@@ -37,9 +37,9 @@ namespace HrApp.Models
 
         public ICollection<Interview> Interviews { get; set; }
 
-        public ICollection<PersonLanguageLevel> PersonLanguageLevels { get; set; }
+        public ICollection<Language> Languages { get; set; }
 
-        public ICollection<PersonSkill> PersonSkills { get; set; }
+        public ICollection<ProfessionalSkill> ProfessionalSkills { get; set; }
 
         public ICollection<PersonTypeJob> PersonTypeJobs { get; set; }
 

@@ -12,11 +12,25 @@ namespace HrApp.Controllers
 {
     public class HomeController : Controller
     {
-        private PersonRepository _personRepository;
+        private UnitOfWork _unitOfWork;
+
+        public HomeController()
+        {
+            _unitOfWork = new UnitOfWork("HRDataBase");
+        }
+
         public ActionResult Index()
         {
-            _personRepository = new PersonRepository(new DbConnectionFactory("HRDataBase"));
-            var peson = _personRepository.GetAllWhere(new Person() {LastName = "a"});
+            var persons = _unitOfWork.PersonRepository.GetAll();
+            foreach (var person in persons)
+            {
+                person.Educations = _unitOfWork.EducationRepository.GetAllWhere(new Education() {PersonId = person.PersonId}).ToList();
+                person.WorkExperiences = _unitOfWork.WorkExpireanceRepository.GetAllWhere(new WorkExperience() { PersonId = person.PersonId }).ToList();
+                person.Jobs = _unitOfWork.JobRepository.GetAllWhere(new Job() { PersonId = person.PersonId }).ToList();
+                person.Interviews = _unitOfWork.InterviewRepository.GetAllWhere(new Interview() { PersonId = person.PersonId }).ToList();
+                person.ProfessionalSkills = _unitOfWork.ProfessionalSkillRepository.GetAllWhere(new ProfessionalSkill() { PersonId = person.PersonId }).ToList();
+                person.Languages = _unitOfWork.LanguageRepository.GetAllWhere(new Language() { PersonId = person.PersonId }).ToList();
+            }
             return View();
         }
 
