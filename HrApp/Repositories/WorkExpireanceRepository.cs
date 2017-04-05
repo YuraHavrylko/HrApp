@@ -31,7 +31,7 @@ namespace HrApp.Repositories
             {
                 {"@PersonId", experience.PersonId},
                 {"@CompanyName", experience.CompanyName},
-                {"@CompanyName", experience.CompanyName}
+                {"@PositionName", experience.PositionName}
             };
 
             return CustomExecuteReader<WorkExperience>("sp_GetWorkExperiencesWhere", parameters).ToList();

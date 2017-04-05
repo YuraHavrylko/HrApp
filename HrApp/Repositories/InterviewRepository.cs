@@ -29,8 +29,7 @@ namespace HrApp.Repositories
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
-                {"@PersonId", interview.PersonId},
-                {"@Point", interview.Point}
+                {"@PersonId", interview.PersonId}
             };
 
             return CustomExecuteReader<Interview>("sp_GetInterviewsWhere", parameters).ToList();
