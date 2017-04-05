@@ -54,8 +54,8 @@
                         {
                             <p>@education.SpecialityName</p>
                             <p>from @education.StartDate to @education.FinishDate @{
-                                                                                      var during = 0;
-                                                                                      during = DateTime.Now.Year - @person.Birthday.Year;
+                                var during = 0;
+                                during = education.FinishDate.Value.Year - education.StartDate.Value.Year;
                                                                                   } (@during)</p>
                             <p>@education.EducationalInstitutionName</p>
                         }
@@ -66,49 +66,93 @@
         <div class="col-md-4">
             <div class="row">
                 <div class="col-md-6">
-                    <p><b>Work experience ()</b></p>
+                    <p><b>Work experience (@person.WorkExpireance)</b>
+                    </p>
                     <p></p>
+                    @if (person.WorkExperiences != null)
+                    {
+                        foreach (var experience in person.WorkExperiences)
+                        {
+                            <p>@experience.PositionName</p>
+                            <p>from @experience.StartDate to @experience.FinishDate @{
+                                    var during = 0;
+                                    during = experience.FinishDate.Value.Year - experience.StartDate.Value.Year;
+                                } (@during years)
+                            </p>
+                            <p>@experience.CompanyName</p>
+                        }
+                    }
                     <p>from 99.9999 to today(1 year 10 mounths)</p>
                     <p>company name</p>
                 </div>
                 <div class="col-md-6">
-                    <p><b>Knowlerge of language</b></p>
-                    <p> - </p>
-                    <p><b>Professional skills</b></p>
-                    @for (var i = 1; i < 10; i++)
-                    {<p>skill @i</p>}
+                    <p><b>Knowlerge of language</b>
+                    </p>
+                    @if (person.Languages != null)
+                    {
+                        foreach (var language in person.Languages)
+                        {
+                            <p>
+                                @language.LanguageName - @language.LanguageLevelName
+                            </p>
+                        }
+                    }
+                    <p><b>Professional skills</b>
+                    </p>
+                    @if (person.ProfessionalSkills != null)
+                    {
+                        foreach (var skill in person.ProfessionalSkills)
+                        {
+                            <p>
+                               @skill.SkillName
+                            </p>
+                        }
+                    }
                 </div>
             </div>
         </div>
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="col-md-8">
-                        <p><b>Interviews</b></p>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p>date of interview</p>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-8">
+                    <p><b>Interviews</b>
+                    </p>
+                    @if (person.Interviews != null)
+                    {
+                        foreach (var interview in person.Interviews)
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>@interview.InterviewDate</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>Point: @interview.Point</p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <p>Point: </p>
-                            </div>
-                        </div>
+                        }
+                    }
 
-                        <p><b>Comments</b>
-                        </p>
-                        <p>some text</p>
-                    </div>
+                    <p><b>Comments</b>
+                    </p>
+                    @if (person.Interviews != null)
+                    {
+                        foreach (var interview in person.Interviews)
+                        {
+                            <p>@interview.Comment</p>
+                        }
+                    }
+                    
+                </div>
 
-                    <div class="col-md-4">
-                        <p><b>Resume files</b></p>
-                        <br /><br /><br /><br />
-                        <p><b>Test files</b></p>
-                    </div>
+                <div class="col-md-4">
+                    <p><b>Resume files</b>
+                    </p>
+                    <br/><br/><br/><br/>
+                    <p><b>Test files</b>
+                    </p>
                 </div>
             </div>
-        
+        </div>
+
     </div>
-
-
-
-            }
+}
 

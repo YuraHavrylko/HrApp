@@ -22,7 +22,7 @@ namespace HrApp.Controllers
         public ActionResult Index()
         {
             var persons = _unitOfWork.PersonRepository.GetAll();
-            //int i = 0;
+            int i = 0;
             foreach (var person in persons)
             {
                 person.Educations = _unitOfWork.EducationRepository.GetAllWhere(new Education() {PersonId = person.PersonId}).ToList();
@@ -32,9 +32,9 @@ namespace HrApp.Controllers
                 person.ProfessionalSkills = _unitOfWork.ProfessionalSkillRepository.GetAllWhere(new ProfessionalSkill() { PersonId = person.PersonId }).ToList();
                 person.Languages = _unitOfWork.LanguageRepository.GetAllWhere(new Language() { PersonId = person.PersonId }).ToList();
                 person.PersonTypeJobs = _unitOfWork.TypeJobRepository.GetAllWhere(new TypeJob() { PersonId = person.PersonId }).ToList();
-                //if (i > 10)
-                //    break;
-                //i++;
+                if (i > 10)
+                    break;
+                i++;
             }
             return View(persons);
         }
