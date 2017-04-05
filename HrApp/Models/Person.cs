@@ -23,7 +23,7 @@ namespace HrApp.Models
         [MaxLength(50)]
         public string Phone { get; set; }
 
-        public double Salary { get; set; }
+        public int Salary { get; set; }
 
         [Required]
         public DateTime Birthday { get; set; }

@@ -11,15 +11,15 @@ namespace HrApp.Models
         public int InterviewId { get; set; }
 
         [Required]
-        public DateTime InterviewTime { get; set; }
+        public DateTime InterviewDate { get; set; }
 
         public int? Point { get; set; }
 
         public string Comment { get; set; }
 
-        public string Resume { get; set; }
+        public string FileResume { get; set; }
 
-        public string Test { get; set; }
+        public string FileTest { get; set; }
 
         [Required]
         [ForeignKey("PersonId")]

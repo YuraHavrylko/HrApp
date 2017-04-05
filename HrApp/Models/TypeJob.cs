@@ -10,10 +10,10 @@ namespace HrApp.Models
 
         [Required]
         [MaxLength(100)]
-        public string NameType { get; set; }
+        public string TypeJobName { get; set; }
 
-        [Required]
-        [ForeignKey("PersonId")]
-        public int PersonId { get; set; }
+        //[Required]
+        //[ForeignKey("PersonId")]
+        //public int PersonId { get; set; }
     }
 }
