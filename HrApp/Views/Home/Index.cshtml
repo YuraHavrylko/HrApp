@@ -1,56 +1,64 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@model IEnumerable<HrApp.Models.Person>
 
-@{
-    List<int> test = new List<int>();
-    test.Add(1);
-    test.Add(2);
-    test.Add(3);
-    test.Add(4);
-
-    var name = "Name";
-    var surname = "Surname";
-    List<string> jobsName = new List<string>();
-    jobsName.Add("PHP");
-    jobsName.Add(".Net");
-
-    int salary = 15000;
-
-    string city = "Ivano-Frankivsk";
-
-    string phone = "+1236547896";
-
-    string email = "mail@gmail.com";
-
-}
-
-@foreach (var x in test)
+@foreach (var person in Model)
 {
     <div class="row">
         <div class="col-md-4">
             <ul class="list-inline">
-                <li class="btn btn-default">@Html.ActionLink("Edit", "Index", "Home", new { id = test }, null)</li>
-                <li class="btn btn-default">@Html.ActionLink("Open", "FullInformation", "Home", new { id = test }, null)</li>
-                <li class="btn btn-default">@Html.ActionLink("Load resume", "Index", "Home", new { id = test }, null)</li>
-                <li class="btn btn-default">@Html.ActionLink("Load test", "Index", "Home", new { id = test }, null)</li>
+                <li class="btn btn-default">@Html.ActionLink("Edit", "Index", "Home", new {id = person.PersonId}, null)</li>
+                <li class="btn btn-default">@Html.ActionLink("Open", "FullInformation", "Home", new {id = person.PersonId}, null)</li>
+                <li class="btn btn-default">@Html.ActionLink("Load resume", "Index", "Home", new {id = person.PersonId}, null)</li>
+                <li class="btn btn-default">@Html.ActionLink("Load test", "Index", "Home", new {id = person.PersonId}, null)</li>
             </ul>
             <div class="row">
                 <div class="col-md-6">
-                    <p><b>@name @surname</b></p>
-                    <p><b>@jobsName[0], @jobsName[1]</b></p>
-                    <p>Date of birth <br />17.08.1983 (32 years)</p>
-                    <p>City: @city</p>
-                    <p>Phone: @phone</p>
-                    <p>Email: @email</p>
+                    <p><b>@person.FirstName @person.LastName</b>
+                    </p>
+                    @if (person.Jobs != null)
+                    {
+                        foreach (var job in person.Jobs)
+                        {
+                            <p><b>@job.JobName</b>
+                            </p>
+                        }
+                    }
+                    <p>Date of birth <br/>@person.Birthday (@{
+                                                                var age = 0;
+                                                                age = DateTime.Now.Year - @person.Birthday.Year;
+                                                            } @age years)
+                    </p>
+                    <p>City: @person.City</p>
+                    <p>Phone: @person.Phone</p>
+                    <p>Email: @person.Email</p>
                 </div>
                 <div class="col-md-6">
-                    <p><b>from @salary </b></p>
-                    <p>remote work</p>
-                    <p><br /><b>Education</b></p>
-                    <p>ROR developer</p>
-                    <p>from 99.9999 to today(1 year 10 mounths)</p>
-                    <p>University</p>
+                    <p><b>from @person.Salary </b>
+                    </p>
+                    @if (person.PersonTypeJobs != null)
+                    {
+                        foreach (var job in person.PersonTypeJobs)
+                        {
+                            <p><b>@job.TypeJobName</b>
+                            </p>
+                        }
+                    }
+                    <p><br/><b>Education</b>
+                    </p>
+                    @if (person.Educations != null)
+                    {
+                        foreach (var education in person.Educations)
+                        {
+                            <p>@education.SpecialityName</p>
+                            <p>from @education.StartDate to @education.FinishDate @{
+                                                                                      var during = 0;
+                                                                                      during = DateTime.Now.Year - @person.Birthday.Year;
+                                                                                  } (@during)</p>
+                            <p>@education.EducationalInstitutionName</p>
+                        }
+                    }
                 </div>
             </div>
         </div>
