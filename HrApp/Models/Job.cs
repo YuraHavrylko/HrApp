@@ -14,6 +14,6 @@ namespace HrApp.Models
 
         [Required]
         [ForeignKey("PersonId")]
-        public int PersonId { get; set; }
+        public int? PersonId { get; set; }
     }
 }
