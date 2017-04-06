@@ -25,7 +25,7 @@ namespace HrApp.Repositories
             return CustomExecuteReader<Education>("sp_GetEducations").ToList();
         }
 
-        public IEnumerable<Education> GetAllWhere(Education education)
+        public IEnumerable<Education> GetAllWhere(Education education, int page = 1, int count = 10)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -48,6 +48,11 @@ namespace HrApp.Repositories
         }
 
         public void Delete(Education person)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int GetCountWhere(Education person)
         {
             throw new System.NotImplementedException();
         }

@@ -25,7 +25,7 @@ namespace HrApp.Repositories
             return CustomExecuteReader<TypeJob>("sp_GetTypeJobs").ToList();
         }
 
-        public IEnumerable<TypeJob> GetAllWhere(TypeJob job)
+        public IEnumerable<TypeJob> GetAllWhere(TypeJob job, int page = 1, int count = 10)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -47,6 +47,11 @@ namespace HrApp.Repositories
         }
 
         public void Delete(TypeJob person)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int GetCountWhere(TypeJob person)
         {
             throw new System.NotImplementedException();
         }

@@ -25,13 +25,15 @@ namespace HrApp.Repositories
             return CustomExecuteReader<Person>("sp_GetPersons").ToList();
         }
 
-        public IEnumerable<Person> GetAllWhere(Person person)
+        public IEnumerable<Person> GetAllWhere(Person person, int page = 1, int count = 10)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
                 {"@FirstName", person.FirstName},
                 {"@LastName", person.LastName},
                 {"@City", person.City},
+                {"@Page", page},
+                {"@Count", count},
             };
 
             return CustomExecuteReader<Person>("sp_GetPersonsWhere", parameters).ToList();
@@ -50,6 +52,18 @@ namespace HrApp.Repositories
         public void Delete(Person person)
         {
             throw new System.NotImplementedException();
+        }
+
+        public int GetCountWhere(Person person)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@FirstName", person.FirstName},
+                {"@LastName", person.LastName},
+                {"@City", person.City},
+            };
+
+            return (int)CustomExecuteScalar("sp_GetCountPersonsWhere", parameters);
         }
     }
 }
