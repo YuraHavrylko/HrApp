@@ -25,7 +25,7 @@ namespace HrApp.Repositories
             return CustomExecuteReader<ProfessionalSkill>("sp_GetProfessionalSkills").ToList();
         }
 
-        public IEnumerable<ProfessionalSkill> GetAllWhere(ProfessionalSkill skill)
+        public IEnumerable<ProfessionalSkill> GetAllWhere(ProfessionalSkill skill, int page = 1, int count = 10)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -36,9 +36,15 @@ namespace HrApp.Repositories
             return CustomExecuteReader<ProfessionalSkill>("sp_GetProfessionalSkillsWhere", parameters).ToList();
         }
 
-        public void Add(ProfessionalSkill person)
+        public void Add(ProfessionalSkill professionalSkill)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@PersonId", professionalSkill.PersonId},
+                {"@SkillName", professionalSkill.SkillName}
+            };
+
+            CustomExecuteNonQuery("sp_AddProfessionalSkill", parameters);
         }
 
         public void Edit(ProfessionalSkill person)
@@ -47,6 +53,11 @@ namespace HrApp.Repositories
         }
 
         public void Delete(ProfessionalSkill person)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int GetCountWhere(ProfessionalSkill person)
         {
             throw new System.NotImplementedException();
         }
