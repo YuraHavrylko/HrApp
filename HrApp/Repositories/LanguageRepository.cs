@@ -37,9 +37,16 @@ namespace HrApp.Repositories
             return CustomExecuteReader<Language>("sp_GetLanguagesWhere", parameters).ToList();
         }
 
-        public void Add(Language person)
+        public void Add(Language language)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@PersonId", language.PersonId},
+                {"@LanguageLevelName", language.LanguageLevelName},
+                {"@LanguageName", language.LanguageName}
+            };
+
+            CustomExecuteNonQuery("sp_AddLanguage", parameters);
         }
 
         public void Edit(Language person)

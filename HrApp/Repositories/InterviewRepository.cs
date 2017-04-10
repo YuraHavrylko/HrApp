@@ -35,9 +35,19 @@ namespace HrApp.Repositories
             return CustomExecuteReader<Interview>("sp_GetInterviewsWhere", parameters).ToList();
         }
 
-        public void Add(Interview person)
+        public void Add(Interview interview)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@PersonId", interview.PersonId},
+                {"@InterviewDate", interview.InterviewDate},
+                {"@Point", interview.Point},
+                {"@Comment", interview.Comment},
+                {"@FileResume", interview.FileResume},
+                {"@FileTest", interview.FileTest}
+            };
+
+            CustomExecuteNonQuery("sp_AddInterview", parameters);
         }
 
         public void Edit(Interview person)

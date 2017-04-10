@@ -36,9 +36,15 @@ namespace HrApp.Repositories
             return CustomExecuteReader<Job>("sp_GetJobsWhere", parameters).ToList();
         }
 
-        public void Add(Job person)
+        public void Add(Job job)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@PersonId", job.PersonId},
+                {"@JobName", job.JobName}
+            };
+
+            CustomExecuteNonQuery("sp_AddJob", parameters);
         }
 
         public void Edit(Job person)
