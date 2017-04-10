@@ -18,7 +18,7 @@ namespace HrApp.Models
         }
 
         [Key]
-        public int PersonId { get; set; }
+        public int? PersonId { get; set; }
 
         [MaxLength(200)]
         public string Email { get; set; }
@@ -42,7 +42,7 @@ namespace HrApp.Models
         [MaxLength(50)]
         public string City { get; set; }
 
-        public double WorkExpireance { get; set; }
+        public double? WorkExpireance { get; set; }
 
         public ICollection<Education> Educations { get; set; }
 
