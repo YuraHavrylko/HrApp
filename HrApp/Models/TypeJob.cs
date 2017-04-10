@@ -6,7 +6,7 @@ namespace HrApp.Models
     public class TypeJob
     {
         [Key]
-        public int TypeJobId { get; set; }
+        public int? TypeJobId { get; set; }
 
         [Required]
         [MaxLength(100)]
@@ -14,6 +14,6 @@ namespace HrApp.Models
 
         [Required]
         [ForeignKey("PersonId")]
-        public int PersonId { get; set; }
+        public int? PersonId { get; set; }
     }
 }

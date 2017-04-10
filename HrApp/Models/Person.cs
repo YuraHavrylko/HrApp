@@ -18,7 +18,7 @@ namespace HrApp.Models
         }
 
         [Key]
-        public int PersonId { get; set; }
+        public int? PersonId { get; set; }
 
         [MaxLength(200)]
         public string Email { get; set; }

@@ -17,7 +17,7 @@ namespace HrApp.Contexts
 
         public DbSet<LanguageLevel> LanguageLevels { get; set; }
 
-        public DbSet<PersonLanguageLevel> PersonLanguageLevels { get; set; }
+        public DbSet<TypeLanguage> TypeLanguage { get; set; }
 
         public DbSet<PersonSkill> PersonSkills { get; set; }
 
