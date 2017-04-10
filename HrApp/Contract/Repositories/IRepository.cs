@@ -17,6 +17,6 @@ namespace HrApp.Contract.Repositories
 
         void Edit(T person);
 
-        void Delete(T person);
+        void Delete(int id);
     }
 }

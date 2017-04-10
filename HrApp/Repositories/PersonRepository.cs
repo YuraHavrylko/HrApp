@@ -126,12 +126,30 @@ namespace HrApp.Repositories
 
         public void Edit(Person person)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@PersonId", person.PersonId},
+                {"@FirstName", person.FirstName},
+                {"@LastName", person.LastName},
+                {"@Birthday", person.Birthday},
+                {"@City", person.City},
+                {"@Email", person.Email},
+                {"@Phone", person.Phone},
+                {"@Salary", person.Salary},
+                {"@WorkExpireance", person.WorkExpireance},
+            };
+
+            CustomExecuteNonQuery("sp_EditPerson", parameters);
         }
 
-        public void Delete(Person person)
+        public void Delete(int person)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@PersonId", person}
+            };
+
+            CustomExecuteNonQuery("sp_DeletePerson", parameters);
         }
 
         public int GetCountWhere(Person person = null, Education education = null,

@@ -9,7 +9,8 @@
     <div class="row panel panel-default" style="padding: 5px; margin-top: 10px; margin-right: 10px; margin-left: 10px">
     <div class="col-md-4">
         <div class="container">
-            <button type="button" class="btn btn-basic btn-md" onclick="location.href='@Url.Action("Index", "Home", new {id = person.PersonId}, null)'">Edit</button>
+            <button type="button" class="btn btn-basic btn-md" onclick="location.href='@Url.Action("Edit", "Home", new {id = person.PersonId}, null)'">Edit</button>
+            <button type="button" class="btn btn-basic btn-md" onclick="location.href='@Url.Action("Delete", "Home", new {id = person.PersonId}, null)'">Delete</button>
             <button type="button" class="btn btn-basic btn-md" onclick="location.href='@Url.Action("FullInformation", "Home", new {id = person.PersonId}, null)'">Open</button>
             <button type="button" class="btn btn-basic btn-md" onclick="location.href='@Url.Action("Index", "Home", new {id = person.PersonId}, null)'">Load resume</button>
             <button type="button" class="btn btn-basic btn-md" onclick="location.href='@Url.Action("Index", "Home", new {id = person.PersonId}, null)'">Load test</button>
@@ -221,7 +222,7 @@
 }
 </div>
 <ul class="pagination">
-    @for (int i = 0; i < (int)Math.Ceiling(ViewBag.CountPerson / ViewBag.Count * 1.0); i++)
+    @for (int i = 0; i < (int)Math.Ceiling((ViewBag.CountPerson * 1.0) / ViewBag.Count ); i++)
     {
         if (ViewBag.Page == i + 1)
         {

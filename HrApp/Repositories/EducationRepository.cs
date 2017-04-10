@@ -51,14 +51,28 @@ namespace HrApp.Repositories
             CustomExecuteNonQuery("sp_AddEducation", parameters);
         }
 
-        public void Edit(Education person)
+        public void Edit(Education education)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@EducationId", education.EducationId},
+                {"@SpecialityName", education.SpecialityName},
+                {"@EducationalInstitutionName", education.EducationalInstitutionName},
+                {"@StartDate", education.StartDate},
+                {"@FinishDate", education.FinishDate}
+            };
+
+            CustomExecuteNonQuery("sp_EditEducation", parameters);
         }
 
-        public void Delete(Education person)
+        public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@EducationId", id}
+            };
+
+            CustomExecuteNonQuery("sp_DeleteEducation", parameters);
         }
 
         public int GetCountWhere(Education person)
