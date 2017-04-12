@@ -18,19 +18,7 @@ namespace HrApp.Controllers
             _unitOfWork = new UnitOfWork("HRDataBase");
         }
 
-        // GET: Education
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: Education/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Education/Create
+        // GET: Interview/Create
         public ActionResult Create(int id)
         {
             var interview = new Interview();
@@ -38,7 +26,7 @@ namespace HrApp.Controllers
             return View(interview);
         }
 
-        // POST: Education/Create
+        // POST: Interview/Create
         [HttpPost]
         public ActionResult Create(Interview interview, HttpPostedFileBase fileResume, HttpPostedFileBase fileTest)
         {
@@ -63,14 +51,14 @@ namespace HrApp.Controllers
             return View(interview);
         }
 
-        // GET: Education/Edit/5
+        // GET: Interview/Edit/5
         public ActionResult Edit(int id)
         {
             var interview = _unitOfWork.InterviewRepository.Get(id);
             return View(interview);
         }
 
-        // POST: Education/Edit/5
+        // POST: Interview/Edit/5
         [HttpPost]
         public ActionResult Edit(Interview interview, HttpPostedFileBase fileResume, HttpPostedFileBase fileTest)
         {
@@ -95,7 +83,7 @@ namespace HrApp.Controllers
             return View(interview);
         }
 
-        // GET: Education/Delete/5
+        // GET: Interview/Delete/5
         public ActionResult Delete(int idPerson, int idInterview)
         {
             _unitOfWork.InterviewRepository.Delete(idInterview);

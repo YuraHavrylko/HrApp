@@ -13,6 +13,10 @@ namespace HrApp.Models
         [Required]
         public DateTime InterviewDate { get; set; }
 
+        public DateTime? InterviewStartDate { get; set; }
+
+        public DateTime? InterviewFinishDate { get; set; }
+
         public int? Point { get; set; }
 
         public string Comment { get; set; }

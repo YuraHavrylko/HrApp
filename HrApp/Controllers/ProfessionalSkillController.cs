@@ -17,12 +17,7 @@ namespace HrApp.Controllers
             _unitOfWork = new UnitOfWork("HRDataBase");
         }
 
-        // GET: ProfessionalSkill
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+        // GET: ProfessionalSkill/Create
         public ActionResult Create(int id)
         {
             var skill = new ProfessionalSkill();

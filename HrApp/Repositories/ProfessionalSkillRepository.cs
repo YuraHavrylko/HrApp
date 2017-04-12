@@ -67,10 +67,5 @@ namespace HrApp.Repositories
 
             CustomExecuteNonQuery("sp_DeleteProfessionalSkill", parameters);
         }
-
-        public int GetCountWhere(ProfessionalSkill person)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

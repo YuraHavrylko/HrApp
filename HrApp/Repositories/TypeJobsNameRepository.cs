@@ -57,11 +57,6 @@ namespace HrApp.Repositories
             throw new System.NotImplementedException();
         }
 
-        public int GetCountWhere(TypeJobsName person)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void Delete(int id)
         {
             throw new NotImplementedException();

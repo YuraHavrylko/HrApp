@@ -68,9 +68,5 @@ namespace HrApp.Repositories
             CustomExecuteNonQuery("sp_DeleteTypeJob", parameters);
         }
 
-        public int GetCountWhere(TypeJob person)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

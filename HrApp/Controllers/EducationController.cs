@@ -18,18 +18,6 @@ namespace HrApp.Controllers
             _unitOfWork = new UnitOfWork("HRDataBase");
         }
 
-        // GET: Education
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: Education/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: Education/Create
         public ActionResult Create(int id)
         {

@@ -76,10 +76,5 @@ namespace HrApp.Repositories
 
             CustomExecuteNonQuery("sp_DeleteWorkExperience", parameters);
         }
-
-        public int GetCountWhere(WorkExperience person)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

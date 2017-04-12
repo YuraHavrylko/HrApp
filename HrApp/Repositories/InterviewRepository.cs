@@ -75,9 +75,5 @@ namespace HrApp.Repositories
             CustomExecuteNonQuery("sp_DeleteInterview", parameters);
         }
 
-        public int GetCountWhere(Interview person)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
