@@ -1,0 +1,33 @@
+﻿@using System.Web.Mvc.Html
+@using HrApp.Models
+@model HrApp.Models.TypeJob
+
+@{
+    ViewBag.Title = "Edit person type job";
+    List<TypeJob> list = ViewBag.JobName;
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true)
+                <fieldset>
+                    <legend>Edit person type job</legend>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TypeJobName)
+                        @Html.DropDownListFor(model => model.TypeJobName, new SelectList(list.Select(language => language.TypeJobName)), Model.TypeJobName, new { @class = "form-control" })
+                    </div>
+                    @Html.HiddenFor(model => model.PersonId)
+                    @Html.HiddenFor(model => model.PersonTypeJobId)
+                    <div class="form-group">
+                        <p>
+                            <input type="submit" value="Edit" class="btn btn-success btn-block" />
+                        </p>
+                    </div>
+                </fieldset>
+            }
+            @Html.ActionLink("Back to Person", "FullInformation", "Home", new { id = Model.PersonId }, null)
+        </div>
+    </div>
+</div>

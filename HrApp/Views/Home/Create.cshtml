@@ -1,18 +1,16 @@
 ﻿@model HrApp.Models.Person
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Create person";
 }
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-
-            <h2>Create person</h2>
             @using (Html.BeginForm())
             {
                 @Html.ValidationSummary(true)
                 <fieldset>
-                    <legend>Form</legend>
+                    <legend>Create person</legend>
                     <div class="form-group">
                         @Html.LabelFor(model => model.FirstName)
                         @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })

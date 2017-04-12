@@ -42,7 +42,7 @@ namespace HrApp.Repositories
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
                 {"@PersonId", workExperience.PersonId},
-                {"@PositionName", workExperience.PositionName},
+                {"@CompanyName", workExperience.CompanyName},
                 {"@PositionName", workExperience.PositionName},
                 {"@StartDate", workExperience.StartDate},
                 {"@FinishDate", workExperience.FinishDate},
@@ -57,7 +57,7 @@ namespace HrApp.Repositories
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
                 {"@WorkExperienceId", workExperience.WorkExperienceId},
-                {"@PositionName", workExperience.PositionName},
+                {"@CompanyName", workExperience.CompanyName},
                 {"@PositionName", workExperience.PositionName},
                 {"@StartDate", workExperience.StartDate},
                 {"@FinishDate", workExperience.FinishDate},

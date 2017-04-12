@@ -49,14 +49,26 @@ namespace HrApp.Repositories
             CustomExecuteNonQuery("sp_AddLanguage", parameters);
         }
 
-        public void Edit(Language person)
+        public void Edit(Language language)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@LanguageId", language.LanguageId},
+                {"@LanguageLevelName", language.LanguageLevelName},
+                {"@LanguageName", language.LanguageName}
+            };
+
+            CustomExecuteNonQuery("sp_EditLanguage", parameters);
         }
 
         public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@LanguageId", id}
+            };
+
+            CustomExecuteNonQuery("sp_DeleteLanguage", parameters);
         }
 
         public int GetCountWhere(Language person)

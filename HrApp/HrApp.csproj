@@ -161,6 +161,11 @@
     <Compile Include="Contract\Repositories\IRepository.cs" />
     <Compile Include="Controllers\EducationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InterviewController.cs" />
+    <Compile Include="Controllers\JobController.cs" />
+    <Compile Include="Controllers\LanguageController.cs" />
+    <Compile Include="Controllers\ProfessionalSkillController.cs" />
+    <Compile Include="Controllers\TypeJobController.cs" />
     <Compile Include="Controllers\WorkExpireanceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -241,9 +246,21 @@
     <Content Include="Views\WorkExpireance\Create.cshtml" />
     <Content Include="Views\WorkExpireance\Edit.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\ProfessionalSkill\Edit.cshtml" />
+    <Content Include="Views\ProfessionalSkill\Create.cshtml" />
+    <Content Include="Views\Language\Create.cshtml" />
+    <Content Include="Views\Language\Edit.cshtml" />
+    <Content Include="Views\Job\Create.cshtml" />
+    <Content Include="Views\Job\Edit.cshtml" />
+    <Content Include="Views\TypeJob\Create.cshtml" />
+    <Content Include="Views\TypeJob\Edit.cshtml" />
+    <Content Include="Views\Interview\Create.cshtml" />
+    <Content Include="Views\Interview\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Documents\Resumes\" />
+    <Folder Include="Documents\Tests\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
