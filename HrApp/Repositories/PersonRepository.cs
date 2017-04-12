@@ -70,7 +70,8 @@ namespace HrApp.Repositories
 
             if (interview != null)
             {
-                parameters.Add("@InterviewDate", interview.InterviewDate);
+                parameters.Add("@InterviewStartDate", interview.InterviewStartDate);
+                parameters.Add("@InterviewFinishDate", interview.InterviewFinishDate);
             }
 
             if (language != null)
@@ -184,7 +185,8 @@ namespace HrApp.Repositories
 
             if (interview != null)
             {
-                parameters.Add("@InterviewDate", interview.InterviewDate);
+                parameters.Add("@InterviewStartDate", interview.InterviewStartDate);
+                parameters.Add("@InterviewFinishDate", interview.InterviewFinishDate);
             }
 
             if (language != null)
