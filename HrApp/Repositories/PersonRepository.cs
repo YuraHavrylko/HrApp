@@ -5,6 +5,7 @@ using HrApp.Contract;
 using HrApp.Contract.Repositories;
 using HrApp.Infrastructure;
 using HrApp.Models;
+using HrApp.Models.Search;
 
 namespace HrApp.Repositories
 {
@@ -34,9 +35,7 @@ namespace HrApp.Repositories
             return list;
         }
 
-        public IEnumerable<Person> GetAllWhere(Person person = null, Education education = null,
-            Interview interview = null, Job job = null, Language language = null, TypeJob typeJob = null,
-            WorkExperience experience = null, ProfessionalSkill professionalSkill = null, int page = 1, int count = 10)
+        public IEnumerable<Person> GetAllWhere(PersonSearchModel person = null, int page = 1, int count = 10)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -58,49 +57,52 @@ namespace HrApp.Repositories
                 parameters.Add("@SalaryFinish", person.SalaryFinish);
                 parameters.Add("@WorkExpireanceStart", person.WorkExpireanceStart);
                 parameters.Add("@WorkExpireanceFinish", person.WorkExpireanceFinish);
-            }
 
-            if (education != null)
-            {
-                parameters.Add("@SpecialityName", education.SpecialityName);
-                parameters.Add("@EducationalInstitutionName", education.EducationalInstitutionName);
-                parameters.Add("@EducationStartDate", education.StartDate);
-                parameters.Add("@EducationFinishDate", education.FinishDate);
-            }
+                if (person.Education != null)
+                {
+                    parameters.Add("@SpecialityName", person.Education.SpecialityName);
+                    parameters.Add("@EducationalInstitutionName", person.Education.EducationalInstitutionName);
+                    parameters.Add("@EducationStartDate", person.Education.StartDate);
+                    parameters.Add("@EducationFinishDate", person.Education.FinishDate);
+                }
 
-            if (interview != null)
-            {
-                parameters.Add("@InterviewStartDate", interview.InterviewStartDate);
-                parameters.Add("@InterviewFinishDate", interview.InterviewFinishDate);
-            }
+                if (person.Interview != null)
+                {
+                    parameters.Add("@InterviewStartDate", person.Interview.InterviewStartDate);
+                    parameters.Add("@InterviewFinishDate", person.Interview.InterviewFinishDate);
+                }
 
-            if (language != null)
-            {
-                parameters.Add("@LanguageName", language.LanguageName);
-                parameters.Add("@LanguageLevelName", language.LanguageLevelName);
-            }
+                if (person.TypeLanguage != null)
+                {
+                    parameters.Add("@LanguageName", person.TypeLanguage.LanguageName);
+                    
+                }
+                if (person.LanguageLevel != null)
+                {
+                    parameters.Add("@LanguageLevelName", person.LanguageLevel.LanguageLevelName);
+                }
+                if (person.Job != null)
+                {
+                    parameters.Add("@JobName", person.Job.JobName);
+                }
 
-            if (job != null)
-            {
-                parameters.Add("@JobName", job.JobName);
-            }
+                if (person.TypeJob != null)
+                {
+                    parameters.Add("@TypeJobName", person.TypeJob.TypeJobName);
+                }
 
-            if (typeJob != null)
-            {
-                parameters.Add("@TypeJobName", typeJob.TypeJobName);
-            }
+                if (person.WorkExperience != null)
+                {
+                    parameters.Add("@PositionName", person.WorkExperience.PositionName);
+                    parameters.Add("@CompanyName", person.WorkExperience.CompanyName);
+                    parameters.Add("@ExperienceStartDate", person.WorkExperience.StartDate);
+                    parameters.Add("@ExperienceFinishDate", person.WorkExperience.FinishDate);
+                }
 
-            if (experience != null)
-            {
-                parameters.Add("@PositionName", experience.PositionName);
-                parameters.Add("@CompanyName", experience.CompanyName);
-                parameters.Add("@ExperienceStartDate", experience.StartDate);
-                parameters.Add("@ExperienceFinishDate", experience.FinishDate);
-            }
-
-            if (professionalSkill != null)
-            {
-                parameters.Add("@SkillName", professionalSkill.SkillName);
+                if (person.ProfessionalSkill != null)
+                {
+                    parameters.Add("@SkillName", person.ProfessionalSkill.SkillName);
+                }
             }
 
             var list = CustomExecuteReader("sp_GetPersonsWhere", parameters);
@@ -153,9 +155,7 @@ namespace HrApp.Repositories
             CustomExecuteNonQuery("sp_DeletePerson", parameters);
         }
 
-        public int GetCountWhere(Person person = null, Education education = null,
-            Interview interview = null, Job job = null, Language language = null, TypeJob typeJob = null,
-            WorkExperience experience = null, ProfessionalSkill professionalSkill = null)
+        public int GetCountWhere(PersonSearchModel person = null)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>();
 
@@ -173,49 +173,53 @@ namespace HrApp.Repositories
                 parameters.Add("@SalaryFinish", person.SalaryFinish);
                 parameters.Add("@WorkExpireanceStart", person.WorkExpireanceStart);
                 parameters.Add("@WorkExpireanceFinish", person.WorkExpireanceFinish);
-            }
 
-            if (education != null)
-            {
-                parameters.Add("@SpecialityName", education.SpecialityName);
-                parameters.Add("@EducationalInstitutionName", education.EducationalInstitutionName);
-                parameters.Add("@EducationStartDate", education.StartDate);
-                parameters.Add("@EducationFinishDate", education.FinishDate);
-            }
+                if (person.Education != null)
+                {
+                    parameters.Add("@SpecialityName", person.Education.SpecialityName);
+                    parameters.Add("@EducationalInstitutionName", person.Education.EducationalInstitutionName);
+                    parameters.Add("@EducationStartDate", person.Education.StartDate);
+                    parameters.Add("@EducationFinishDate", person.Education.FinishDate);
+                }
 
-            if (interview != null)
-            {
-                parameters.Add("@InterviewStartDate", interview.InterviewStartDate);
-                parameters.Add("@InterviewFinishDate", interview.InterviewFinishDate);
-            }
+                if (person.Interview != null)
+                {
+                    parameters.Add("@InterviewStartDate", person.Interview.InterviewStartDate);
+                    parameters.Add("@InterviewFinishDate", person.Interview.InterviewFinishDate);
+                }
 
-            if (language != null)
-            {
-                parameters.Add("@LanguageName", language.LanguageName);
-                parameters.Add("@LanguageLevelName", language.LanguageLevelName);
-            }
+                if (person.TypeLanguage != null)
+                {
+                    parameters.Add("@LanguageName", person.TypeLanguage.LanguageName);
 
-            if (job != null)
-            {
-                parameters.Add("@JobName", job.JobName);
-            }
+                }
+                if (person.LanguageLevel != null)
+                {
+                    parameters.Add("@LanguageLevelName", person.LanguageLevel.LanguageLevelName);
+                }
 
-            if (typeJob != null)
-            {
-                parameters.Add("@TypeJobName", typeJob.TypeJobName);
-            }
+                if (person.Job != null)
+                {
+                    parameters.Add("@JobName", person.Job.JobName);
+                }
 
-            if (experience != null)
-            {
-                parameters.Add("@PositionName", experience.PositionName);
-                parameters.Add("@CompanyName", experience.CompanyName);
-                parameters.Add("@ExperienceStartDate", experience.StartDate);
-                parameters.Add("@ExperienceFinishDate", experience.FinishDate);
-            }
+                if (person.TypeJob != null)
+                {
+                    parameters.Add("@TypeJobName", person.TypeJob.TypeJobName);
+                }
 
-            if (professionalSkill != null)
-            {
-                parameters.Add("@SkillName", professionalSkill.SkillName);
+                if (person.WorkExperience != null)
+                {
+                    parameters.Add("@PositionName", person.WorkExperience.PositionName);
+                    parameters.Add("@CompanyName", person.WorkExperience.CompanyName);
+                    parameters.Add("@ExperienceStartDate", person.WorkExperience.StartDate);
+                    parameters.Add("@ExperienceFinishDate", person.WorkExperience.FinishDate);
+                }
+
+                if (person.ProfessionalSkill != null)
+                {
+                    parameters.Add("@SkillName", person.ProfessionalSkill.SkillName);
+                }
             }
 
             return (int) CustomExecuteScalar("sp_GetCountPersonsWhere", parameters);

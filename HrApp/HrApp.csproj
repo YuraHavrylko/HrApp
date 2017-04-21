@@ -156,7 +156,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Contexts\PersonContext.cs" />
     <Compile Include="Contract\IConnectionFactory.cs" />
     <Compile Include="Contract\Repositories\IRepository.cs" />
     <Compile Include="Controllers\EducationController.cs" />
@@ -164,8 +163,11 @@
     <Compile Include="Controllers\InterviewController.cs" />
     <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\LanguageController.cs" />
+    <Compile Include="Controllers\LanguageNameController.cs" />
+    <Compile Include="Controllers\LevelLanguageController.cs" />
     <Compile Include="Controllers\ProfessionalSkillController.cs" />
     <Compile Include="Controllers\TypeJobController.cs" />
+    <Compile Include="Controllers\TypeJobNameController.cs" />
     <Compile Include="Controllers\WorkExpireanceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -176,16 +178,17 @@
     <Compile Include="Infrastructure\DbConnectionFactory.cs" />
     <Compile Include="Infrastructure\DbExecuteProvider.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="Models\BigPersonModel.cs" />
     <Compile Include="Models\Education.cs" />
     <Compile Include="Models\Interview.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\LanguageLevel.cs" />
+    <Compile Include="Models\Search\InterviewSearchModel.cs" />
+    <Compile Include="Models\Search\PersonSearchModel.cs" />
     <Compile Include="Models\TypeJobName.cs" />
     <Compile Include="Models\TypeLanguage.cs" />
     <Compile Include="Models\Person.cs" />
-    <Compile Include="Models\PersonSkill.cs" />
-    <Compile Include="Models\PersonTypeJob.cs" />
     <Compile Include="Models\ProfessionalSkill.cs" />
     <Compile Include="Models\TypeJob.cs" />
     <Compile Include="Models\WorkExperience.cs" />
@@ -239,7 +242,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\FullInformation.cshtml" />
-    <Content Include="Views\Home\Find.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Education\Create.cshtml" />
     <Content Include="Views\Education\Edit.cshtml" />
@@ -256,6 +258,15 @@
     <Content Include="Views\TypeJob\Edit.cshtml" />
     <Content Include="Views\Interview\Create.cshtml" />
     <Content Include="Views\Interview\Edit.cshtml" />
+    <Content Include="Views\LanguageName\Edit.cshtml" />
+    <Content Include="Views\LanguageName\Create.cshtml" />
+    <Content Include="Views\LevelLanguage\Create.cshtml" />
+    <Content Include="Views\LevelLanguage\Edit.cshtml" />
+    <Content Include="Views\TypeJobName\Create.cshtml" />
+    <Content Include="Views\TypeJobName\Edit.cshtml" />
+    <Content Include="Views\LanguageName\Index.cshtml" />
+    <Content Include="Views\LevelLanguage\Index.cshtml" />
+    <Content Include="Views\TypeJobName\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -45,21 +45,31 @@ namespace HrApp.Repositories
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
-                {"@TypeLanguageId", languagesName.TypeLanguageId},
                 {"@LanguageName", languagesName.LanguageName}
             };
 
             CustomExecuteNonQuery("sp_AddTypeLanguage", parameters);
         }
 
-        public void Edit(TypeLanguage person)
+        public void Edit(TypeLanguage languagesName)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@TypeLanguageId", languagesName.TypeLanguageId},
+                {"@LanguageName", languagesName.LanguageName}
+            };
+
+            CustomExecuteNonQuery("sp_EditTypeLanguage", parameters);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@TypeLanguageId", id},
+            };
+
+            CustomExecuteNonQuery("sp_DeleteTypeLanguage", parameters);
         }
     }
 }
