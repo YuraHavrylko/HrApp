@@ -39,7 +39,7 @@ namespace HrApp.Controllers
             if (ModelState.IsValid)
             {
                 _unitOfWork.LanguagesNameRepository.Add(language);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "LanguageName");
             }
 
             return View(language);
@@ -59,7 +59,7 @@ namespace HrApp.Controllers
             if (ModelState.IsValid)
             {
                 _unitOfWork.LanguagesNameRepository.Edit(typeLanguage);
-                return RedirectToAction("FullInformation", "Home");
+                return RedirectToAction("Index", "LanguageName");
             }
 
             return View(typeLanguage);
@@ -69,7 +69,7 @@ namespace HrApp.Controllers
         public ActionResult Delete(int typeLanguage)
         {
             _unitOfWork.LanguagesNameRepository.Delete(typeLanguage);
-            return RedirectToAction("FullInformation", "Home");
+            return RedirectToAction("Index", "LanguageName");
         }
     }
 }

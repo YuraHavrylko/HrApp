@@ -37,7 +37,7 @@ namespace HrApp.Controllers
             if (ModelState.IsValid)
             {
                 _unitOfWork.TypeJobsNameRepository.Add(typeJobName);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "TypeJobName");
             }
 
             return View(typeJobName);
@@ -57,7 +57,7 @@ namespace HrApp.Controllers
             if (ModelState.IsValid)
             {
                 _unitOfWork.TypeJobsNameRepository.Edit(typeJobName);
-                return RedirectToAction("FullInformation", "Home");
+                return RedirectToAction("Index", "TypeJobName");
             }
 
             return View(typeJobName);
@@ -67,7 +67,7 @@ namespace HrApp.Controllers
         public ActionResult Delete(int typeJobName)
         {
             _unitOfWork.TypeJobsNameRepository.Delete(typeJobName);
-            return RedirectToAction("FullInformation", "Home");
+            return RedirectToAction("Index", "TypeJobName");
         }
     }
 }
