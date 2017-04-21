@@ -12,7 +12,7 @@
                     <legend>Add person job</legend>
                     <div class="form-group">
                         @Html.LabelFor(model => model.JobName)
-                        @Html.TextBoxFor(model => model.JobName, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.JobName, new { @class = "form-control", @required = "required" })
                         @Html.ValidationMessageFor(model => model.JobName)
                     </div>
                     @Html.HiddenFor(model => model.PersonId)
