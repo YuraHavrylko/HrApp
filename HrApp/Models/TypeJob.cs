@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HrApp.Models
 {
@@ -10,5 +11,9 @@ namespace HrApp.Models
         [Required]
         [MaxLength(100)]
         public string NameType { get; set; }
+
+        [Required]
+        [ForeignKey("PersonId")]
+        public int PersonId { get; set; }
     }
 }

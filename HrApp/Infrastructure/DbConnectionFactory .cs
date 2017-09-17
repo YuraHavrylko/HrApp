@@ -1,0 +1,41 @@
+﻿using System;
+using System.Configuration;
+using System.Data;
+using System.Data.Common;
+using HrApp.Contract;
+
+namespace HrApp.Infrastructure
+{
+    public class DbConnectionFactory : IConnectionFactory
+    {
+
+        private readonly DbProviderFactory _provider;
+        private readonly string _connectionString;
+        private readonly string _name;
+
+        public DbConnectionFactory(string connectionName)
+        {
+            if (connectionName == null) throw new ArgumentNullException("connectionName");
+
+            var conStr = ConfigurationManager.ConnectionStrings[connectionName];
+            if (conStr == null)
+                throw new ConfigurationErrorsException(string.Format("Failed to find connection string named '{0}' in config file", connectionName));
+
+            _name = conStr.ProviderName;
+            _provider = DbProviderFactories.GetFactory(conStr.ProviderName);
+            _connectionString = conStr.ConnectionString;
+
+        }
+
+        public IDbConnection Create()
+        {
+            var connection = _provider.CreateConnection();
+            if (connection == null)
+                throw new ConfigurationErrorsException(string.Format("Failed to create a connection using the connection string named '{0}' in config file", _name));
+
+            connection.ConnectionString = _connectionString;
+            connection.Open();
+            return connection;
+        }
+    }
+}
