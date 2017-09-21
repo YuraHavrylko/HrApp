@@ -91,7 +91,7 @@ namespace HrApp.Infrastructure
         {
             TEntity objT = Activator.CreateInstance<TEntity>();
 
-            foreach (var property in typeof(TEntity).GetFields(BindingFlags.Public | BindingFlags.Instance))
+            foreach (var property in typeof(TEntity).GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 if (record.HasColumn(property.Name) && !record.IsDBNull(record.GetOrdinal(property.Name)))
                 {

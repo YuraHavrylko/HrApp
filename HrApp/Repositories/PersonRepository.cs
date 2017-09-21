@@ -32,7 +32,6 @@ namespace HrApp.Repositories
                 {"@FirstName", person.FirstName},
                 {"@LastName", person.LastName},
                 {"@City", person.City},
-                {"@Salary", person.Salary}
             };
 
             return CustomExecuteReader<Person>("sp_GetPersonsWhere", parameters).ToList();
