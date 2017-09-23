@@ -31,7 +31,7 @@ namespace HrApp.Repositories
             {
                 {"@PersonId", education.PersonId},
                 {"@SpecialityName", education.SpecialityName},
-                {"@City", education.EducationalInstitutionName}
+                {"@EducationalInstitutionName", education.EducationalInstitutionName}
             };
 
             return CustomExecuteReader<Education>("sp_GetEducationsWhere", parameters).ToList();
