@@ -30,7 +30,7 @@ namespace HrApp.Repositories
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
                 {"@PersonId", job.PersonId},
-                {"@NameType", job.TypeJobName}
+                {"@TypeJobName", job.TypeJobName}
             };
 
             return CustomExecuteReader<TypeJob>("sp_GetTypeJobsWhere", parameters).ToList();

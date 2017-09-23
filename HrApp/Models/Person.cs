@@ -41,7 +41,7 @@ namespace HrApp.Models
 
         public ICollection<ProfessionalSkill> ProfessionalSkills { get; set; }
 
-        public ICollection<PersonTypeJob> PersonTypeJobs { get; set; }
+        public ICollection<TypeJob> PersonTypeJobs { get; set; }
 
         public ICollection<WorkExperience> WorkExperiences { get; set; }
 

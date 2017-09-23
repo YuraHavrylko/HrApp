@@ -13,7 +13,7 @@ namespace HrApp.Models
         public int PersonId { get; set; }
 
         [Required]
-        [ForeignKey("TypeJobId")]
-        public int TypeJobId { get; set; }
+        [ForeignKey("TypeJobName")]
+        public string TypeJobName { get; set; }
     }
 }
