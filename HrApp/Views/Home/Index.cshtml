@@ -4,155 +4,172 @@
 @model IEnumerable<HrApp.Models.Person>
 
 
-@foreach (var person in Model)
-{
-    <div class="row">
-        <div class="col-md-4">
-            <ul class="list-inline">
-                <li class="btn btn-default">@Html.ActionLink("Edit", "Index", "Home", new {id = person.PersonId}, null)</li>
-                <li class="btn btn-default">@Html.ActionLink("Open", "FullInformation", "Home", new {id = person.PersonId}, null)</li>
-                <li class="btn btn-default">@Html.ActionLink("Load resume", "Index", "Home", new {id = person.PersonId}, null)</li>
-                <li class="btn btn-default">@Html.ActionLink("Load test", "Index", "Home", new {id = person.PersonId}, null)</li>
-            </ul>
-            <div class="row">
-                <div class="col-md-6">
-                    <p><b>@person.FirstName @person.LastName</b>
-                    </p>
-                    @if (person.Jobs != null)
-                    {
-                        foreach (var job in person.Jobs)
-                        {
-                            <p><b>@job.JobName</b>
-                            </p>
-                        }
-                    }
-                    <p>Date of birth <br/>@person.Birthday (@{
-                                                                var age = 0;
-                                                                age = DateTime.Now.Year - @person.Birthday.Year;
-                                                            } @age years)
-                    </p>
-                    <p>City: @person.City</p>
-                    <p>Phone: @person.Phone</p>
-                    <p>Email: @person.Email</p>
+<div class="panel-group">
+    @foreach (var person in Model)
+    {
+        <div class="row panel panel-default" style="padding: 5px; margin-top: 5px">
+            <div class="col-md-4">
+                <div class="container">
+                    <button type="button" class="btn btn-basic btn-md">@Html.ActionLink("Edit", "Index", "Home", new { id = person.PersonId }, null)</button>
+                    <button type="button" class="btn btn-basic btn-md">@Html.ActionLink("Open", "FullInformation", "Home", new { id = person.PersonId }, null)</button>
+                    <button type="button" class="btn btn-basic btn-md">@Html.ActionLink("Load resume", "Index", "Home", new { id = person.PersonId }, null)</button>
+                    <button type="button" class="btn btn-basic btn-md">@Html.ActionLink("Load test", "Index", "Home", new { id = person.PersonId }, null)</button>
                 </div>
-                <div class="col-md-6">
-                    <p><b>from @person.Salary </b>
-                    </p>
-                    @if (person.PersonTypeJobs != null)
-                    {
-                        foreach (var job in person.PersonTypeJobs)
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>
+                            <b>@person.FirstName @person.LastName</b>
+                        </p>
+                        @if (person.Jobs != null)
                         {
-                            <p><b>@job.TypeJobName</b>
-                            </p>
+                            foreach (var job in person.Jobs)
+                            {
+                                <p>
+                                    <b>@job.JobName</b>
+                                </p>
+                            }
                         }
-                    }
-                    <p><br/><b>Education</b>
-                    </p>
-                    @if (person.Educations != null)
-                    {
-                        foreach (var education in person.Educations)
+                        <p>
+                            Date of birth <br />@person.Birthday (@{
+                                var age = 0;
+                                age = DateTime.Now.Year - @person.Birthday.Year;
+                            } @age years)
+                        </p>
+                        <p>City: @person.City</p>
+                        <p>Phone: @person.Phone</p>
+                        <p>Email: @person.Email</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            <b>from @person.Salary </b>
+                        </p>
+                        @if (person.PersonTypeJobs != null)
                         {
-                            <p>@education.SpecialityName</p>
-                            <p>from @education.StartDate to @education.FinishDate @{
-                                var during = 0;
-                                during = education.FinishDate.Value.Year - education.StartDate.Value.Year;
-                                                                                  } (@during)</p>
-                            <p>@education.EducationalInstitutionName</p>
+                            foreach (var job in person.PersonTypeJobs)
+                            {
+                                <p>
+                                    <b>@job.TypeJobName</b>
+                                </p>
+                            }
                         }
-                    }
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-6">
-                    <p><b>Work experience (@person.WorkExpireance)</b>
-                    </p>
-                    <p></p>
-                    @if (person.WorkExperiences != null)
-                    {
-                        foreach (var experience in person.WorkExperiences)
+                        <p>
+                            <br /><b>Education</b>
+                        </p>
+                        @if (person.Educations != null)
                         {
-                            <p>@experience.PositionName</p>
-                            <p>from @experience.StartDate to @experience.FinishDate @{
-                                    var during = 0;
-                                    during = experience.FinishDate.Value.Year - experience.StartDate.Value.Year;
-                                } (@during years)
-                            </p>
-                            <p>@experience.CompanyName</p>
-                        }
-                    }
-                    <p>from 99.9999 to today(1 year 10 mounths)</p>
-                    <p>company name</p>
-                </div>
-                <div class="col-md-6">
-                    <p><b>Knowlerge of language</b>
-                    </p>
-                    @if (person.Languages != null)
-                    {
-                        foreach (var language in person.Languages)
-                        {
-                            <p>
-                                @language.LanguageName - @language.LanguageLevelName
-                            </p>
-                        }
-                    }
-                    <p><b>Professional skills</b>
-                    </p>
-                    @if (person.ProfessionalSkills != null)
-                    {
-                        foreach (var skill in person.ProfessionalSkills)
-                        {
-                            <p>
-                               @skill.SkillName
-                            </p>
-                        }
-                    }
+                            foreach (var education in person.Educations)
+                            {
+                                <p>@education.SpecialityName</p>
+                                <p>
+                                    from @education.StartDate to @education.FinishDate @{
+                                        var during = 0;
+                                        during = education.FinishDate.Value.Year - education.StartDate.Value.Year;
+                                    } (@during)
+                                </p>
+                                                                                <p>@education.EducationalInstitutionName</p>
+                                            }
+                                        }
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-8">
-                    <p><b>Interviews</b>
-                    </p>
-                    @if (person.Interviews != null)
-                    {
-                        foreach (var interview in person.Interviews)
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>
+                            <b>Work experience (@person.WorkExpireance)</b>
+                        </p>
+                        <p></p>
+                        @if (person.WorkExperiences != null)
                         {
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p>@interview.InterviewDate</p>
+                            foreach (var experience in person.WorkExperiences)
+                            {
+                                <p>@experience.PositionName</p>
+                                <p>
+                                    from @experience.StartDate to @experience.FinishDate @{
+                                        var during = 0;
+                                        during = experience.FinishDate.Value.Year - experience.StartDate.Value.Year;
+                                    } (@during years)
+                                </p>
+                                <p>@experience.CompanyName</p>
+                                            }
+                                        }
+                        <p>from 99.9999 to today(1 year 10 mounths)</p>
+                        <p>company name</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            <b>Knowlerge of language</b>
+                        </p>
+                        @if (person.Languages != null)
+                        {
+                            foreach (var language in person.Languages)
+                            {
+                                <p>
+                                    @language.LanguageName - @language.LanguageLevelName
+                                </p>
+                            }
+                        }
+                        <p>
+                            <b>Professional skills</b>
+                        </p>
+                        @if (person.ProfessionalSkills != null)
+                        {
+                            foreach (var skill in person.ProfessionalSkills)
+                            {
+                                <p>
+                                    @skill.SkillName
+                                </p>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-8">
+                        <p>
+                            <b>Interviews</b>
+                        </p>
+                        @if (person.Interviews != null)
+                        {
+                            foreach (var interview in person.Interviews)
+                            {
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>@interview.InterviewDate</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="text-right">Point: @interview.Point</p>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <p>Point: @interview.Point</p>
-                                </div>
-                            </div>
+                            }
                         }
-                    }
 
-                    <p><b>Comments</b>
-                    </p>
-                    @if (person.Interviews != null)
-                    {
-                        foreach (var interview in person.Interviews)
+                        <p>
+                            <b>Comments</b>
+                        </p>
+                        @if (person.Interviews != null)
                         {
-                            <p>@interview.Comment</p>
+                            foreach (var interview in person.Interviews)
+                            {
+                                <p>@interview.Comment</p>
+                            }
                         }
-                    }
-                    
-                </div>
 
-                <div class="col-md-4">
-                    <p><b>Resume files</b>
-                    </p>
-                    <br/><br/><br/><br/>
-                    <p><b>Test files</b>
-                    </p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <p class="text-center">
+                            <b>Resume files</b>
+                        </p>
+                        <br /><br /><br /><br />
+                        <p class="text-center">
+                            <b>Test files</b>
+                        </p>
+                    </div>
                 </div>
             </div>
+
         </div>
-
-    </div>
-}
-
+      }
+</div>
