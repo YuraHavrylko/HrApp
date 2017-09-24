@@ -16,27 +16,33 @@
             </ul>
             <div class="row">
                 <div class="col-md-6">
-                    <p><b>@person.FirstName @person.LastName</b>
-                    </p>
+                    <h3><b>@person.FirstName @person.LastName</b>
+                    </h3>
                     @if (person.Jobs != null)
                     {
-                        foreach (var job in person.Jobs)
-                        {
-                            <p><b>@job.JobName</b>
-                            </p>
-                        }
-                    }
-                    <p>Date of birth <br/>@person.Birthday (@{
-                                                                var age = 0;
-                                                                age = DateTime.Now.Year - @person.Birthday.Year;
-                                                            } @age years)
-                    </p>
-                    <p>City: @person.City</p>
-                    <p>Phone: @person.Phone</p>
-                    <p>Email: @person.Email</p>
-                </div>
+                        <ul>
+                            @foreach (var job in person.Jobs)
+                            {
+                            <p>
+                                <li><b>@job.JobName</b></li>
+</p>
+                            }
+                            </ul>
+                            }
+                            <p>
+                                <b>
+                                    Date of birth
+                                </b><br />@person.Birthday.ToString("yy-MMM-dd") (@{
+                                        var age = 0;
+                                        age = DateTime.Now.Year - @person.Birthday.Year;
+                                    } @age years)
+</p>
+                    <p><b>City:</b> @person.City</p>
+                            <p><b>Phone:</b> @person.Phone</p>
+                            <p><b>Email:</b> @person.Email</p>
+</div>
                 <div class="col-md-6">
-                    <p><b>from @person.Salary </b>
+                    <p align="right"><b>from @person.Salary UAH/mon</b>
                     </p>
                     @if (person.PersonTypeJobs != null)
                     {
@@ -52,12 +58,18 @@
                     {
                         foreach (var education in person.Educations)
                         {
+                           
+                            
                             <p>@education.SpecialityName</p>
-                            <p>from @education.StartDate to @education.FinishDate @{
-                                var during = 0;
-                                during = education.FinishDate.Value.Year - education.StartDate.Value.Year;
-                                                                                  } (@during)</p>
+                            <p>@{
+                                var startDate = education.StartDate.Value.ToString("yy-MMM-dd");
+                                var endDate = education.FinishDate.Value != null? education.FinishDate.Value.ToString("yy-MMM-dd") : "Today";
+                                var years = (education.FinishDate.Value != null ? education.FinishDate.Value : DateTime.Now).Year - education.StartDate.Value.Year;
+                                var month = (education.FinishDate.Value != null ? education.FinishDate.Value : DateTime.Now).Month - education.StartDate.Value.Month;
+                                var during = (years > 0 ? years + " years" : "") + (month > 0 ? month + " month" : "");
+                            }from @startDate to @endDate  (@during)</p>
                             <p>@education.EducationalInstitutionName</p>
+                            <hr/>
                         }
                     }
                 </div>
@@ -66,7 +78,7 @@
         <div class="col-md-4">
             <div class="row">
                 <div class="col-md-6">
-                    <p><b>Work experience (@person.WorkExpireance)</b>
+                    <p><b>Work experience (@person.WorkExpireance years)</b>
                     </p>
                     <p></p>
                     @if (person.WorkExperiences != null)
@@ -74,16 +86,19 @@
                         foreach (var experience in person.WorkExperiences)
                         {
                             <p>@experience.PositionName</p>
-                            <p>from @experience.StartDate to @experience.FinishDate @{
-                                    var during = 0;
-                                    during = experience.FinishDate.Value.Year - experience.StartDate.Value.Year;
-                                } (@during years)
+                            <p>
+                                @{
+                                    var startDate = experience.StartDate.Value.ToString("dd-MMM-yyyy");
+                                    var endDate = experience.FinishDate.Value != null ? experience.FinishDate.Value.ToString("dd-MMM-yyyy") : "Today";
+                                    var years = (experience.FinishDate.Value != null ? experience.FinishDate.Value : DateTime.Now).Year - experience.StartDate.Value.Year;
+                                    var month = (experience.FinishDate.Value != null ? experience.FinishDate.Value : DateTime.Now).Month - experience.StartDate.Value.Month;
+                                    var duringExp = (years > 0 ? years + " years" : "") + (month > 0 ? month + " month" : "");
+                                }from @startDate to @endDate (@duringExp)
                             </p>
                             <p>@experience.CompanyName</p>
+                            <hr />
                         }
                     }
-                    <p>from 99.9999 to today(1 year 10 mounths)</p>
-                    <p>company name</p>
                 </div>
                 <div class="col-md-6">
                     <p><b>Knowlerge of language</b>
@@ -122,10 +137,10 @@
                         {
                             <div class="row">
                                 <div class="col-md-6">
-                                    <p>@interview.InterviewDate</p>
+                                    <p>@interview.InterviewDate.ToString("dd-MMM-yyyy")</p>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>Point: @interview.Point</p>
+                                    <p><b>Point:</b> @interview.Point</p>
                                 </div>
                             </div>
                         }
