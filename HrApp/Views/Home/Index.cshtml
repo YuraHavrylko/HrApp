@@ -9,10 +9,10 @@
         <div class="row panel panel-default" style="padding: 5px; margin-top: 5px">
             <div class="col-md-4">
                 <div class="container">
-                    <button type="button" class="btn btn-basic btn-md">@Html.ActionLink("Edit", "Index", "Home", new {id = person.PersonId}, null)</button>
-                    <button type="button" class="btn btn-basic btn-md">@Html.ActionLink("Open", "FullInformation", "Home", new {id = person.PersonId}, null)</button>
-                    <button type="button" class="btn btn-basic btn-md">@Html.ActionLink("Load resume", "Index", "Home", new {id = person.PersonId}, null)</button>
-                    <button type="button" class="btn btn-basic btn-md">@Html.ActionLink("Load test", "Index", "Home", new {id = person.PersonId}, null)</button>
+                    <button type="button" class="btn btn-basic btn-md" onclick="location.href='@Url.Action("Index", "Home", new {id = person.PersonId}, null)'">Edit</button>
+                    <button type="button" class="btn btn-basic btn-md" onclick="location.href='@Url.Action("FullInformation", "Home", new {id = person.PersonId}, null)'">Open</button>
+                    <button type="button" class="btn btn-basic btn-md" onclick="location.href='@Url.Action("Index", "Home", new {id = person.PersonId}, null)'">Load resume</button>
+                    <button type="button" class="btn btn-basic btn-md" onclick="location.href='@Url.Action("Index", "Home", new {id = person.PersonId}, null)'">Load test</button>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
