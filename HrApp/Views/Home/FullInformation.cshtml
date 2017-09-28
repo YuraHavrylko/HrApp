@@ -1,6 +1,10 @@
 ﻿
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model HrApp.Models.Person
+@{
+    var person = Model;
 }
 
 <!DOCTYPE html>
@@ -11,7 +15,184 @@
     <title>FullInformation</title>
 </head>
 <body>
-    <div> 
+<div>
+    <div class="row panel panel-default" style="padding: 5px; margin-top: 5px">
+        <div class="col-md-4">
+            <div class="container">
+                <button type="button" class="btn btn-basic btn-md" onclick="location.href='@Url.Action("Index", "Home", new {id = person.PersonId}, null)'">Edit</button>
+                <button type="button" class="btn btn-basic btn-md" onclick="location.href='@Url.Action("FullInformation", "Home", new {id = person.PersonId}, null)'">Open</button>
+                <button type="button" class="btn btn-basic btn-md" onclick="location.href='@Url.Action("Index", "Home", new {id = person.PersonId}, null)'">Load resume</button>
+                <button type="button" class="btn btn-basic btn-md" onclick="location.href='@Url.Action("Index", "Home", new {id = person.PersonId}, null)'">Load test</button>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>
+                        <b>@person.FirstName @person.LastName</b>
+                    </h3>
+                    @if (person.Jobs != null)
+                    {
+                        <ul>
+                            @foreach (var job in person.Jobs)
+                            {
+                                <p>
+                                    <li><b>@job.JobName</b></li>
+                                </p>
+                            }
+                        </ul>
+                    }
+                    <p>
+                        <b>
+                            Date of birth
+                        </b><br />@person.Birthday.ToString("yy-MMM-dd") (@{
+                                                                              var age = 0;
+                                                                              age = DateTime.Now.Year - @person.Birthday.Year;
+                                                                          } @age years)
+                    </p>
+                    <p><b>City:</b> @person.City</p>
+                    <p><b>Phone:</b> @person.Phone</p>
+                    <p><b>Email:</b> @person.Email</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="text-right">
+                        <b>from @person.Salary UAH/mon</b>
+                    </p>
+                    @if (person.PersonTypeJobs != null)
+                    {
+                        foreach (var job in person.PersonTypeJobs)
+                        {
+                            <p>
+                                <b>@job.TypeJobName</b>
+                            </p>
+                        }
+                    }
+                    <p>
+                        <br /><b>Education</b>
+                    </p>
+                    @if (person.Educations != null)
+                    {
+                        foreach (var education in person.Educations)
+                        {
+
+
+                            <p>@education.SpecialityName</p>
+                            <p>
+                                @{
+                                    var startDate = education.StartDate.Value.ToString("yy-MMM-dd");
+                                    var endDate = education.FinishDate.Value != null ? education.FinishDate.Value.ToString("yy-MMM-dd") : "Today";
+                                    var years = (education.FinishDate.Value != null ? education.FinishDate.Value : DateTime.Now).Year - education.StartDate.Value.Year;
+                                    var month = (education.FinishDate.Value != null ? education.FinishDate.Value : DateTime.Now).Month - education.StartDate.Value.Month;
+                                    var during = (years > 0 ? years + " years" : "") + (month > 0 ? month + " month" : "");
+                                }from @startDate to @endDate (@during)
+                            </p>
+                            <p>@education.EducationalInstitutionName</p>
+                            <hr />
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <b>Work experience (@person.WorkExpireance years)</b>
+                    </p>
+                    <p></p>
+                    @if (person.WorkExperiences != null)
+                    {
+                        foreach (var experience in person.WorkExperiences)
+                        {
+                            <p>@experience.PositionName</p>
+                            <p>
+                                @{
+                                    var startDate = experience.StartDate.Value.ToString("dd-MMM-yyyy");
+                                    var endDate = experience.FinishDate.Value != null ? experience.FinishDate.Value.ToString("dd-MMM-yyyy") : "Today";
+                                    var years = (experience.FinishDate.Value != null ? experience.FinishDate.Value : DateTime.Now).Year - experience.StartDate.Value.Year;
+                                    var month = (experience.FinishDate.Value != null ? experience.FinishDate.Value : DateTime.Now).Month - experience.StartDate.Value.Month;
+                                    var duringExp = (years > 0 ? years + " years" : "") + (month > 0 ? month + " month" : "");
+                                }from @startDate to @endDate (@duringExp)
+                            </p>
+                            <p>@experience.CompanyName</p>
+                            <hr />
+                        }
+                    }
+                </div>
+                <div class="col-md-6">
+                    <p>
+                        <b>Knowlerge of language</b>
+                    </p>
+                    @if (person.Languages != null)
+                    {
+                        foreach (var language in person.Languages)
+                        {
+                            <p>
+                                @language.LanguageName - @language.LanguageLevelName
+                            </p>
+                        }
+                    }
+                    <p>
+                        <b>Professional skills</b>
+                    </p>
+                    @if (person.ProfessionalSkills != null)
+                    {
+                        foreach (var skill in person.ProfessionalSkills)
+                        {
+                            <p>
+                                @skill.SkillName
+                            </p>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-8">
+                    <p>
+                        <b>Interviews</b>
+                    </p>
+                    @if (person.Interviews != null)
+                    {
+                        foreach (var interview in person.Interviews)
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>@interview.InterviewDate.ToString("dd-MMM-yyyy")</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="text-right"><b>Point:</b> @interview.Point</p>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    <p>
+                        <b>Comments</b>
+                    </p>
+                    @if (person.Interviews != null)
+                    {
+                        foreach (var interview in person.Interviews)
+                        {
+                            <p>@interview.Comment</p>
+                        }
+                    }
+
+                </div>
+
+                <div class="col-md-4">
+                    <p class="text-right">
+                        <b>Resume files</b>
+                    </p>
+                    <br /><br /><br /><br />
+                    <p class="text-right">
+                        <b>Test files</b>
+                    </p>
+                </div>
+            </div>
+        </div>
+
     </div>
+</div>
 </body>
 </html>
+
