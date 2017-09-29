@@ -25,7 +25,7 @@ namespace HrApp.Repositories
             return CustomExecuteReader<Interview>("sp_GetInterviews").ToList();
         }
 
-        public IEnumerable<Interview> GetAllWhere(Interview interview)
+        public IEnumerable<Interview> GetAllWhere(Interview interview, int page = 1, int count = 10)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -46,6 +46,11 @@ namespace HrApp.Repositories
         }
 
         public void Delete(Interview person)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int GetCountWhere(Interview person)
         {
             throw new System.NotImplementedException();
         }

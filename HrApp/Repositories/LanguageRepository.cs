@@ -25,7 +25,7 @@ namespace HrApp.Repositories
             return CustomExecuteReader<Language>("sp_GetLanguages").ToList();
         }
 
-        public IEnumerable<Language> GetAllWhere(Language language)
+        public IEnumerable<Language> GetAllWhere(Language language, int page = 1, int count = 10)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -48,6 +48,11 @@ namespace HrApp.Repositories
         }
 
         public void Delete(Language person)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int GetCountWhere(Language person)
         {
             throw new System.NotImplementedException();
         }

@@ -25,7 +25,7 @@ namespace HrApp.Repositories
             return CustomExecuteReader<WorkExperience>("sp_GetWorkExperiences").ToList();
         }
 
-        public IEnumerable<WorkExperience> GetAllWhere(WorkExperience experience)
+        public IEnumerable<WorkExperience> GetAllWhere(WorkExperience experience, int page = 1, int count = 10)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -48,6 +48,11 @@ namespace HrApp.Repositories
         }
 
         public void Delete(WorkExperience person)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int GetCountWhere(WorkExperience person)
         {
             throw new System.NotImplementedException();
         }
