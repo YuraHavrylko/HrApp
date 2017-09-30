@@ -25,7 +25,7 @@ namespace HrApp.Repositories
             return CustomExecuteReader<Job>("sp_GetJobs").ToList();
         }
 
-        public IEnumerable<Job> GetAllWhere(Job job)
+        public IEnumerable<Job> GetAllWhere(Job job, int page = 1, int count = 10)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -36,9 +36,15 @@ namespace HrApp.Repositories
             return CustomExecuteReader<Job>("sp_GetJobsWhere", parameters).ToList();
         }
 
-        public void Add(Job person)
+        public void Add(Job job)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@PersonId", job.PersonId},
+                {"@JobName", job.JobName}
+            };
+
+            CustomExecuteNonQuery("sp_AddJob", parameters);
         }
 
         public void Edit(Job person)
@@ -47,6 +53,11 @@ namespace HrApp.Repositories
         }
 
         public void Delete(Job person)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int GetCountWhere(Job person)
         {
             throw new System.NotImplementedException();
         }

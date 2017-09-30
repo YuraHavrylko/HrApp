@@ -9,7 +9,9 @@ namespace HrApp.Contract.Repositories
 
         IEnumerable<T> GetAll();
 
-        IEnumerable<T> GetAllWhere(T person);
+        IEnumerable<T> GetAllWhere(T person, int page, int count);
+
+        int GetCountWhere(T person);
 
         void Add(T person);
 
