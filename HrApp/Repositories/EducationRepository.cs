@@ -37,9 +37,18 @@ namespace HrApp.Repositories
             return CustomExecuteReader<Education>("sp_GetEducationsWhere", parameters).ToList();
         }
 
-        public void Add(Education person)
+        public void Add(Education education)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@PersonId", education.PersonId},
+                {"@SpecialityName", education.SpecialityName},
+                {"@EducationalInstitutionName", education.EducationalInstitutionName},
+                {"@StartDate", education.StartDate},
+                {"@FinishDate", education.FinishDate}
+            };
+
+            CustomExecuteNonQuery("sp_AddEducation", parameters);
         }
 
         public void Edit(Education person)
