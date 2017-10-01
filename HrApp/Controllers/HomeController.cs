@@ -24,6 +24,10 @@ namespace HrApp.Controllers
             ViewBag.CountPerson = _unitOfWork.PersonRepository.GetCount();
             ViewBag.Count = count;
             ViewBag.Page = page;
+            ViewBag.Languages = _unitOfWork.LanguagesNameRepository.GetAll();
+            ViewBag.LanguageLevel = _unitOfWork.LanguageLevelRepository.GetAll();
+            ViewBag.TypeJob = _unitOfWork.TypeJobsNameRepository.GetAll();
+
             var persons = _unitOfWork.PersonRepository.GetAll(page: page, count: count);
 
 
@@ -37,30 +41,41 @@ namespace HrApp.Controllers
             return View(person);
         }
 
-        public ActionResult Find(string searchString)
+        public ActionResult Find(string searchString, int page = 1, int count = 10)
         {
-            searchString = "in";
-            var personsSearchByJob = _unitOfWork.JobRepository.GetAllWhere(new Job() { JobName = searchString }).ToList();
-            List<Person> persons = new List<Person>();
-            for (int i = 0; i < personsSearchByJob.Count; i++)
-            {
-                persons.Add(_unitOfWork.PersonRepository.Get(personsSearchByJob[i].PersonId.Value));
-            }
-                foreach (var person in persons)
-                {
-                        person.Educations = _unitOfWork.EducationRepository.GetAllWhere(new Education() { PersonId = person.PersonId }).ToList();
-                        person.WorkExperiences = _unitOfWork.WorkExpireanceRepository.GetAllWhere(new WorkExperience() { PersonId = person.PersonId }).ToList();
-                        person.Jobs = _unitOfWork.JobRepository.GetAllWhere(new Job() { PersonId = person.PersonId }).ToList();
-                        person.Interviews = _unitOfWork.InterviewRepository.GetAllWhere(new Interview() { PersonId = person.PersonId }).ToList();
-                        person.ProfessionalSkills = _unitOfWork.ProfessionalSkillRepository.GetAllWhere(new ProfessionalSkill() { PersonId = person.PersonId }).ToList();
-                        person.Languages = _unitOfWork.LanguageRepository.GetAllWhere(new Language() { PersonId = person.PersonId }).ToList();
-                        person.PersonTypeJobs = _unitOfWork.TypeJobRepository.GetAllWhere(new TypeJob() { PersonId = person.PersonId }).ToList();
+            ViewBag.CountPerson = _unitOfWork.PersonRepository.GetCountWhere(job : new Job() { JobName = searchString });
+            ViewBag.Count = count;
+            ViewBag.Page = page;
+            ViewBag.Languages = _unitOfWork.LanguagesNameRepository.GetAll();
+            ViewBag.LanguageLevel = _unitOfWork.LanguageLevelRepository.GetAll();
+            ViewBag.TypeJob = _unitOfWork.TypeJobsNameRepository.GetAll();
 
-                    
-                }
-            
+            var persons = _unitOfWork.PersonRepository.GetAllWhere(job: new Job() { JobName = searchString }, page: page, count: count);
+
             return View("Index",persons);
         }
-        
+
+        public ActionResult Filter(int? SalaryStart = null, int? SalaryFinish = null, 
+            string LanguageName = null, string LanguageLevelName = null, string TypeJobName = null,
+            int page = 1, int count = 10)
+        {
+            ViewBag.CountPerson = _unitOfWork.PersonRepository.GetCountWhere(
+                person: new Person() { SalaryStart = SalaryStart, SalaryFinish = SalaryFinish}, 
+                language : new Language(){ LanguageName = LanguageName, LanguageLevelName = LanguageLevelName });
+
+            ViewBag.Count = count;
+            ViewBag.Page = page;
+            ViewBag.Languages = _unitOfWork.LanguagesNameRepository.GetAll();
+            ViewBag.LanguageLevel = _unitOfWork.LanguageLevelRepository.GetAll();
+            ViewBag.TypeJob = _unitOfWork.TypeJobsNameRepository.GetAll();
+
+            var persons = _unitOfWork.PersonRepository.GetAllWhere(
+                person: new Person() { SalaryStart = SalaryStart, SalaryFinish = SalaryFinish }, 
+                language: new Language() { LanguageName = LanguageName, LanguageLevelName = LanguageLevelName }, 
+                typeJob: new TypeJob(){TypeJobName = TypeJobName}, 
+                page: page, count: count);
+
+            return View("Index", persons);
+        }
     }
 }
