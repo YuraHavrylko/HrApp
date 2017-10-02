@@ -6,7 +6,7 @@ namespace HrApp.Models
     public class Language
     {
         [Key]
-        public int LanguageId { get; set; }
+        public int? LanguageId { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -18,6 +18,6 @@ namespace HrApp.Models
 
         [Required]
         [ForeignKey("PersonId")]
-        public int PersonId { get; set; }
+        public int? PersonId { get; set; }
     }
 }
