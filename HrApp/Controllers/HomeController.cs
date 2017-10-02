@@ -61,6 +61,53 @@ namespace HrApp.Controllers
             
             return View("Index",persons);
         }
-        
+
+        //  
+        // GET: /CRUD/Create  
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        //  
+        // POST: /CRUD/Create  
+        [HttpPost]
+        public ActionResult Create(Person person)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.PersonRepository.Add(person);
+                return RedirectToAction("Index");
+            }
+
+            return View(person);
+        }
+
+        // GET: Education/Edit/5
+        public ActionResult Edit(int id)
+        {
+            var education = _unitOfWork.PersonRepository.Get(id);
+            return View(education);
+        }
+
+        // POST: Education/Edit/5
+        [HttpPost]
+        public ActionResult Edit(Person person)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.PersonRepository.Edit(person);
+                return RedirectToAction("FullInformation", "Home", new { id = person.PersonId });
+            }
+
+            return View(person);
+        }
+
+        // GET: Education/Delete/5
+        public ActionResult Delete(int idPerson)
+        {
+            _unitOfWork.EducationRepository.Delete(idPerson);
+            return RedirectToAction("Index", "Home", new { id = idPerson });
+        }
     }
 }

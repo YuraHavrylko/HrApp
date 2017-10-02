@@ -1,0 +1,47 @@
+﻿@model HrApp.Models.WorkExperience
+
+@{
+    ViewBag.Title = "Edit person work experience";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+
+            <h2>Create education</h2>
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true)
+                <fieldset>
+                    <legend>Form</legend>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CompanyName)
+                        @Html.TextBoxFor(model => model.CompanyName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CompanyName)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PositionName)
+                        @Html.TextBoxFor(model => model.PositionName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PositionName)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StartDate)
+                        @Html.TextBoxFor(model => model.StartDate, new { type = "date", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.StartDate)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FinishDate)
+                        @Html.TextBoxFor(model => model.FinishDate, new { type = "date", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.FinishDate)
+                    </div>
+                    @Html.HiddenFor(model => model.PersonId)
+                    <div class="form-group">
+                        <p>
+                            <input type="submit" value="Create" class="btn btn-success btn-block" />
+                        </p>
+                    </div>
+                </fieldset>
+            }
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+</div>

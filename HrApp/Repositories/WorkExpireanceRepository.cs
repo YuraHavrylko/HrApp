@@ -52,14 +52,29 @@ namespace HrApp.Repositories
             CustomExecuteNonQuery("sp_AddWorkExperience", parameters);
         }
 
-        public void Edit(WorkExperience person)
+        public void Edit(WorkExperience workExperience)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@WorkExperienceId", workExperience.WorkExperienceId},
+                {"@PositionName", workExperience.PositionName},
+                {"@PositionName", workExperience.PositionName},
+                {"@StartDate", workExperience.StartDate},
+                {"@FinishDate", workExperience.FinishDate},
+
+            };
+
+            CustomExecuteNonQuery("sp_EditWorkExperience", parameters);
         }
 
-        public void Delete(WorkExperience person)
+        public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@WorkExperienceId", id}
+            };
+
+            CustomExecuteNonQuery("sp_DeleteWorkExperience", parameters);
         }
 
         public int GetCountWhere(WorkExperience person)

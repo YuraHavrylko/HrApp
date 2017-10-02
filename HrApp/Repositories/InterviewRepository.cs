@@ -55,7 +55,7 @@ namespace HrApp.Repositories
             throw new System.NotImplementedException();
         }
 
-        public void Delete(Interview person)
+        public void Delete(int id)
         {
             throw new System.NotImplementedException();
         }

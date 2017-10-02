@@ -159,7 +159,9 @@
     <Compile Include="Contexts\PersonContext.cs" />
     <Compile Include="Contract\IConnectionFactory.cs" />
     <Compile Include="Contract\Repositories\IRepository.cs" />
+    <Compile Include="Controllers\EducationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\WorkExpireanceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -229,6 +231,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\FullInformation.cshtml" />
     <Content Include="Views\Home\Find.cshtml" />
+    <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Education\Create.cshtml" />
+    <Content Include="Views\Education\Edit.cshtml" />
+    <Content Include="Views\WorkExpireance\Create.cshtml" />
+    <Content Include="Views\WorkExpireance\Edit.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
