@@ -104,12 +104,21 @@ namespace HrApp.Controllers
         }
 
         public ActionResult Filter(int? SalaryStart = null, int? SalaryFinish = null, 
-            string LanguageName = null, string LanguageLevelName = null, string TypeJobName = null,
+            string LanguageName = null, string LanguageLevelName = null,
+            int? WorkExpireanceStart = null, int? WorkExpireanceFinish = null, string TypeJobName = null,
+            DateTime? interviewStartDate = null, DateTime? interviewFinishDate = null,
             int page = 1, int count = 10)
         {
             ViewBag.CountPerson = _unitOfWork.PersonRepository.GetCountWhere(
-                person: new Person() { SalaryStart = SalaryStart, SalaryFinish = SalaryFinish}, 
-                language : new Language(){ LanguageName = LanguageName, LanguageLevelName = LanguageLevelName });
+                person: new Person() {
+                    SalaryStart = SalaryStart,
+                    SalaryFinish = SalaryFinish,
+                    WorkExpireanceStart = WorkExpireanceStart,
+                    WorkExpireanceFinish = WorkExpireanceFinish
+                }, 
+                language : new Language(){ LanguageName = LanguageName, LanguageLevelName = LanguageLevelName },
+                typeJob: new TypeJob() { TypeJobName = TypeJobName },
+                interview : new Interview(){InterviewStartDate = interviewStartDate, InterviewFinishDate = interviewFinishDate});
 
             ViewBag.Count = count;
             ViewBag.Page = page;
@@ -118,12 +127,20 @@ namespace HrApp.Controllers
             ViewBag.TypeJob = _unitOfWork.TypeJobsNameRepository.GetAll();
 
             var persons = _unitOfWork.PersonRepository.GetAllWhere(
-                person: new Person() { SalaryStart = SalaryStart, SalaryFinish = SalaryFinish }, 
+                person: new Person()
+                {
+                    SalaryStart = SalaryStart,
+                    SalaryFinish = SalaryFinish,
+                    WorkExpireanceStart = WorkExpireanceStart,
+                    WorkExpireanceFinish = WorkExpireanceFinish
+                }, 
                 language: new Language() { LanguageName = LanguageName, LanguageLevelName = LanguageLevelName }, 
-                typeJob: new TypeJob(){TypeJobName = TypeJobName}, 
+                typeJob: new TypeJob(){TypeJobName = TypeJobName},
+                interview: new Interview() { InterviewStartDate = interviewStartDate, InterviewFinishDate = interviewFinishDate },
                 page: page, count: count);
 
             return View("Index", persons);
         }
+        
     }
 }
