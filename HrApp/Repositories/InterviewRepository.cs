@@ -50,14 +50,29 @@ namespace HrApp.Repositories
             CustomExecuteNonQuery("sp_AddInterview", parameters);
         }
 
-        public void Edit(Interview person)
+        public void Edit(Interview interview)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@InterviewId", interview.InterviewId},
+                {"@InterviewDate", interview.InterviewDate},
+                {"@Point", interview.Point},
+                {"@Comment", interview.Comment},
+                {"@FileResume", interview.FileResume},
+                {"@FileTest", interview.FileTest}
+            };
+
+            CustomExecuteNonQuery("sp_EditInterview", parameters);
         }
 
         public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@InterviewId", id}
+            };
+
+            CustomExecuteNonQuery("sp_DeleteInterview", parameters);
         }
 
         public int GetCountWhere(Interview person)

@@ -6,13 +6,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-
-            <h2>Create education</h2>
             @using (Html.BeginForm())
             {
                 @Html.ValidationSummary(true)
                 <fieldset>
-                    <legend>Form</legend>
+                    <legend>Add person work expireance</legend>
                     <div class="form-group">
                         @Html.LabelFor(model => model.CompanyName)
                         @Html.TextBoxFor(model => model.CompanyName, new { @class = "form-control" })
@@ -41,7 +39,7 @@
                     </div>
                 </fieldset>
             }
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to Person", "FullInformation", "Home", new { id = Model.PersonId }, null)
         </div>
     </div>
 </div>

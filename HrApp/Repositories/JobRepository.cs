@@ -15,7 +15,7 @@ namespace HrApp.Repositories
 
         public Job Get(int id)
         {
-            Dictionary<string, object> parameters = new Dictionary<string, object> { { "@EducationId", id } };
+            Dictionary<string, object> parameters = new Dictionary<string, object> { { "@JobId", id } };
 
             return CustomExecuteReader<Job>("sp_GetJobById", parameters).FirstOrDefault();
         }
@@ -47,14 +47,25 @@ namespace HrApp.Repositories
             CustomExecuteNonQuery("sp_AddJob", parameters);
         }
 
-        public void Edit(Job person)
+        public void Edit(Job job)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@JobId", job.JobId},
+                {"@JobName", job.JobName}
+            };
+
+            CustomExecuteNonQuery("sp_EditJob", parameters);
         }
 
         public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@JobId", id}
+            };
+
+            CustomExecuteNonQuery("sp_DeleteJob", parameters);
         }
 
         public int GetCountWhere(Job person)

@@ -6,7 +6,7 @@ namespace HrApp.Models
     public class TypeJob
     {
         [Key]
-        public int? TypeJobId { get; set; }
+        public int? PersonTypeJobId { get; set; }
 
         [Required]
         [MaxLength(100)]

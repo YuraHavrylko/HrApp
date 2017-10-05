@@ -97,10 +97,10 @@ namespace HrApp.Controllers
         }
 
         // GET: Education/Delete/5
-        public ActionResult Delete(int idPerson)
+        public ActionResult Delete(int id)
         {
-            _unitOfWork.EducationRepository.Delete(idPerson);
-            return RedirectToAction("Index", "Home", new {id = idPerson});
+            _unitOfWork.PersonRepository.Delete(id);
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Filter(int? SalaryStart = null, int? SalaryFinish = null, 

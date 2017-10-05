@@ -1,18 +1,16 @@
 ﻿@model HrApp.Models.Person
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Edit person";
 }
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-
-            <h2>Create person</h2>
             @using (Html.BeginForm())
             {
                 @Html.ValidationSummary(true)
                 <fieldset>
-                    <legend>Form</legend>
+                    <legend>Edit person</legend>
                     <div class="form-group">
                         @Html.LabelFor(model => model.FirstName)
                         @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
@@ -53,9 +51,10 @@
                         @Html.TextBoxFor(model => model.WorkExpireance, new { type = "number", step= "0.1", @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.WorkExpireance)
                     </div>
+                    @Html.HiddenFor(model => model.PersonId)
                     <div class="form-group">
                         <p>
-                            <input type="submit" value="Create" class="btn btn-success btn-block" />
+                            <input type="submit" value="Edit" class="btn btn-success btn-block" />
                         </p>
                     </div>
                 </fieldset>

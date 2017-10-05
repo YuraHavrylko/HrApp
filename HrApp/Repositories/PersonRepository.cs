@@ -142,7 +142,7 @@ namespace HrApp.Repositories
             CustomExecuteNonQuery("sp_EditPerson", parameters);
         }
 
-        public void Delete(int person)
+        public void Delete(int? person)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {

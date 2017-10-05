@@ -47,14 +47,25 @@ namespace HrApp.Repositories
             CustomExecuteNonQuery("sp_AddProfessionalSkill", parameters);
         }
 
-        public void Edit(ProfessionalSkill person)
+        public void Edit(ProfessionalSkill professionalSkill)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@ProfessionalSkillId", professionalSkill.ProfessionalSkillId},
+                {"@SkillName", professionalSkill.SkillName}
+            };
+
+            CustomExecuteNonQuery("sp_EditProfessionalSkill", parameters);
         }
 
         public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@ProfessionalSkillId", id}
+            };
+
+            CustomExecuteNonQuery("sp_DeleteProfessionalSkill", parameters);
         }
 
         public int GetCountWhere(ProfessionalSkill person)
