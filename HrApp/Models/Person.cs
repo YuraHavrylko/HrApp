@@ -42,7 +42,7 @@ namespace HrApp.Models
         [MaxLength(50)]
         public string City { get; set; }
 
-        public double? WorkExpireance { get; set; }
+        public int? WorkExpireance { get; set; }
 
         public ICollection<Education> Educations { get; set; }
 

@@ -74,10 +74,5 @@ namespace HrApp.Repositories
 
             CustomExecuteNonQuery("sp_DeleteEducation", parameters);
         }
-
-        public int GetCountWhere(Education person)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

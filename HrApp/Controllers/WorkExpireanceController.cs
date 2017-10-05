@@ -17,18 +17,6 @@ namespace HrApp.Controllers
             _unitOfWork = new UnitOfWork("HRDataBase");
         }
 
-        // GET: WorkExpireance
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: WorkExpireance/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: WorkExperience/Create
         public ActionResult Create(int id)
         {

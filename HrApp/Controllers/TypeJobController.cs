@@ -16,12 +16,8 @@ namespace HrApp.Controllers
         {
             _unitOfWork = new UnitOfWork("HRDataBase");
         }
-        // GET: TypeJob
-        public ActionResult Index()
-        {
-            return View();
-        }
 
+        // GET: TypeJob/Create
         public ActionResult Create(int id)
         {
             var typejob = new TypeJob();
@@ -30,7 +26,7 @@ namespace HrApp.Controllers
             return View(typejob);
         }
 
-        // POST: ProfessionalSkill/Create
+        // POST: TypeJob/Create
         [HttpPost]
         public ActionResult Create(TypeJob job)
         {
@@ -43,7 +39,7 @@ namespace HrApp.Controllers
             return View(job);
         }
 
-        // GET: ProfessionalSkill/Edit/5
+        // GET: TypeJob/Edit/5
         public ActionResult Edit(int id)
         {
             ViewBag.JobName = _unitOfWork.TypeJobRepository.GetAll();
@@ -51,7 +47,7 @@ namespace HrApp.Controllers
             return View(job);
         }
 
-        // POST: ProfessionalSkill/Edit/5
+        // POST: TypeJob/Edit/5
         [HttpPost]
         public ActionResult Edit(TypeJob job)
         {
@@ -64,7 +60,7 @@ namespace HrApp.Controllers
             return View(job);
         }
 
-        // GET: ProfessionalSkill/Delete/5
+        // GET: TypeJob/Delete/5
         public ActionResult Delete(int idPerson, int idPersonTypeJob)
         {
             _unitOfWork.TypeJobRepository.Delete(idPersonTypeJob);

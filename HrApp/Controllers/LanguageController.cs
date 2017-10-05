@@ -17,12 +17,7 @@ namespace HrApp.Controllers
             _unitOfWork = new UnitOfWork("HRDataBase");
         }
 
-        // GET: Language
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+        // GET: Language/Create
         public ActionResult Create(int id)
         {
             var language = new Language();
@@ -32,7 +27,7 @@ namespace HrApp.Controllers
             return View(language);
         }
 
-        // POST: ProfessionalSkill/Create
+        // POST: Language/Create
         [HttpPost]
         public ActionResult Create(Language language)
         {
@@ -46,7 +41,7 @@ namespace HrApp.Controllers
             return View(language);
         }
 
-        // GET: ProfessionalSkill/Edit/5
+        // GET: Language/Edit/5
         public ActionResult Edit(int id)
         {
             ViewBag.LanguageName = _unitOfWork.LanguagesNameRepository.GetAll();
@@ -55,7 +50,7 @@ namespace HrApp.Controllers
             return View(language);
         }
 
-        // POST: ProfessionalSkill/Edit/5
+        // POST: Language/Edit/5
         [HttpPost]
         public ActionResult Edit(Language language)
         {
@@ -69,7 +64,7 @@ namespace HrApp.Controllers
             return View(language);
         }
 
-        // GET: ProfessionalSkill/Delete/5
+        // GET: Language/Delete/5
         public ActionResult Delete(int idPerson, int idLanguage)
         {
             _unitOfWork.LanguageRepository.Delete(idLanguage);

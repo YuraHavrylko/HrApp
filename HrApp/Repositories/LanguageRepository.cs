@@ -70,10 +70,5 @@ namespace HrApp.Repositories
 
             CustomExecuteNonQuery("sp_DeleteLanguage", parameters);
         }
-
-        public int GetCountWhere(Language person)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
