@@ -120,6 +120,20 @@ namespace HrApp.Controllers
                 typeJob: new TypeJob() { TypeJobName = TypeJobName },
                 interview : new Interview(){InterviewStartDate = interviewStartDate, InterviewFinishDate = interviewFinishDate});
 
+            ViewBag.SalaryStart = SalaryStart;
+            ViewBag.SalaryFinish = SalaryFinish;
+
+            ViewBag.WorkExpireanceStart = WorkExpireanceStart;
+            ViewBag.WorkExpireanceFinish = WorkExpireanceFinish;
+
+            ViewBag.LanguageName = LanguageName;
+            ViewBag.LanguageLevelName = LanguageLevelName;
+
+            ViewBag.InterviewStartDate = interviewStartDate;
+            ViewBag.InterviewFinishDate = interviewFinishDate;
+
+            ViewBag.TypeJobName = TypeJobName;
+
             ViewBag.Count = count;
             ViewBag.Page = page;
             ViewBag.Languages = _unitOfWork.LanguagesNameRepository.GetAll();
