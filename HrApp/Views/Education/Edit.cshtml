@@ -13,22 +13,22 @@
                     <legend>Edit person education</legend>
                     <div class="form-group">
                         @Html.LabelFor(model => model.EducationalInstitutionName)
-                        @Html.TextBoxFor(model => model.EducationalInstitutionName, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.EducationalInstitutionName, new { @class = "form-control", @required = "required" })
                         @Html.ValidationMessageFor(model => model.EducationalInstitutionName)
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.SpecialityName)
-                        @Html.TextBoxFor(model => model.SpecialityName, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.SpecialityName, new { @class = "form-control", @required = "required" })
                         @Html.ValidationMessageFor(model => model.SpecialityName)
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.StartDate)
-                        @Html.TextBoxFor(model => model.StartDate, new { type = "date", @class = "form-control" })
+                        @Html.TextBoxFor(model => model.StartDate, new { type = "date", @class = "form-control", @required = "required" })
                         @Html.ValidationMessageFor(model => model.StartDate)
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.FinishDate)
-                        @Html.TextBoxFor(model => model.FinishDate, new { type = "date", @class = "form-control" })
+                        @Html.TextBoxFor(model => model.FinishDate, new { type = "date", @class = "form-control", @required = "required" })
                         @Html.ValidationMessageFor(model => model.FinishDate)
                     </div>
                     @Html.HiddenFor(model => model.PersonId)
