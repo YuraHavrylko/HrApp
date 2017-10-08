@@ -13,7 +13,7 @@
                     <legend>Edit person professional skill</legend>
                     <div class="form-group">
                         @Html.LabelFor(model => model.SkillName)
-                        @Html.TextBoxFor(model => model.SkillName, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.SkillName, new { @class = "form-control", @required = "required" })
                         @Html.ValidationMessageFor(model => model.SkillName)
                     </div>
                     

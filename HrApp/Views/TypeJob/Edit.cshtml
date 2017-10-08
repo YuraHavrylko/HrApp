@@ -16,7 +16,7 @@
                     <legend>Edit person type job</legend>
                     <div class="form-group">
                         @Html.LabelFor(model => model.TypeJobName)
-                        @Html.DropDownListFor(model => model.TypeJobName, new SelectList(list.Select(language => language.TypeJobName)), Model.TypeJobName, new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.TypeJobName, new SelectList(list.Select(language => language.TypeJobName)), Model.TypeJobName, new { @class = "form-control", @required = "required" })
                     </div>
                     @Html.HiddenFor(model => model.PersonId)
                     @Html.HiddenFor(model => model.PersonTypeJobId)

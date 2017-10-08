@@ -3,6 +3,7 @@
 
 @{
     ViewBag.Title = "Home Page";
+    int counter = 0;
 }
 
 
@@ -174,13 +175,19 @@
                                 <b>@person.FirstName @person.LastName</b>
                             </h3>
                             @if (person.Jobs != null)
-                {
+                            {
+                                counter = 0;
                                 <ul>
                                     @foreach (var job in person.Jobs)
                                     {
-                                        <p>
-                                        <li><b>@job.JobName</b></li>
-                                        </p>
+                                        if (counter < 4)
+                                        {
+                                            <p>
+                                            <li><b>@job.JobName</b></li>
+                                            </p>
+                                        }
+                                        else { break; }
+                                        counter++;
                                     }
                                 </ul>
                             }
@@ -201,36 +208,51 @@
                                 <b>from @person.Salary UAH/mon</b>
                             </p>
                             @if (person.PersonTypeJobs != null)
-                {
-                    foreach (var job in person.PersonTypeJobs)
-                    {
-                                    <p>
-                                        <b>@job.TypeJobName</b>
-                                    </p>
+                            {
+                                counter = 0;
+                                foreach (var job in person.PersonTypeJobs)
+                                {
+                                    if (counter < 3)
+                                    {
+                                        <p>
+                                            <b>@job.TypeJobName</b>
+                                        </p>
+                                    }
+                                    else { break; }
+                                    counter++;
                                 }
                             }
                             <p>
                                 <br /><b>Education</b>
                             </p>
                             @if (person.Educations != null)
-                {
-                    foreach (var education in person.Educations)
-                    {
-                                    <p>@education.SpecialityName</p>
-                                    <p>
-                                        @{
-                                            var startDate = education.StartDate.Value.ToString("MM.yyyy");
-                                            var endDate = education.FinishDate.Value != null ? education.FinishDate.Value.ToString("MM.yyyy") : "today";
-                                            var totaldays = ((education.FinishDate.Value != null ? education.FinishDate.Value : DateTime.Now) - education.StartDate.Value).TotalDays;
-                                            int years = (int)Math.Truncate(totaldays / 365);
-                                            var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
-                                            var during = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
-                                        }from @startDate to @endDate (@during)
-                                    </p>
-                                    <p>@education.EducationalInstitutionName</p>
-                                    <hr />
+                            {
+                                counter = 0;
+                                foreach (var education in person.Educations)
+                                {
+                                    if (counter < 2)
+                                    {
+                                        <p>@education.SpecialityName</p>
+                                        <p>
+                                            @{
+                                                var startDate = education.StartDate.Value.ToString("MM.yyyy");
+                                                var endDate = education.FinishDate.Value != null ? education.FinishDate.Value.ToString("MM.yyyy") : "today";
+                                                var totaldays = ((education.FinishDate.Value != null ? education.FinishDate.Value : DateTime.Now) - education.StartDate.Value).TotalDays;
+                                                int years = (int)Math.Truncate(totaldays / 365);
+                                                var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
+                                                var during = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
+                                            }from @startDate to @endDate (@during)
+                                        </p>
+                                        <p>@education.EducationalInstitutionName</p>
+                                        <hr />
+                                                        }
+                                                        else
+                                                        {
+                                                            break;
+                                                        }
+                                                        counter++;
+                                                    }
                                                 }
-                                            }
                         </div>
                     </div>
                 </div>
@@ -242,33 +264,44 @@
                             </p>
                             <p></p>
                             @if (person.WorkExperiences != null)
-                {
-                    foreach (var experience in person.WorkExperiences)
-                    {
-                                    <p>@experience.PositionName</p>
-                                    <p>
-                                        @{
-                                            var startDate = experience.StartDate.Value.ToString("MM.yyyy");
-                                            var endDate = experience.FinishDate.Value != null ? experience.FinishDate.Value.ToString("MM.yyyy") : "Today";
-                                            var totaldays = ((experience.FinishDate.Value != null ? experience.FinishDate.Value : DateTime.Now) - experience.StartDate.Value).TotalDays;
-                                            int years = (int)Math.Truncate(totaldays / 365);
-                                            var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
-                                            var duringExp = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
-                                        }from @startDate to @endDate (@duringExp)
-                                    </p>
-                                    <p>@experience.CompanyName</p>
-                                    <hr />
+                            {
+                                counter = 0;
+                                foreach (var experience in person.WorkExperiences)
+                                {
+                                    if (counter < 2)
+                                    {
+                                        <p>@experience.PositionName</p>
+                                        <p>
+                                            @{
+                                                var startDate = experience.StartDate.Value.ToString("MM.yyyy");
+                                                var endDate = experience.FinishDate.Value != null ? experience.FinishDate.Value.ToString("MM.yyyy") : "Today";
+                                                var totaldays = ((experience.FinishDate.Value != null ? experience.FinishDate.Value : DateTime.Now) - experience.StartDate.Value).TotalDays;
+                                                int years = (int)Math.Truncate(totaldays / 365);
+                                                var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
+                                                var duringExp = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
+                                            }from @startDate to @endDate (@duringExp)
+                                        </p>
+                                        <p>@experience.CompanyName</p>
+                                        <hr />
+                                                        }
+                                                        else
+                                                        { break; }
+                                                        counter++;
+
+                                                    }
                                                 }
-                                            }
                         </div>
                         <div class="col-md-6">
                             <p>
                                 <b>Knowlerge of language</b>
                             </p>
-                            @if (person.Languages != null)
-                {
-                                <ul>
-                                    @foreach (var language in person.Languages)
+                           @if (person.Languages != null)
+                           {
+                               counter = 0;
+                            <ul>
+                                @foreach (var language in person.Languages)
+                                {
+                                    if (counter < 4)
                                     {
                                         <li>
                                             <p>
@@ -276,15 +309,23 @@
                                             </p>
                                         </li>
                                     }
-                                </ul>
-                            }
+                                    else
+                                    { break; }
+                                    counter++;
+
+                                }
+                            </ul>
+                           }
                             <p>
                                 <b>Professional skills</b>
                             </p>
-                            @if (person.ProfessionalSkills != null)
-                {
-                                <ul>
-                                    @foreach (var skill in person.ProfessionalSkills)
+                           @if (person.ProfessionalSkills != null)
+                           {
+                               counter = 0;
+                            <ul>
+                                @foreach (var skill in person.ProfessionalSkills)
+                                {
+                                    if (counter < 3)
                                     {
                                         <li>
                                             <p>
@@ -292,8 +333,12 @@
                                             </p>
                                         </li>
                                     }
-                                </ul>
-                            }
+                                    else
+                                    { break; }
+                                    counter++;
+                                }
+                            </ul>
+                           }
                         </div>
                     </div>
                 </div>
@@ -304,30 +349,44 @@
                                 <b>Interviews</b>
                             </p>
                             @if (person.Interviews != null)
-                {
-                    foreach (var interview in person.Interviews)
-                    {
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <p>@interview.InterviewDate.ToString("dd.MM.yyyy")</p>
+                            {
+                                counter = 0;
+                                foreach (var interview in person.Interviews)
+                                {
+                                    if (counter < 4)
+                                    {
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p>@interview.InterviewDate.ToString("dd.MM.yyyy")</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="text-right"><b>Point:</b> @interview.Point</p>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <p class="text-right"><b>Point:</b> @interview.Point</p>
-                                        </div>
-                                    </div>
+                                    }
+                                    else
+                                    { break; }
+                                    counter++;
                                 }
                             }
 
                             <p>
                                 <b>Comments</b>
                             </p>
-                            @if (person.Interviews != null)
-                {
-                    foreach (var interview in person.Interviews)
-                    {
+                           @if (person.Interviews != null)
+                           {
+                               counter = 0;
+                               foreach (var interview in person.Interviews)
+                               {
+                                   if (counter == 0)
+                                   {
                                     <p>@interview.Comment</p>
-                                }
-                            }
+                                   }
+                                   else
+                                   { break; }
+                                   counter++;
+                               }
+                           }
 
                         </div>
 
@@ -335,36 +394,44 @@
                             <p class="text-center">
                                 <b>Resume files</b>
                             </p>
-                            @if (person.Interviews != null)
-                {
-                                <div class="row">
-                                    @foreach (var interview in person.Interviews)
-                                    {
-                                        <div class="col-md-4">
-                                            <img src="/file.png" width="35" height="35" class="img-thumbnail">
-                                            <p>
-                                                <small class="">@interview.FileResume</small>
-                                            </p>
-                                            <a href="/Documents/Resumes/@interview.FileResume" download>Load</a>
-                                        </div>
-                                    }
-                                </div>
+                            @foreach (var interview in person.Interviews)
+                            {
+                                if (counter < 3)
+                                {
+                                    <div class="col-md-4">
+                                        <img src="/file.png" width="35" height="35" class="img-thumbnail">
+                                        <p>
+                                            <small class="">@interview.FileResume</small>
+                                        </p>
+                                        <a href="/Documents/Resumes/@interview.FileResume" download>Load</a>
+                                    </div>
+                                }
+                                else
+                                { break; }
+                                counter++;
                             }
                             <p class="text-center">
                                 <b>Test files</b>
                             </p>
                             @if (person.Interviews != null)
-                {
+                            {
+                                counter = 0;
                                 <div class="row">
                                     @foreach (var interview in person.Interviews)
                                     {
-                                        <div class="col-md-4">
-                                            <img src="/file.png" width="35" height="35" class="img-thumbnail">
-                                            <p>
-                                                <small>@interview.FileTest</small>
-                                            </p>
-                                            <a href="/Documents/Tests/@interview.FileTest" download>Load</a>
-                                        </div>
+                                        if (counter < 3)
+                                        {
+                                            <div class="col-md-4">
+                                                <img src="/file.png" width="35" height="35" class="img-thumbnail">
+                                                <p>
+                                                    <small>@interview.FileTest</small>
+                                                </p>
+                                                <a href="/Documents/Tests/@interview.FileTest" download>Load</a>
+                                            </div>
+                                        }
+                                        else
+                                        { break; }
+                                        counter++;
                                     }
                                 </div>
                             }
