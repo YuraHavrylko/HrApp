@@ -1,0 +1,27 @@
+﻿@model System.Collections.Generic.IEnumerable<HrApp.Models.TypeJobsName>
+
+@{
+    ViewBag.Title = "Language level name";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            @foreach (var type in Model)
+            {
+                <p>
+                    <div class="row">
+                        <div class="col-md-8" style="padding-right: 5px">
+                            @type.TypeJobName
+                        </div>
+                        <div class="col-md-4" style="padding-left: 0px">
+                            <div class="btn-group btn-group-justified">
+                                <a class="btn btn-warning  btn-xs" onclick="location.href='@Url.Action("Edit", "TypeJobName", new {id = type.TypeJobId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                <a class="btn btn-danger btn-xs" onclick="location.href='@Url.Action("Delete", "TypeJobName", new {typeJobName = type.TypeJobId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </p>
+            }
+        </div>
+    </div>
+</div>

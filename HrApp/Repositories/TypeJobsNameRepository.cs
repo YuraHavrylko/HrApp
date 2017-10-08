@@ -33,7 +33,7 @@ namespace HrApp.Repositories
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
-                {"@TypeJobsNameId", typeJobsName.TypeJobNameId},
+                {"@TypeJobsNameId", typeJobsName.TypeJobId},
                 {"@TypeJobName", typeJobsName.TypeJobName}
             };
 
@@ -45,21 +45,31 @@ namespace HrApp.Repositories
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
-                {"@TypeJobsNameId", typeJobsName.TypeJobNameId},
                 {"@TypeJobName", typeJobsName.TypeJobName}
             };
 
             CustomExecuteNonQuery("sp_AddTypeJobsName", parameters);
         }
 
-        public void Edit(TypeJobsName person)
+        public void Edit(TypeJobsName typeJobsName)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@TypeJobsNameId", typeJobsName.TypeJobId},
+                {"@TypeJobName", typeJobsName.TypeJobName}
+            };
+
+            CustomExecuteNonQuery("sp_EditTypeJobsName", parameters);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@TypeJobsNameId", id}
+            };
+
+            CustomExecuteNonQuery("sp_DeleteTypeJobsName", parameters);
         }
     }
 }

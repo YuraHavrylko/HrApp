@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using HrApp.Infrastructure;
 using HrApp.Models;
+using HrApp.Models.Search;
 using HrApp.Repositories;
 
 namespace HrApp.Controllers
@@ -21,17 +23,18 @@ namespace HrApp.Controllers
 
         public ActionResult Index(int page = 1, int count = 10)
         {
-            ViewBag.CountPerson = _unitOfWork.PersonRepository.GetCount();
+            var person = new PersonSearchModel();
             ViewBag.Count = count;
             ViewBag.Page = page;
-            ViewBag.Languages = _unitOfWork.LanguagesNameRepository.GetAll();
-            ViewBag.LanguageLevel = _unitOfWork.LanguageLevelRepository.GetAll();
-            ViewBag.TypeJob = _unitOfWork.TypeJobsNameRepository.GetAll();
+            person.TypeLanguages = _unitOfWork.LanguagesNameRepository.GetAll().ToList();
+            person.LanguageLevels = _unitOfWork.LanguageLevelRepository.GetAll().ToList();
+            person.TypeJobsNames = _unitOfWork.TypeJobsNameRepository.GetAll().ToList();
 
-            var persons = _unitOfWork.PersonRepository.GetAll(page: page, count: count);
+            ViewBag.CountPerson = _unitOfWork.PersonRepository.GetCount();
+            ViewBag.PersonFind = person;
+            var persons = _unitOfWork.PersonRepository.GetAll(page, count);
 
-
-            return View(persons);
+            return View("Index", new BigPersonModel() { PersonSearchModel = person, Persons = persons });
         }
         
         public ActionResult FullInformation(int id)
@@ -39,20 +42,6 @@ namespace HrApp.Controllers
             var person = _unitOfWork.PersonRepository.Get(id);
 
             return View(person);
-        }
-
-        public ActionResult Find(string searchString, int page = 1, int count = 10)
-        {
-            ViewBag.CountPerson = _unitOfWork.PersonRepository.GetCountWhere(job : new Job() { JobName = searchString });
-            ViewBag.Count = count;
-            ViewBag.Page = page;
-            ViewBag.Languages = _unitOfWork.LanguagesNameRepository.GetAll();
-            ViewBag.LanguageLevel = _unitOfWork.LanguageLevelRepository.GetAll();
-            ViewBag.TypeJob = _unitOfWork.TypeJobsNameRepository.GetAll();
-
-            var persons = _unitOfWork.PersonRepository.GetAllWhere(job: new Job() { JobName = searchString }, page: page, count: count);
-
-            return View("Index",persons);
         }
 
         //  
@@ -103,57 +92,28 @@ namespace HrApp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult Filter(int? SalaryStart = null, int? SalaryFinish = null, 
-            string LanguageName = null, string LanguageLevelName = null,
-            int? WorkExpireanceStart = null, int? WorkExpireanceFinish = null, string TypeJobName = null,
-            DateTime? interviewStartDate = null, DateTime? interviewFinishDate = null,
-            int page = 1, int count = 10)
+        public ActionResult Filter(BigPersonModel person = null, int page = 1, int count = 10)
         {
-            ViewBag.CountPerson = _unitOfWork.PersonRepository.GetCountWhere(
-                person: new Person() {
-                    SalaryStart = SalaryStart,
-                    SalaryFinish = SalaryFinish,
-                    WorkExpireanceStart = WorkExpireanceStart,
-                    WorkExpireanceFinish = WorkExpireanceFinish
-                }, 
-                language : new Language(){ LanguageName = LanguageName, LanguageLevelName = LanguageLevelName },
-                typeJob: new TypeJob() { TypeJobName = TypeJobName },
-                interview : new Interview(){InterviewStartDate = interviewStartDate, InterviewFinishDate = interviewFinishDate});
 
-            ViewBag.SalaryStart = SalaryStart;
-            ViewBag.SalaryFinish = SalaryFinish;
-
-            ViewBag.WorkExpireanceStart = WorkExpireanceStart;
-            ViewBag.WorkExpireanceFinish = WorkExpireanceFinish;
-
-            ViewBag.LanguageName = LanguageName;
-            ViewBag.LanguageLevelName = LanguageLevelName;
-
-            ViewBag.InterviewStartDate = interviewStartDate;
-            ViewBag.InterviewFinishDate = interviewFinishDate;
-
-            ViewBag.TypeJobName = TypeJobName;
-
+            if (person == null)
+            {
+                person = new BigPersonModel();
+            }
+            if (person.PersonSearchModel == null)
+            {
+                person.PersonSearchModel = new PersonSearchModel();
+            }
             ViewBag.Count = count;
             ViewBag.Page = page;
-            ViewBag.Languages = _unitOfWork.LanguagesNameRepository.GetAll();
-            ViewBag.LanguageLevel = _unitOfWork.LanguageLevelRepository.GetAll();
-            ViewBag.TypeJob = _unitOfWork.TypeJobsNameRepository.GetAll();
+            person.PersonSearchModel.TypeLanguages = _unitOfWork.LanguagesNameRepository.GetAll().ToList();
+            person.PersonSearchModel.LanguageLevels = _unitOfWork.LanguageLevelRepository.GetAll().ToList();
+            person.PersonSearchModel.TypeJobsNames = _unitOfWork.TypeJobsNameRepository.GetAll().ToList();
 
-            var persons = _unitOfWork.PersonRepository.GetAllWhere(
-                person: new Person()
-                {
-                    SalaryStart = SalaryStart,
-                    SalaryFinish = SalaryFinish,
-                    WorkExpireanceStart = WorkExpireanceStart,
-                    WorkExpireanceFinish = WorkExpireanceFinish
-                }, 
-                language: new Language() { LanguageName = LanguageName, LanguageLevelName = LanguageLevelName }, 
-                typeJob: new TypeJob(){TypeJobName = TypeJobName},
-                interview: new Interview() { InterviewStartDate = interviewStartDate, InterviewFinishDate = interviewFinishDate },
-                page: page, count: count);
+            ViewBag.CountPerson = _unitOfWork.PersonRepository.GetCountWhere(person.PersonSearchModel);
 
-            return View("Index", persons);
+            var persons = _unitOfWork.PersonRepository.GetAllWhere(person.PersonSearchModel, page, count);
+            person.Persons = persons;
+            return View("Index", person);
         }
         
     }

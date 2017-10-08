@@ -7,7 +7,7 @@ namespace HrApp.Models
 {
     public class TypeJobsName
     {
-        public int? TypeJobNameId { get; set; }
+        public int? TypeJobId { get; set; }
 
         public string TypeJobName { get; set; }
     }

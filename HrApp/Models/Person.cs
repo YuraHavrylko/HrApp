@@ -58,18 +58,5 @@ namespace HrApp.Models
 
         public ICollection<Job> Jobs { get; set; }
 
-        #region SearchPattern
-
-        public int? SalaryStart { get; set; }
-        public int? SalaryFinish { get; set; }
-
-        public int? AgeStart { get; set; }
-        public int? AgeFinish { get; set; }
-
-        public int? WorkExpireanceStart { get; set; }
-        public int? WorkExpireanceFinish { get; set; }
-
-        #endregion
-
     }   
 }

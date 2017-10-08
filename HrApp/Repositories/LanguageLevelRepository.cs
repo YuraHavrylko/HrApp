@@ -45,7 +45,6 @@ namespace HrApp.Repositories
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
-                {"@LanguageLevelId", languageLevel.LanguageLevelId},
                 {"@LanguageLevelName", languageLevel.LanguageLevelName}
             };
 
@@ -54,12 +53,23 @@ namespace HrApp.Repositories
 
         public void Edit(LanguageLevel languageLevel)
         {
-            throw new System.NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@LanguageLevelId", languageLevel.LanguageLevelId},
+                {"@LanguageLevelName", languageLevel.LanguageLevelName}
+            };
+
+            CustomExecuteNonQuery("sp_EditLanguageLevel", parameters);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@LanguageLevelId", id}
+            };
+
+            CustomExecuteNonQuery("sp_DeleteLanguageLevel", parameters);
         }
     }
 }
