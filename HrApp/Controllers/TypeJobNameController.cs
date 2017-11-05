@@ -12,9 +12,9 @@ namespace HrApp.Controllers
     {
         private UnitOfWork _unitOfWork;
 
-        public TypeJobNameController()
+        public TypeJobNameController(UnitOfWork unitOfWork)
         {
-            _unitOfWork = new UnitOfWork("HRDataBase");
+            this._unitOfWork = unitOfWork;
         }
 
         public ActionResult Index()

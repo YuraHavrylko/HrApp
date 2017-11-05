@@ -13,9 +13,9 @@ namespace HrApp.Controllers
     {
         private UnitOfWork _unitOfWork;
 
-        public InterviewController()
+        public InterviewController(UnitOfWork unitOfWork)
         {
-            _unitOfWork = new UnitOfWork("HRDataBase");
+            this._unitOfWork = unitOfWork;
         }
 
         // GET: Interview/Create

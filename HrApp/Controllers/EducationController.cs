@@ -9,13 +9,14 @@ using HrApp.Models;
 
 namespace HrApp.Controllers
 {
+
     public class EducationController : Controller
     {
         private UnitOfWork _unitOfWork;
 
-        public EducationController()
+        public EducationController(UnitOfWork unitOfWork)
         {
-            _unitOfWork = new UnitOfWork("HRDataBase");
+            this._unitOfWork = unitOfWork;
         }
 
         // GET: Education/Create

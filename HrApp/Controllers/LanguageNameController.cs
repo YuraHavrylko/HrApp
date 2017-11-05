@@ -13,9 +13,9 @@ namespace HrApp.Controllers
 
         private UnitOfWork _unitOfWork;
 
-        public LanguageNameController()
+        public LanguageNameController(UnitOfWork unitOfWork)
         {
-            _unitOfWork = new UnitOfWork("HRDataBase");
+            this._unitOfWork = unitOfWork;
         }
 
         // GET: LanguageName
