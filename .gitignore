@@ -27,8 +27,20 @@ bld/
 # Visual Studio 2015 cache/options directory
 .vs/
 .vs/config/applicationhost.config
+
 # Uncomment if you have tasks that create the project's static files in wwwroot
-#wwwroot/
+**/wwwroot/lib
+**/wwwroot/bundle/js/*
+**/wwwroot/bundle/css/*
+
+!HrApp/wwwroot/bundle/css/.gitkeep
+!HrApp/wwwroot/bundle/js/.gitkeep
+
+**/App_Data/Documents/Resumes/*
+**/App_Data/Documents/Tests/*
+
+!HrApp/App_Data/Documents/Resumes/.gitkeep
+!HrApp/App_Data/Documents/Tests/.gitkeep
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
@@ -277,3 +289,6 @@ __pycache__/
 # Cake - Uncomment if you are using it
 # tools/**
 # !tools/packages.config
+
+# Microsoft Azure ApplicationInsights config file
+**/ApplicationInsights.config

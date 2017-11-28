@@ -7,7 +7,7 @@
 }
 
 
-<div style="padding-top: 25px" align="center">
+<div class="content-wrapper">
     <div class="row panel panel-default" style="padding: 5px; margin-top: 15px; margin-right: 10px; margin-left: 10px">
         @using (Html.BeginForm("Filter", "Home", FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
         {
@@ -125,7 +125,7 @@
                                     </div>
                                 </div>
                             </div>
-</fieldset>
+                        </fieldset>
                     }
 
                 </div>
@@ -133,33 +133,33 @@
 
         }
     </div>
-</div>
 
-<div class="panel-group" style="padding: 5px">
-<div class="row panel panel-default" style="padding: 5px; margin-top: 15px; margin-right: 10px; margin-left: 10px;" align="center">
-    <div class="btn-group btn-group-justified">
-        <a type="button" class="btn btn-success btn-sm btn-block" onclick="location.href = '@Url.Action("Create", "Home", null, null)'">Create person</a>
-        <a type="button" class="btn btn-success btn-sm btn-block" onclick="location.href = '@Url.Action("Index", "LanguageName", null, null)'">Manage languages</a>
-        <a type="button" class="btn btn-success btn-sm btn-block" onclick="location.href = '@Url.Action("Index", "LevelLanguage", null, null)'">Manage levels language</a>
-        <a type="button" class="btn btn-success btn-sm btn-block" onclick="location.href = '@Url.Action("Index", "TypeJobName", null, null)'">Manage type jobs</a>
+
+    <div class="panel-group" style="padding: 5px">
+        <div class="row panel panel-default" style="padding: 5px; margin-top: 15px; margin-right: 10px; margin-left: 10px;" align="center">
+            <div class="btn-group btn-group-justified">
+                <a type="button" class="btn btn-success btn-sm btn-block" onclick="location.href = '@Url.Action("Create", "Home", null, null)'">Create person</a>
+                <a type="button" class="btn btn-success btn-sm btn-block" onclick="location.href = '@Url.Action("Index", "LanguageName", null, null)'">Manage languages</a>
+                <a type="button" class="btn btn-success btn-sm btn-block" onclick="location.href = '@Url.Action("Index", "LevelLanguage", null, null)'">Manage levels language</a>
+                <a type="button" class="btn btn-success btn-sm btn-block" onclick="location.href = '@Url.Action("Index", "TypeJobName", null, null)'">Manage type jobs</a>
+            </div>
         </div>
-    </div>
-    
-<ul class="pagination">
-    @for (int i = 0; i < (int)Math.Ceiling((ViewBag.CountPerson * 1.0) / ViewBag.Count); i++)
-    {
-           
-        if (ViewBag.Page == i + 1)
-        {
-            <li class="active"><a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), "Home", new {person = Model, page = i + 1 })">@(i + 1)</a></li>
-        }
-        else
-        {
-            <li><a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), "Home", new {person = Model, page = i + 1 })">@(i + 1)</a></li>
-        }
-    }
-</ul>
-    <p>Count items: @ViewBag.CountPerson</p>
+
+        <ul class="pagination">
+            @for (int i = 0; i < (int)Math.Ceiling((ViewBag.CountPerson * 1.0) / ViewBag.Count); i++)
+            {
+
+                if (ViewBag.Page == i + 1)
+                {
+                    <li class="active"><a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), "Home", new {person = Model, page = i + 1 })">@(i + 1)</a></li>
+                }
+                else
+                {
+                    <li><a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), "Home", new {person = Model, page = i + 1 })">@(i + 1)</a></li>
+                }
+            }
+        </ul>
+        <p>Count items: @ViewBag.CountPerson</p>
         @foreach (var person in Model.Persons)
         {
             <div class="row panel panel-default" style="padding: 5px; margin-top: 15px; margin-right: 10px; margin-left: 10px">
@@ -295,50 +295,50 @@
                             <p>
                                 <b>Knowlerge of language</b>
                             </p>
-                           @if (person.Languages != null)
-                           {
-                               counter = 0;
-                            <ul>
-                                @foreach (var language in person.Languages)
-                                {
-                                    if (counter < 4)
+                            @if (person.Languages != null)
+                            {
+                                counter = 0;
+                                <ul>
+                                    @foreach (var language in person.Languages)
                                     {
-                                        <li>
-                                            <p>
-                                                @language.LanguageName - @language.LanguageLevelName
-                                            </p>
-                                        </li>
-                                    }
-                                    else
-                                    { break; }
-                                    counter++;
+                                        if (counter < 4)
+                                        {
+                                            <li>
+                                                <p>
+                                                    @language.LanguageName - @language.LanguageLevelName
+                                                </p>
+                                            </li>
+                                        }
+                                        else
+                                        { break; }
+                                        counter++;
 
-                                }
-                            </ul>
-                           }
+                                    }
+                                </ul>
+                            }
                             <p>
                                 <b>Professional skills</b>
                             </p>
-                           @if (person.ProfessionalSkills != null)
-                           {
-                               counter = 0;
-                            <ul>
-                                @foreach (var skill in person.ProfessionalSkills)
-                                {
-                                    if (counter < 3)
+                            @if (person.ProfessionalSkills != null)
+                            {
+                                counter = 0;
+                                <ul>
+                                    @foreach (var skill in person.ProfessionalSkills)
                                     {
-                                        <li>
-                                            <p>
-                                                @skill.SkillName
-                                            </p>
-                                        </li>
+                                        if (counter < 3)
+                                        {
+                                            <li>
+                                                <p>
+                                                    @skill.SkillName
+                                                </p>
+                                            </li>
+                                        }
+                                        else
+                                        { break; }
+                                        counter++;
                                     }
-                                    else
-                                    { break; }
-                                    counter++;
-                                }
-                            </ul>
-                           }
+                                </ul>
+                            }
                         </div>
                     </div>
                 </div>
@@ -373,20 +373,20 @@
                             <p>
                                 <b>Comments</b>
                             </p>
-                           @if (person.Interviews != null)
-                           {
-                               counter = 0;
-                               foreach (var interview in person.Interviews)
-                               {
-                                   if (counter == 0)
-                                   {
-                                    <p>@interview.Comment</p>
-                                   }
-                                   else
-                                   { break; }
-                                   counter++;
-                               }
-                           }
+                            @if (person.Interviews != null)
+                            {
+                                counter = 0;
+                                foreach (var interview in person.Interviews)
+                                {
+                                    if (counter == 0)
+                                    {
+                                        <p>@interview.Comment</p>
+                                    }
+                                    else
+                                    { break; }
+                                    counter++;
+                                }
+                            }
 
                         </div>
 
@@ -441,23 +441,23 @@
                 </div>
 
             </div>
-                                            }
+                                                }
     </div>
 
 
     <ul class="pagination">
-    @for (int i = 0; i < (int)Math.Ceiling((ViewBag.CountPerson * 1.0) / ViewBag.Count); i++)
-    {
-        if (ViewBag.Page == i + 1)
+        @for (int i = 0; i < (int)Math.Ceiling((ViewBag.CountPerson * 1.0) / ViewBag.Count); i++)
         {
-            <li class="active"><a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), "Home", new {person = Model, page = i + 1 })">@(i + 1)</a></li>
+            if (ViewBag.Page == i + 1)
+            {
+                <li class="active"><a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), "Home", new {person = Model, page = i + 1 })">@(i + 1)</a></li>
+            }
+            else
+            {
+                <li><a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), "Home", new {person = Model, page = i + 1 })">@(i + 1)</a></li>
+            }
         }
-        else
-        {
-            <li><a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), "Home", new {person = Model, page = i + 1 })">@(i + 1)</a></li>
-        }
-    }
-</ul>
+    </ul>
 
-
+</div>
 

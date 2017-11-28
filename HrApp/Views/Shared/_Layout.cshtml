@@ -1,39 +1,46 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title - HrApp</title>
+    @if (IsSectionDefined("Styles"))
+    {
+        @RenderSection("Styles", required: false)
+    }
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/wwwroot/bundle/css/base.min.css" />
+    <link rel="stylesheet" href="~/wwwroot/bundle/css/template.min.css" />
+    <link rel="stylesheet" href="~/wwwroot/lib/material-admin-lte/dist/css/MaterialAdminLTE.min.css" />
+    <link rel="stylesheet" href="~/wwwroot/lib/material-admin-lte/dist/css/skins/all-md-skins.min.css" />
 </head>
-<body>
-    <nav class="navbar navbar-fixed-top navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Main Page", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            
-        </div>
-    </nav>
-<div class="">
-    @RenderBody()
-    <hr/>
-    <footer>
-        <p>&copy; @DateTime.Now.Year</p>
-    </footer>
-</div>
+<body class="hold-transition skin-blue sidebar-mini">
 
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
+<div id="wrapper" class="wrapper">
+    
+    @Html.Partial("_TopNavbar")
+
+    @Html.Partial("_Navigation")
+
+    @RenderBody()
+
+    @Html.Partial("_Footer")
+
+</div>
+    <script src="~/wwwroot/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/wwwroot/lib/bootstrap-material-design/dist/js/material.min.js"></script>
+    <script src="~/wwwroot/lib/ripples/dist/js/ripple.min.js"></script>
+    <script>
+        $.material.init();
+    </script>
+    <script src="~/wwwroot/lib/material-admin-lte/dist/js/app.min.js"></script>
+    
+    <script src="~/wwwroot/lib/material-admin-lte/dist/js/demo.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>

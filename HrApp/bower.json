@@ -1,0 +1,14 @@
+{
+  "name": "HrApp",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "*",
+    "jquery-validation-unobtrusive": "*",
+    "modernizr": "*",
+    "respond": "*",
+    "bootstrap-material-design": "*",
+    "ripples": "*",
+    "admin-lte": "*",
+    "material-admin-lte" :  "DucThanhNguyen/MaterialAdminLTE" 
+  }
+}
