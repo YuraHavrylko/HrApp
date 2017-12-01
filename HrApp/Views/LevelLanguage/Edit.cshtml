@@ -3,28 +3,30 @@
 @{
     ViewBag.Title = "Edit language level";
 }
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            @using (Html.BeginForm())
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                @using (Html.BeginForm())
             {
-                @Html.ValidationSummary(true)
-                <fieldset>
-                    <legend>Edit language level</legend>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.LanguageLevelName)
-                        @Html.TextBoxFor(model => model.LanguageLevelName, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.LanguageLevelName)
-                    </div>
-                    @Html.HiddenFor(model => model.LanguageLevelId)
-                    <div class="form-group">
-                        <p>
-                            <input type="submit" value="Edit" class="btn btn-success btn-block" />
-                        </p>
-                    </div>
-                </fieldset>
-            }
-           @Html.ActionLink("Back to manage language levels", "Index", "LevelLanguage")
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <legend>Edit language level</legend>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LanguageLevelName)
+                            @Html.TextBoxFor(model => model.LanguageLevelName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.LanguageLevelName)
+                        </div>
+                        @Html.HiddenFor(model => model.LanguageLevelId)
+                        <div class="form-group">
+                            <p>
+                                <input type="submit" value="Edit" class="btn btn-success btn-block" />
+                            </p>
+                        </div>
+                    </fieldset>
+                }
+                @Html.ActionLink("Back to manage language levels", "Index", "LevelLanguage")
+            </div>
         </div>
     </div>
-</div>
+    </div>

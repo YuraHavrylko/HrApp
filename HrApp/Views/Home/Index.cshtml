@@ -5,459 +5,512 @@
     ViewBag.Title = "Home Page";
     int counter = 0;
 }
+<style>
+.container{
+    margin-top:30px;
+}
 
+.filter-col{
+    padding-left:10px;
+    padding-right:10px;
+}</style>
 
 <div class="content-wrapper">
-    <div class="row panel panel-default" style="padding: 5px; margin-top: 15px; margin-right: 10px; margin-left: 10px">
-        @using (Html.BeginForm("Filter", "Home", FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
-        {
-            <div class="">
-                <div class="">
-                    @using (Html.BeginForm())
-                    {
-                        @Html.ValidationSummary(true)
-                        <fieldset>
-                            <legend>Find form</legend>
-                            <div class="">
-                                <div class="row rowWithFullWidth">
-                                    <div class="col-md-1">
-                                        <h4>Salary:</h4>
-                                        <div class="form-group">
-                                            <div class="col-md-3">
-                                                @Html.Label("from", new { @class = "control-label" })
-                                            </div>
-                                            <div class="col-md-7">
-                                                @Html.TextBoxFor(model => model.PersonSearchModel.SalaryStart, new { @class = "form-control " })
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-3 ">
-                                                @Html.Label("to", new { @class = "control-label" })
-                                            </div>
-                                            <div class="col-md-7">
-                                                @Html.TextBoxFor(model => model.PersonSearchModel.SalaryFinish, new { @class = "form-control" })
-                                            </div>
-
-                                        </div>
-
-
-
-                                    </div>
-
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-1">
-                                        <h4>Experience:</h4>
-                                        <div class="form-group">
-                                            <div class="col-md-3">
-                                                @Html.Label("from", new { @class = "control-label" })
-                                            </div>
-                                            <div class="col-md-7">
-                                                @Html.TextBoxFor(model => model.PersonSearchModel.WorkExpireanceStart, new { @class = "form-control " })
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-3">
-                                                @Html.Label("to", new { @class = "control-label" })
-                                            </div>
-                                            <div class="col-md-7">
-                                                @Html.TextBoxFor(model => model.PersonSearchModel.SalaryStart, new { @class = "form-control" })
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">
-                                        <h4>Language:</h4>
-                                        <div class="form-group">
-                                            <div class="col-md-3">
-                                                @Html.Label("name", new { @class = "control-label" })
-                                            </div>
-                                            <div class="col-md-9">
-                                                @Html.DropDownListFor(model => model.PersonSearchModel.TypeLanguage.LanguageName, new SelectList(Model.PersonSearchModel.TypeLanguages.Select(x => x.LanguageName)), "", new { @class = "form-control " })
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-3">
-                                                @Html.Label("level", new { @class = "control-label" })
-                                            </div>
-                                            <div class="col-md-9">
-                                                @Html.DropDownListFor(model => model.PersonSearchModel.LanguageLevel.LanguageLevelName, new SelectList(Model.PersonSearchModel.LanguageLevels.Select(x => x.LanguageLevelName)), "", new { @class = "form-control " })
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">
-                                        <h4>Interview date:</h4>
-                                        <div class="form-group">
-                                            <div class="col-md-3">
-                                                @Html.Label("from", new { @class = "control-label" })
-                                            </div>
-                                            <div class="col-md-9">
-                                                @Html.TextBoxFor(model => model.PersonSearchModel.Interview.InterviewStartDate, new { type = "date", @class = "form-control " })
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-3">
-                                                @Html.Label("to", new { @class = "control-label" })
-                                            </div>
-                                            <div class="col-md-9">
-                                                @Html.TextBoxFor(model => model.PersonSearchModel.Interview.InterviewFinishDate, new { type = "date", @class = "form-control" })
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">
-                                        <h4>Type job:</h4>
-                                        <div class="form-group">
-                                            <div class="col-md-3">
-                                                @Html.Label("name", new { @class = "control-label" })
-                                            </div>
-                                            <div class="col-md-9">
-                                                @Html.DropDownListFor(model => model.PersonSearchModel.TypeJob.TypeJobName, new SelectList(Model.PersonSearchModel.TypeJobsNames.Select(x => x.TypeJobName)), "", new { @class = "form-control " })
-                                                <p>
-                                                    <br />
-                                                    <input type="submit" value="Find" class="btn btn-success btn-block" />
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                    }
-
-                </div>
-            </div>
-
-        }
-    </div>
-
-
-    <div class="panel-group" style="padding: 5px">
-        <div class="row panel panel-default" style="padding: 5px; margin-top: 15px; margin-right: 10px; margin-left: 10px;" align="center">
+   
+    <div class="panel-group" >
+        <div class="row panel panel-default" style="padding: 5px; margin-top: 5px; margin-right: 1px; margin-left: 1px;" align="center">
             <div class="btn-group btn-group-justified">
-                <a type="button" class="btn btn-success btn-sm btn-block" onclick="location.href = '@Url.Action("Create", "Home", null, null)'">Create person</a>
-                <a type="button" class="btn btn-success btn-sm btn-block" onclick="location.href = '@Url.Action("Index", "LanguageName", null, null)'">Manage languages</a>
-                <a type="button" class="btn btn-success btn-sm btn-block" onclick="location.href = '@Url.Action("Index", "LevelLanguage", null, null)'">Manage levels language</a>
-                <a type="button" class="btn btn-success btn-sm btn-block" onclick="location.href = '@Url.Action("Index", "TypeJobName", null, null)'">Manage type jobs</a>
+                <a type="button" class="btn btn-primary" onclick="location.href = '@Url.Action("Create", "Home", null, null)'" style="color: white">Create person</a>
+                <a type="button" class="btn  btn-primary" onclick="location.href = '@Url.Action("Index", "LanguageName", null, null)'" style="color: white">Manage languages</a>
+                <a type="button" class="btn  btn-primary" onclick="location.href = '@Url.Action("Index", "LevelLanguage", null, null)'" style="color: white">Manage levels language</a>
+                <a type="button" class="btn btn-primary" onclick="location.href = '@Url.Action("Index", "TypeJobName", null, null)'" style="color: white">Manage type jobs</a>
             </div>
         </div>
-
-        <ul class="pagination">
-            @for (int i = 0; i < (int)Math.Ceiling((ViewBag.CountPerson * 1.0) / ViewBag.Count); i++)
-            {
-
-                if (ViewBag.Page == i + 1)
-                {
-                    <li class="active"><a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), "Home", new {person = Model, page = i + 1 })">@(i + 1)</a></li>
-                }
-                else
-                {
-                    <li><a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), "Home", new {person = Model, page = i + 1 })">@(i + 1)</a></li>
-                }
-            }
-        </ul>
-        <p>Count items: @ViewBag.CountPerson</p>
-        @foreach (var person in Model.Persons)
-        {
-            <div class="row panel panel-default" style="padding: 5px; margin-top: 15px; margin-right: 10px; margin-left: 10px">
-                <div class="col-md-4">
-                    <div class="btn-group btn-group-justified">
-                        <a type="button" class="btn btn-info btn-sm" onclick="location.href = '@Url.Action("FullInformation", "Home", new {id = person.PersonId}, null)'">Open</a>
-                        <a type="button" class="btn btn-warning btn-sm" onclick="location.href = '@Url.Action("Edit", "Home", new {id = person.PersonId}, null)'">Edit</a>
-                        <a type="button" class="btn btn-danger btn-sm" onclick="location.href = '@Url.Action("Delete", "Home", new {id = person.PersonId}, null)'">Delete</a>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h3>
-                                <b>@person.FirstName @person.LastName</b>
-                            </h3>
-                            @if (person.Jobs != null)
-                            {
-                                counter = 0;
-                                <ul>
-                                    @foreach (var job in person.Jobs)
+    </div>
+    <div >
+        <div class="row" style="padding: 5px; margin-right: 15px; margin-left: 15px;">
+            <div id="filter-panel" class="collapse filter-panel">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @using (Html.BeginForm("Filter", "Home", FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            <div class="">
+                                <div class="">
+                                    @using (Html.BeginForm())
                                     {
-                                        if (counter < 4)
+                                        @Html.ValidationSummary(true)
+                                        <fieldset>
+                                            <legend>Find form</legend>
+                                            <div class="">
+                                                <div class="row rowWithFullWidth">
+                                                    <div class="col-md-1">
+                                                        <h4>Salary:</h4>
+                                                        <div class="form-group">
+                                                            <div class="col-md-3">
+                                                                @Html.Label("from", new { @class = "control-label" })
+                                                            </div>
+                                                            <div class="col-md-7">
+                                                                @Html.TextBoxFor(model => model.PersonSearchModel.SalaryStart, new { @class = "form-control " })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-3 ">
+                                                                @Html.Label("to", new { @class = "control-label" })
+                                                            </div>
+                                                            <div class="col-md-7">
+                                                                @Html.TextBoxFor(model => model.PersonSearchModel.SalaryFinish, new { @class = "form-control" })
+                                                            </div>
+
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                    <div class="col-md-1"></div>
+                                                    <div class="col-md-1">
+                                                        <h4>Experience:</h4>
+                                                        <div class="form-group">
+                                                            <div class="col-md-3">
+                                                                @Html.Label("from", new { @class = "control-label" })
+                                                            </div>
+                                                            <div class="col-md-7">
+                                                                @Html.TextBoxFor(model => model.PersonSearchModel.WorkExpireanceStart, new { @class = "form-control " })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-3">
+                                                                @Html.Label("to", new { @class = "control-label" })
+                                                            </div>
+                                                            <div class="col-md-7">
+                                                                @Html.TextBoxFor(model => model.PersonSearchModel.SalaryStart, new { @class = "form-control" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-1"></div>
+                                                    <div class="col-md-2">
+                                                        <h4>Language:</h4>
+                                                        <div class="form-group">
+                                                            <div class="col-md-3">
+                                                                @Html.Label("name", new { @class = "control-label" })
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                @Html.DropDownListFor(model => model.PersonSearchModel.TypeLanguage.LanguageName, new SelectList(Model.PersonSearchModel.TypeLanguages.Select(x => x.LanguageName)), "", new { @class = "form-control " })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-3">
+                                                                @Html.Label("level", new { @class = "control-label" })
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                @Html.DropDownListFor(model => model.PersonSearchModel.LanguageLevel.LanguageLevelName, new SelectList(Model.PersonSearchModel.LanguageLevels.Select(x => x.LanguageLevelName)), "", new { @class = "form-control " })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1"></div>
+                                                    <div class="col-md-2">
+                                                        <h4>Interview date:</h4>
+                                                        <div class="form-group">
+                                                            <div class="col-md-3">
+                                                                @Html.Label("from", new { @class = "control-label" })
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                @Html.TextBoxFor(model => model.PersonSearchModel.Interview.InterviewStartDate, new { type = "date", @class = "form-control " })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-3">
+                                                                @Html.Label("to", new { @class = "control-label" })
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                @Html.TextBoxFor(model => model.PersonSearchModel.Interview.InterviewFinishDate, new { type = "date", @class = "form-control" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-1"></div>
+                                                    <div class="col-md-2">
+                                                        <h4>Type job:</h4>
+                                                        <div class="form-group">
+                                                            <div class="col-md-3">
+                                                                @Html.Label("name", new { @class = "control-label" })
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                @Html.DropDownListFor(model => model.PersonSearchModel.TypeJob.TypeJobName, new SelectList(Model.PersonSearchModel.TypeJobsNames.Select(x => x.TypeJobName)), "", new { @class = "form-control " })
+                                                                <p>
+                                                                    <br />
+                                                                    <input type="submit" value="Find" class="btn btn-primary" style="color: white"/>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    }
+
+                                </div>
+                            </div>
+
+                        }
+
+
+                    </div>
+                </div>
+
+            </div>
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter-panel" style="color: white">
+                <span class="glyphicon glyphicon-cog" style="color: white"></span> Advanced Search
+            </button>
+        </div>
+        </div>
+        
+        
+            @*<ul class="pagination">
+                    @for (int i = 0; i < (int)Math.Ceiling((ViewBag.CountPerson * 1.0) / ViewBag.Count); i++)
+                    {
+
+                        if (ViewBag.Page == i + 1)
+                        {
+                            <li class="active"><a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), "Home", new {person = Model, page = i + 1 })">@(i + 1)</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), "Home", new {person = Model, page = i + 1 })">@(i + 1)</a></li>
+                        }
+                    }
+                </ul>*@
+            @*<p>Count items: @ViewBag.CountPerson</p>*@
+    <div class="panel-group" style="padding-right: 5px; padding-left: 5px">
+        @if (Model.Persons.Count() > 0)
+            {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>User name</th>
+                        <th>Job</th>
+                        <th>Work experience</th>
+                        <th>City</th>
+                        <th>Email</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in this.Model.Persons)
+                    {
+                        <tr>
+                            <td><a href="#" onclick="location.href = '@Url.Action("FullInformation", "Home", new {id = user.PersonId}, null)'">@user.FirstName  @user.LastName</a></td>
+                            <td>
+                                @if (user.PersonTypeJobs != null)
+                                {
+                                    counter = 0;
+                                    foreach (var job in user.PersonTypeJobs)
+                                    {
+                                        if (counter < 1)
                                         {
                                             <p>
-                                            <li><b>@job.JobName</b></li>
+                                                <b>@job.TypeJobName</b>
                                             </p>
                                         }
                                         else { break; }
                                         counter++;
                                     }
-                                </ul>
-                            }
-                            <p>
-                                <b>
-                                    Date of birth
-                                </b><br />@person.Birthday.ToString("dd MMMM yyyy") (@{
-                                    var age = 0;
-                                    age = DateTime.Now.Year - @person.Birthday.Year;
-                                } @age years)
-                            </p>
-                            <p><b>City:</b> @person.City</p>
-                            <p><b>Phone:</b> @person.Phone</p>
-                            <p><b>Email:</b> @person.Email</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="text-right">
-                                <b>from @person.Salary UAH/mon</b>
-                            </p>
-                            @if (person.PersonTypeJobs != null)
-                            {
-                                counter = 0;
-                                foreach (var job in person.PersonTypeJobs)
-                                {
-                                    if (counter < 3)
-                                    {
-                                        <p>
-                                            <b>@job.TypeJobName</b>
-                                        </p>
-                                    }
-                                    else { break; }
-                                    counter++;
                                 }
-                            }
-                            <p>
-                                <br /><b>Education</b>
-                            </p>
-                            @if (person.Educations != null)
-                            {
-                                counter = 0;
-                                foreach (var education in person.Educations)
+                            </td>
+                            <td>
+                                @if (user.WorkExperiences != null)
                                 {
-                                    if (counter < 2)
+                                    counter = 0;
+                                    foreach (var experience in user.WorkExperiences)
                                     {
-                                        <p>@education.SpecialityName</p>
-                                        <p>
-                                            @{
-                                                var startDate = education.StartDate.Value.ToString("MM.yyyy");
-                                                var endDate = education.FinishDate.Value != null ? education.FinishDate.Value.ToString("MM.yyyy") : "today";
-                                                var totaldays = ((education.FinishDate.Value != null ? education.FinishDate.Value : DateTime.Now) - education.StartDate.Value).TotalDays;
-                                                int years = (int)Math.Truncate(totaldays / 365);
-                                                var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
-                                                var during = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
-                                            }from @startDate to @endDate (@during)
-                                        </p>
-                                        <p>@education.EducationalInstitutionName</p>
-                                        <hr />
+                                        if (counter < 1)
+                                        {
+                                            <p>
+                                                @{
+                                                    var startDate = experience.StartDate.Value.ToString("MM.yyyy");
+                                                    var endDate = experience.FinishDate.Value != null ? experience.FinishDate.Value.ToString("MM.yyyy") : "Today";
+                                                    var totaldays = ((experience.FinishDate.Value != null ? experience.FinishDate.Value : DateTime.Now) - experience.StartDate.Value).TotalDays;
+                                                    int years = (int)Math.Truncate(totaldays / 365);
+                                                    var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
+                                                    var duringExp = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
+                                                } @duringExp
+                                            </p>
+                                                            }
+                                                            else
+                                                            { break; }
+                                                            counter++;
+
                                                         }
-                                                        else
-                                                        {
-                                                            break;
-                                                        }
-                                                        counter++;
                                                     }
-                                                }
+                            </td>
+                            <td>@user.City</td>
+                            <td>@user.Email</td>
+
+
+                            <td><a href="#" onclick="location.href = '@Url.Action("Edit", "Home", new {id = user.PersonId}, null)'">Edit</a></td>
+                            <td><a href="#" onclick="location.href = '@Url.Action("Delete", "Home", new {id = user.PersonId}, null)'">Delete</a></td>
+
+                        </tr>
+                                                    }
+                </tbody>
+            </table>
+                                                    }
+                                                    else
+                                                    {
+                                                        <label style="margin-left:10px">No User Found</label>
+                                                    }
+
+        @*@foreach (var person in Model.Persons)
+            {
+                <div class="row panel panel-default" style="padding: 5px; margin-top: 15px; margin-right: 10px; margin-left: 10px">
+                    <div class="col-md-4">
+                        <div class="btn-group btn-group-justified">
+                            <a type="button" class="btn btn-info btn-sm" onclick="location.href = '@Url.Action("FullInformation", "Home", new {id = person.PersonId}, null)'">Open</a>
+                            <a type="button" class="btn btn-warning btn-sm" onclick="location.href = '@Url.Action("Edit", "Home", new {id = person.PersonId}, null)'">Edit</a>
+                            <a type="button" class="btn btn-danger btn-sm" onclick="location.href = '@Url.Action("Delete", "Home", new {id = person.PersonId}, null)'">Delete</a>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3>
+                                    <b>@person.FirstName @person.LastName</b>
+                                </h3>
+                                @if (person.Jobs != null)
+                                {
+                                    counter = 0;
+                                    <ul>
+                                        @foreach (var job in person.Jobs)
+                                        {
+                                            if (counter < 4)
+                                            {
+                                                <p>
+                                                <li><b>@job.JobName</b></li>
+                                                </p>
+                                            }
+                                            else { break; }
+                                            counter++;
+                                        }
+                                    </ul>
+                                }
+                                <p>
+                                    <b>
+                                        Date of birth
+                                    </b><br />@person.Birthday.ToString("dd MMMM yyyy") (@{
+                                        var age = 0;
+                                        age = DateTime.Now.Year - @person.Birthday.Year;
+                                    } @age years)
+                                </p>
+                                <p><b>City:</b> @person.City</p>
+                                <p><b>Phone:</b> @person.Phone</p>
+                                <p><b>Email:</b> @person.Email</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-right">
+                                    <b>from @person.Salary UAH/mon</b>
+                                </p>
+                                @if (person.PersonTypeJobs != null)
+                                {
+                                    counter = 0;
+                                    foreach (var job in person.PersonTypeJobs)
+                                    {
+                                        if (counter < 3)
+                                        {
+                                            <p>
+                                                <b>@job.TypeJobName</b>
+                                            </p>
+                                        }
+                                        else { break; }
+                                        counter++;
+                                    }
+                                }
+                                <p>
+                                    <br /><b>Education</b>
+                                </p>
+                                @if (person.Educations != null)
+                                {
+                                    counter = 0;
+                                    foreach (var education in person.Educations)
+                                    {
+                                        if (counter < 2)
+                                        {
+                                            <p>@education.SpecialityName</p>
+                                            <p>
+                                                @{
+                                                    var startDate = education.StartDate.Value.ToString("MM.yyyy");
+                                                    var endDate = education.FinishDate.Value != null ? education.FinishDate.Value.ToString("MM.yyyy") : "today";
+                                                    var totaldays = ((education.FinishDate.Value != null ? education.FinishDate.Value : DateTime.Now) - education.StartDate.Value).TotalDays;
+                                                    int years = (int)Math.Truncate(totaldays / 365);
+                                                    var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
+                                                    var during = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
+                                                }from @startDate to @endDate (@during)
+                                            </p>
+                                            <p>@education.EducationalInstitutionName</p>
+                                            <hr />
+                                                            }
+                                                            else
+                                                            {
+                                                                break;
+                                                            }
+                                                            counter++;
+                                                        }
+                                                    }
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p>
-                                <b>Work experience (@person.WorkExpireance years)</b>
-                            </p>
-                            <p></p>
-                            @if (person.WorkExperiences != null)
-                            {
-                                counter = 0;
-                                foreach (var experience in person.WorkExperiences)
+                    <div class="col-md-5">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>
+                                    <b>Work experience (@person.WorkExpireance years)</b>
+                                </p>
+                                <p></p>
+                                @if (person.WorkExperiences != null)
                                 {
-                                    if (counter < 2)
+                                    counter = 0;
+                                    foreach (var experience in person.WorkExperiences)
                                     {
-                                        <p>@experience.PositionName</p>
-                                        <p>
-                                            @{
-                                                var startDate = experience.StartDate.Value.ToString("MM.yyyy");
-                                                var endDate = experience.FinishDate.Value != null ? experience.FinishDate.Value.ToString("MM.yyyy") : "Today";
-                                                var totaldays = ((experience.FinishDate.Value != null ? experience.FinishDate.Value : DateTime.Now) - experience.StartDate.Value).TotalDays;
-                                                int years = (int)Math.Truncate(totaldays / 365);
-                                                var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
-                                                var duringExp = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
-                                            }from @startDate to @endDate (@duringExp)
-                                        </p>
-                                        <p>@experience.CompanyName</p>
-                                        <hr />
-                                                        }
-                                                        else
-                                                        { break; }
-                                                        counter++;
+                                        if (counter < 2)
+                                        {
+                                            <p>@experience.PositionName</p>
+                                            <p>
+                                                @{
+                                                    var startDate = experience.StartDate.Value.ToString("MM.yyyy");
+                                                    var endDate = experience.FinishDate.Value != null ? experience.FinishDate.Value.ToString("MM.yyyy") : "Today";
+                                                    var totaldays = ((experience.FinishDate.Value != null ? experience.FinishDate.Value : DateTime.Now) - experience.StartDate.Value).TotalDays;
+                                                    int years = (int)Math.Truncate(totaldays / 365);
+                                                    var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
+                                                    var duringExp = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
+                                                }from @startDate to @endDate (@duringExp)
+                                            </p>
+                                            <p>@experience.CompanyName</p>
+                                            <hr />
+                                                            }
+                                                            else
+                                                            { break; }
+                                                            counter++;
 
+                                                        }
                                                     }
-                                                }
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    <b>Knowlerge of language</b>
+                                </p>
+                                @if (person.Languages != null)
+                                {
+                                    counter = 0;
+                                    <ul>
+                                        @foreach (var language in person.Languages)
+                                        {
+                                            if (counter < 4)
+                                            {
+                                                <li>
+                                                    <p>
+                                                        @language.LanguageName - @language.LanguageLevelName
+                                                    </p>
+                                                </li>
+                                            }
+                                            else
+                                            { break; }
+                                            counter++;
+
+                                        }
+                                    </ul>
+                                }
+                                <p>
+                                    <b>Professional skills</b>
+                                </p>
+                                @if (person.ProfessionalSkills != null)
+                                {
+                                    counter = 0;
+                                    <ul>
+                                        @foreach (var skill in person.ProfessionalSkills)
+                                        {
+                                            if (counter < 3)
+                                            {
+                                                <li>
+                                                    <p>
+                                                        @skill.SkillName
+                                                    </p>
+                                                </li>
+                                            }
+                                            else
+                                            { break; }
+                                            counter++;
+                                        }
+                                    </ul>
+                                }
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <p>
-                                <b>Knowlerge of language</b>
-                            </p>
-                            @if (person.Languages != null)
-                            {
-                                counter = 0;
-                                <ul>
-                                    @foreach (var language in person.Languages)
+                    </div>
+                    <div class="col-md-3">
+                                <p>
+                                    <b>Interviews</b>
+                                </p>
+                                @if (person.Interviews != null)
+                                {
+                                    counter = 0;
+                                    foreach (var interview in person.Interviews)
                                     {
                                         if (counter < 4)
                                         {
-                                            <li>
-                                                <p>
-                                                    @language.LanguageName - @language.LanguageLevelName
-                                                </p>
-                                            </li>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p>@interview.InterviewDate.ToString("dd.MM.yyyy")</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="text-right"><b>Point:</b> @interview.Point</p>
+                                                </div>
+                                            </div>
                                         }
                                         else
                                         { break; }
                                         counter++;
-
                                     }
-                                </ul>
-                            }
-                            <p>
-                                <b>Professional skills</b>
-                            </p>
-                            @if (person.ProfessionalSkills != null)
-                            {
-                                counter = 0;
-                                <ul>
-                                    @foreach (var skill in person.ProfessionalSkills)
+                                }
+
+                                <p>
+                                    <b>Comments</b>
+                                </p>
+                                @if (person.Interviews != null)
+                                {
+                                    counter = 0;
+                                    foreach (var interview in person.Interviews)
                                     {
-                                        if (counter < 3)
+                                        if (counter == 0)
                                         {
-                                            <li>
-                                                <p>
-                                                    @skill.SkillName
-                                                </p>
-                                            </li>
+                                            <p>@interview.Comment</p>
                                         }
                                         else
                                         { break; }
                                         counter++;
                                     }
-                                </ul>
-                            }
-                        </div>
+                                }
+
                     </div>
+
                 </div>
-                <div class="col-md-4">
-                    <div class="row">
-                        <div class="col-md-7">
-                            <p>
-                                <b>Interviews</b>
-                            </p>
-                            @if (person.Interviews != null)
-                            {
-                                counter = 0;
-                                foreach (var interview in person.Interviews)
-                                {
-                                    if (counter < 4)
-                                    {
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <p>@interview.InterviewDate.ToString("dd.MM.yyyy")</p>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p class="text-right"><b>Point:</b> @interview.Point</p>
-                                            </div>
-                                        </div>
-                                    }
-                                    else
-                                    { break; }
-                                    counter++;
-                                }
-                            }
-
-                            <p>
-                                <b>Comments</b>
-                            </p>
-                            @if (person.Interviews != null)
-                            {
-                                counter = 0;
-                                foreach (var interview in person.Interviews)
-                                {
-                                    if (counter == 0)
-                                    {
-                                        <p>@interview.Comment</p>
-                                    }
-                                    else
-                                    { break; }
-                                    counter++;
-                                }
-                            }
-
-                        </div>
-
-                        <div class="col-md-5">
-                            <p class="text-center">
-                                <b>Resume files</b>
-                            </p>
-                            @foreach (var interview in person.Interviews)
-                            {
-                                if (counter < 3)
-                                {
-                                    <div class="col-md-4">
-                                        <img src="/file.png" width="35" height="35" class="img-thumbnail">
-                                        <p>
-                                            <small class="">@interview.FileResume</small>
-                                        </p>
-                                        <a href="/Documents/Resumes/@interview.FileResume" download>Load</a>
-                                    </div>
-                                }
-                                else
-                                { break; }
-                                counter++;
-                            }
-                            <p class="text-center">
-                                <b>Test files</b>
-                            </p>
-                            @if (person.Interviews != null)
-                            {
-                                counter = 0;
-                                <div class="row">
-                                    @foreach (var interview in person.Interviews)
-                                    {
-                                        if (counter < 3)
-                                        {
-                                            <div class="col-md-4">
-                                                <img src="/file.png" width="35" height="35" class="img-thumbnail">
-                                                <p>
-                                                    <small>@interview.FileTest</small>
-                                                </p>
-                                                <a href="/Documents/Tests/@interview.FileTest" download>Load</a>
-                                            </div>
-                                        }
-                                        else
-                                        { break; }
-                                        counter++;
-                                    }
-                                </div>
-                            }
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-                                                }
+            }*@
     </div>
 
 
-    <ul class="pagination">
-        @for (int i = 0; i < (int)Math.Ceiling((ViewBag.CountPerson * 1.0) / ViewBag.Count); i++)
-        {
-            if (ViewBag.Page == i + 1)
-            {
-                <li class="active"><a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), "Home", new {person = Model, page = i + 1 })">@(i + 1)</a></li>
-            }
-            else
-            {
-                <li><a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), "Home", new {person = Model, page = i + 1 })">@(i + 1)</a></li>
-            }
-        }
-    </ul>
 
-</div>
+        <div style="padding: 5px; margin-top: 15px; margin-right: 10px; margin-left: 10px">
+            <ul class="pagination">
+                @for (int i = 0; i < (int)Math.Ceiling((ViewBag.CountPerson * 1.0) / ViewBag.Count); i++)
+            {
+                if (ViewBag.Page == i + 1)
+                {
+                        <li class="active"><a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), "Home", new {person = Model, page = i + 1 })">@(i + 1)</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), "Home", new {person = Model, page = i + 1 })">@(i + 1)</a></li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
 

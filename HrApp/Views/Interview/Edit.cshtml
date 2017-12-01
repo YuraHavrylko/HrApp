@@ -3,50 +3,52 @@
 @{
     ViewBag.Title = "Edit person interview";
 }
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            @using (Html.BeginForm("Create", "Interview", FormMethod.Post, new { enctype = "multipart/form-data" }))
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                @using (Html.BeginForm("Create", "Interview", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-                @Html.ValidationSummary(true)
-                <fieldset>
-                    <legend>Edit person interview</legend>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.InterviewDate)
-                        @Html.TextBoxFor(model => model.InterviewDate, new { type = "datetime", @class = "form-control", @required = "required" })
-                        @Html.ValidationMessageFor(model => model.InterviewDate)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Point)
-                        @Html.TextBoxFor(model => model.Point, new { type = "number", @class = "form-control", @required = "required" })
-                        @Html.ValidationMessageFor(model => model.Point)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Comment)
-                        @Html.TextAreaFor(model => model.Comment, new { rows = 5, @class = "form-control", @required = "required" })
-                        @Html.ValidationMessageFor(model => model.Comment)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.FileResume)
-                        <input type="file" class="form-control" name="fileResume" />
-                        @Html.ValidationMessageFor(model => model.FileResume)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.FileResume)
-                        <input type="file" class="form-control" name="fileTest" />
-                        @Html.ValidationMessageFor(model => model.FileResume)
-                    </div>
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <legend>Edit person interview</legend>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.InterviewDate)
+                            @Html.TextBoxFor(model => model.InterviewDate, new { type = "datetime", @class = "form-control", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.InterviewDate)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Point)
+                            @Html.TextBoxFor(model => model.Point, new { type = "number", @class = "form-control", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.Point)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Comment)
+                            @Html.TextAreaFor(model => model.Comment, new { rows = 5, @class = "form-control", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.Comment)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FileResume)
+                            <input type="file" class="form-control" name="fileResume" />
+                            @Html.ValidationMessageFor(model => model.FileResume)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FileResume)
+                            <input type="file" class="form-control" name="fileTest" />
+                            @Html.ValidationMessageFor(model => model.FileResume)
+                        </div>
 
-                    @Html.HiddenFor(model => model.PersonId)
-                    @Html.HiddenFor(model => model.InterviewId)
-                    <div class="form-group">
-                        <p>
-                            <input type="submit" value="Create" class="btn btn-success btn-block" />
-                        </p>
-                    </div>
-                </fieldset>
-            }
-            @Html.ActionLink("Back to Person", "FullInformation", "Home", new { id = Model.PersonId }, null)
+                        @Html.HiddenFor(model => model.PersonId)
+                        @Html.HiddenFor(model => model.InterviewId)
+                        <div class="form-group">
+                            <p>
+                                <input type="submit" value="Create" class="btn btn-success btn-block" />
+                            </p>
+                        </div>
+                    </fieldset>
+                }
+                @Html.ActionLink("Back to Person", "FullInformation", "Home", new { id = Model.PersonId }, null)
+            </div>
         </div>
     </div>
-</div>
+    </div>

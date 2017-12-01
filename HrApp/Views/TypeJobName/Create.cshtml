@@ -3,29 +3,30 @@
 @{
     ViewBag.Title = "Add type job";
 }
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            @using (Html.BeginForm())
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                @using (Html.BeginForm())
             {
-                @Html.ValidationSummary(true)
-                <fieldset>
-                    <legend>Add type job</legend>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.TypeJobName)
-                        @Html.TextBoxFor(model => model.TypeJobName, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.TypeJobName)
-                    </div>
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <legend>Add type job</legend>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TypeJobName)
+                            @Html.TextBoxFor(model => model.TypeJobName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TypeJobName)
+                        </div>
 
-                    <div class="form-group">
-                        <p>
-                            <input type="submit" value="Create" class="btn btn-success btn-block" />
-                        </p>
-                    </div>
-                </fieldset>
-            }
-            @Html.ActionLink("Back to manage type jobs", "Index", "TypeJobName")
+                        <div class="form-group">
+                            <p>
+                                <input type="submit" value="Create" class="btn btn-success btn-block" />
+                            </p>
+                        </div>
+                    </fieldset>
+                }
+                @Html.ActionLink("Back to manage type jobs", "Index", "TypeJobName")
+            </div>
         </div>
     </div>
-</div>
-
+    </div>
