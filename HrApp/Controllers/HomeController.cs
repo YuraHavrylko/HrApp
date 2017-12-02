@@ -12,6 +12,7 @@ using HrApp.Repositories;
 
 namespace HrApp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private UnitOfWork _unitOfWork;

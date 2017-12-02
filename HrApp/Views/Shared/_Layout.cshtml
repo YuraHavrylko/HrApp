@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@ViewBag.Title - HrApp</title>
@@ -10,7 +10,7 @@
     {
         @RenderSection("Styles", required: false)
     }
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="~/wwwroot/bundle/css/base.min.css" />
@@ -18,19 +18,24 @@
     <link rel="stylesheet" href="~/wwwroot/lib/material-admin-lte/dist/css/MaterialAdminLTE.min.css" />
     <link rel="stylesheet" href="~/wwwroot/lib/material-admin-lte/dist/css/skins/all-md-skins.min.css" />
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition @(Request.IsAuthenticated? "skin-blue sidebar-mini" : "login-page")">
 
-<div id="wrapper" class="wrapper">
-    
-    @Html.Partial("_TopNavbar")
+    <div id="wrapper" class="wrapper">
+        @if (Request.IsAuthenticated)
+        {
+            @Html.Partial("_TopNavbar")
 
-    @Html.Partial("_Navigation")
+            @Html.Partial("_Navigation")
+        }
 
-    @RenderBody()
 
-    @Html.Partial("_Footer")
+        @RenderBody()
 
-</div>
+        @if (Request.IsAuthenticated)
+        {
+            @Html.Partial("_Footer")
+        }
+    </div>
     <script src="~/wwwroot/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/wwwroot/lib/bootstrap-material-design/dist/js/material.min.js"></script>
@@ -39,7 +44,7 @@
         $.material.init();
     </script>
     <script src="~/wwwroot/lib/material-admin-lte/dist/js/app.min.js"></script>
-    
+
     <script src="~/wwwroot/lib/material-admin-lte/dist/js/demo.js"></script>
     @RenderSection("scripts", required: false)
 </body>

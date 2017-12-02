@@ -1,4 +1,14 @@
-﻿<header class="main-header">
+﻿@using System.Security.Claims
+@using HrApp.Infrastructure
+@using HrApp.Models
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin
+
+@{
+    ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+}
+
+<header class="main-header">
 
     <!-- Logo -->
     <a href="index2.html" class="logo">
@@ -22,7 +32,7 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="~/wwwroot/lib/material-admin-lte/dist/img/user-160x160.jpg" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Thanh Nguyen</span>
+                        <span class="hidden-xs">@user.FirstName @user.LastName</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
@@ -30,8 +40,7 @@
                             <img src="~/wwwroot/lib/material-admin-lte/dist/img/user-160x160.jpg" class="img-circle" alt="User Image">
 
                             <p>
-                                Thanh Nguyen <br> <small>Software Developer</small>
-                                <small>Member since Nov. 2012</small>
+                                @user.FirstName @user.LastName <br> <small>Hr manager</small>
                             </p>
                         </li>
                         <!-- Menu Body -->
@@ -55,15 +64,15 @@
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                @Html.ActionLink("Sign out", "Logout", "Account", null, new { @class = "btn btn-default btn-flat" })
                             </div>
                         </li>
                     </ul>
                 </li>
                 <!-- Control Sidebar Toggle Button -->
-                <li>
+                @*<li>
                     <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                </li>
+                </li>*@
             </ul>
         </div>
 
