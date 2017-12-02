@@ -2,6 +2,8 @@
 
 namespace HrApp.Models
 {
+    using System.ComponentModel;
+
     public class LanguageLevel
     {
         [Key]
@@ -9,6 +11,7 @@ namespace HrApp.Models
 
         [Required]
         [MaxLength(50)]
+        [DisplayName("Language level name")]
         public string LanguageLevelName { get; set; }
     }
 }
