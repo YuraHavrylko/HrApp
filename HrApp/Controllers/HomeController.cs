@@ -9,6 +9,9 @@ using HrApp.Infrastructure;
 using HrApp.Models;
 using HrApp.Models.Search;
 using HrApp.Repositories;
+using Microsoft.Owin.Security;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace HrApp.Controllers
 {
@@ -21,21 +24,44 @@ namespace HrApp.Controllers
         {
             this._unitOfWork = unitOfWork;
         }
+        private ApplicationUserManager UserManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+        }
 
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+        [Authorize]
         public ActionResult Index(int page = 1, int count = 10)
         {
-            var person = new PersonSearchModel();
-            ViewBag.Count = count;
-            ViewBag.Page = page;
-            person.TypeLanguages = _unitOfWork.LanguagesNameRepository.GetAll().ToList();
-            person.LanguageLevels = _unitOfWork.LanguageLevelRepository.GetAll().ToList();
-            person.TypeJobsNames = _unitOfWork.TypeJobsNameRepository.GetAll().ToList();
+            if (this.User.Identity.IsAuthenticated)
+            {
+                var person = new PersonSearchModel();
+                ViewBag.Count = count;
+                ViewBag.Page = page;
+                person.TypeLanguages = _unitOfWork.LanguagesNameRepository.GetAll().ToList();
+                person.LanguageLevels = _unitOfWork.LanguageLevelRepository.GetAll().ToList();
+                person.TypeJobsNames = _unitOfWork.TypeJobsNameRepository.GetAll().ToList();
+                person.ApplicationUserId = this.User.Identity.GetUserId();
 
-            ViewBag.CountPerson = _unitOfWork.PersonRepository.GetCount();
-            ViewBag.PersonFind = person;
-            var persons = _unitOfWork.PersonRepository.GetAll(page, count);
-
-            return View("Index", new BigPersonModel() { PersonSearchModel = person, Persons = persons });
+                ViewBag.CountPerson = _unitOfWork.PersonRepository.GetCount();
+                ViewBag.PersonFind = person;
+                var persons = _unitOfWork.PersonRepository.GetAllPersonsByHrId(person.ApplicationUserId, page, count);
+               // var persons = _unitOfWork.PersonRepository.GetAll(page, count);
+                return View("Index", new BigPersonModel() { PersonSearchModel = person, Persons = persons });
+            }
+            else
+            {
+                return this.RedirectToAction("Login");
+            }
         }
         
         public ActionResult FullInformation(int id)
@@ -59,6 +85,7 @@ namespace HrApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                person.ApplicationUserId = this.User.Identity.GetUserId();
                 _unitOfWork.PersonRepository.Add(person);
                 return RedirectToAction("Index");
             }

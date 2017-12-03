@@ -34,6 +34,26 @@ namespace HrApp.Repositories
 
             return list;
         }
+        
+        public IEnumerable<Person> GetAllPersonsByHrId(string applicationUserId = null, int page = 1, int count = 10)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@Page", page},
+                {"@Count", count}
+            };
+
+            if (applicationUserId != null)
+            {
+                parameters.Add("@ApplicationUserId", applicationUserId);
+
+               
+            }
+
+            var list = CustomExecuteReader("sp_GetPersonsByHrId", parameters);
+
+            return list;
+        }
 
         public IEnumerable<Person> GetAllWhere(PersonSearchModel person = null, int page = 1, int count = 10)
         {
@@ -57,6 +77,7 @@ namespace HrApp.Repositories
                 parameters.Add("@SalaryFinish", person.SalaryFinish);
                 parameters.Add("@WorkExpireanceStart", person.WorkExpireanceStart);
                 parameters.Add("@WorkExpireanceFinish", person.WorkExpireanceFinish);
+                parameters.Add("@ApplicationUserId", person.ApplicationUserId);
 
                 if (person.Education != null)
                 {
@@ -122,6 +143,7 @@ namespace HrApp.Repositories
                 {"@Phone", person.Phone},
                 {"@Salary", person.Salary},
                 {"@WorkExpireance", person.WorkExpireance},
+                {"@ApplicationUserId", person.ApplicationUserId},
             };
 
             CustomExecuteNonQuery("sp_AddPerson", parameters);

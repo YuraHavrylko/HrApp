@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace HrApp.Models
 {
     using System.ComponentModel;
-
+    using System.ComponentModel.DataAnnotations.Schema;
     public class Person
     {
         public Person()
@@ -21,6 +21,10 @@ namespace HrApp.Models
 
         [Key]
         public int? PersonId { get; set; }
+
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationUserId { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         [MaxLength(200)]
         public string Email { get; set; }

@@ -7,7 +7,8 @@
 @{
     ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
 }
-
+@if (user != null)
+{
 <header class="main-header">
 
     <!-- Logo -->
@@ -27,7 +28,6 @@
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -78,3 +78,4 @@
 
     </nav>
 </header>
+}
