@@ -9,6 +9,7 @@ using HrApp.Models;
 
 namespace HrApp.Controllers
 {
+    [Authorize]
     public class InterviewController : Controller
     {
         private UnitOfWork _unitOfWork;

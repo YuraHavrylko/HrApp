@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HrApp.Models
 {
+    using System.ComponentModel;
+
     public class Person
     {
         public Person()
@@ -25,10 +27,12 @@ namespace HrApp.Models
 
         [Required]
         [MaxLength(50)]
+        [DisplayName("First name")]
         public string FirstName { get; set; }
 
         [Required]
         [MaxLength(50)]
+        [DisplayName("Last name")]
         public string LastName { get; set; }
 
         [MaxLength(50)]
@@ -42,6 +46,7 @@ namespace HrApp.Models
         [MaxLength(50)]
         public string City { get; set; }
 
+        [DisplayName("Work expireance")]
         public int? WorkExpireance { get; set; }
 
         public ICollection<Education> Educations { get; set; }

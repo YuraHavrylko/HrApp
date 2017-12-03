@@ -12,6 +12,6 @@
     "material-admin-lte": "DucThanhNguyen/MaterialAdminLTE"
   },
   "resolutions": {
-    "jquery": "^3.2.1"
+    "jquery": ">= 2.1.0"
   }
 }

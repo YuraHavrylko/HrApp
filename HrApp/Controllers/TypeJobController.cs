@@ -8,6 +8,7 @@ using HrApp.Models;
 
 namespace HrApp.Controllers
 {
+    [Authorize]
     public class TypeJobController : Controller
     {
         private UnitOfWork _unitOfWork;

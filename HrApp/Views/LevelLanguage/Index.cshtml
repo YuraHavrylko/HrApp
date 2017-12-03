@@ -1,29 +1,48 @@
 ﻿@model System.Collections.Generic.IEnumerable<HrApp.Models.LanguageLevel>
 
 @{
-    ViewBag.Title = "Language level name";
+    ViewBag.Title = "Language level settings";
 }
 <div class="content-wrapper">
-    <div class="container">
+    <section class="content-header">
+        <h1>
+            Language level settings
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/Home"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li>Settings</li>
+            <li class="active">Language level settings</li>
+        </ol>
+    </section>
+
+    <section class="content">
         <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                @foreach (var type in Model)
-            {
-                    <p>
-                        <div class="row">
-                            <div class="col-md-8" style="padding-right: 5px">
-                                @type.LanguageLevelName
-                            </div>
-                            <div class="col-md-4" style="padding-left: 0px">
-                                <div class="btn-group btn-group-justified">
-                                    <a class="btn btn-warning  btn-xs" onclick="location.href='@Url.Action("Edit", "LevelLanguage", new {id = type.LanguageLevelId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                    <a class="btn btn-danger btn-xs" onclick="location.href='@Url.Action("Delete", "LevelLanguage", new {typeLanguage = type.LanguageLevelId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
-                                </div>
-                            </div>
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-body">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Name of language level</th>
+                                    <th style="width: 40px"></th>
+                                    <th style="width: 40px"></th>
+                                </tr>
+                                @foreach (var type in Model)
+                                {
+                                    <tr>
+                                        <td>@type.LanguageLevelName</td>
+                                        <td>@Html.ActionLink("Edit", "Edit", "LevelLanguage", new { id = type.LanguageLevelId }, new { })</td>
+                                        <td>@Html.ActionLink("Delete", "Delete", "LevelLanguage", new { levelLanguage = type.LanguageLevelId }, new { })</td>
+                                    </tr>
+                                }
+                                <tr>
+
+                            </table>
                         </div>
-                    </p>
-                }
+                    <div class="box-footer clearfix">
+                        @Html.ActionLink("Create new level", "Create", "LevelLanguage", null, new { @class = "btn btn-sm btn-info btn-raised btn-flat" })
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    </div>
+    </section>
+</div>

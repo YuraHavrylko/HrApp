@@ -9,7 +9,7 @@ using HrApp.Models;
 
 namespace HrApp.Controllers
 {
-
+    [Authorize]
     public class EducationController : Controller
     {
         private UnitOfWork _unitOfWork;

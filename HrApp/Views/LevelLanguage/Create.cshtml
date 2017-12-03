@@ -1,32 +1,40 @@
-﻿@model HrApp.Models.LanguageLevel
+﻿@using System.Web.Mvc.Html
+@using HrApp.Helpers.Extensions
+@model HrApp.Models.LanguageLevel
 
 @{
     ViewBag.Title = "Add language level";
 }
-<div class="content-wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                @using (Html.BeginForm())
-            {
-                    @Html.ValidationSummary(true)
-                    <fieldset>
-                        <legend>Add language level</legend>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.LanguageLevelName)
-                            @Html.TextBoxFor(model => model.LanguageLevelName, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.LanguageLevelName)
-                        </div>
 
-                        <div class="form-group">
-                            <p>
-                                <input type="submit" value="Create" class="btn btn-success btn-block" />
-                            </p>
-                        </div>
-                    </fieldset>
-                }
-                @Html.ActionLink("Back to manage language levels", "Index", "LevelLanguage")
+<div class="content-wrapper">
+    <section class="content-header">
+        <ol class="breadcrumb">
+            <li><a href="/Home"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li>Settings</li>
+            <li class="active">Create language level </li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="box">
+                    <div class="box-body">
+                        @using (Html.BeginForm())
+                        {
+                            <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.LanguageLevelName, "has-error")">
+                                @Html.TextBoxFor(model => model.LanguageLevelName, new { @class = "form-control", @type = "text", @placeholder = @Html.DisplayNameFor(m => m.LanguageLevelName) })
+                                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.LanguageLevelName)</span>
+                            </div>
+                            <div class="col-xs-5">
+                                <button type="submit" class="btn btn-primary btn-raised btn-block btn-flat">Create</button>
+                            </div>
+                        }
+                        
+                    </div>
+                    @Html.ActionLink("Back to manage language levels", "Index", "LevelLanguage", null, new { @class = "text-center" })
+                </div>
             </div>
         </div>
-    </div>
-    </div>
+    </section>
+</div>
