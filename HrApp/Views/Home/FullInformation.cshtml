@@ -4,19 +4,20 @@
 @model HrApp.Models.Person
 <div class="content-wrapper">
     <div class="panel-group">
-        <div class="row panel panel-default" style="padding: 5px; margin-top: 10px; margin-right: 10px; margin-left: 10px">
-            <div class="col-md-4">
+        <div class="panel panel-default">
+        <div class="row" style="padding: 5px; margin-top: 10px; margin-right: 10px; margin-left: 10px">
+            <div class="col-md-6">
                 <div class="btn-group btn-group-justified">
-                    <a type="button" class="btn btn-info btn-sm" onclick="location.href='@Url.Action("Index", "Home", new {}, null)'">Back to list</a>
-                    <a type="button" class="btn btn-warning btn-sm" onclick="location.href = '@Url.Action("Edit", "Home", new {id = @Model.PersonId}, null)'">Edit</a>
-                    <a type="button" class="btn btn-danger btn-sm" onclick="location.href = '@Url.Action("Delete", "Home", new {id = @Model.PersonId}, null)'">Delete</a>
+                    <a type="button" class="btn btn-primary btn-raised btn-block btn-flat" onclick="location.href='@Url.Action("Index", "Home", new {}, null)'">Back to list</a>
+                    <a type="button" class="btn btn-primary btn-raised btn-block btn-flat" onclick="location.href = '@Url.Action("Edit", "Home", new {id = @Model.PersonId}, null)'">Edit</a>
+                    <a type="button" class="btn btn-primary btn-raised btn-block btn-flat" onclick="location.href = '@Url.Action("Delete", "Home", new {id = @Model.PersonId}, null)'">Delete</a>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <h3>
                             <b>@Model.FirstName @Model.LastName</b>
                         </h3>
-                        <button class="btn btn-success btn-xs btn-block" onclick="location.href='@Url.Action("Create", "Job", new {id = @Model.PersonId}, null)'">Add job</button>
+                        <button class="btn btn-primary btn-raised btn-block btn-flat" onclick="location.href='@Url.Action("Create", "Job", new {id = @Model.PersonId}, null)'">Add job</button>
                         @if (@Model.Jobs != null)
                         {
                             foreach (var job in @Model.Jobs)
@@ -28,8 +29,8 @@
                                         </div>
                                         <div class="col-md-4" style="padding-left: 0px">
                                             <div class="btn-group btn-group-justified">
-                                                <a class="btn btn-warning  btn-xs" onclick="location.href='@Url.Action("Edit", "Job", new {id = job.JobId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                                <a class="btn btn-danger btn-xs" onclick="location.href='@Url.Action("Delete", "Job", new {idPerson = job.PersonId, idJob = job.JobId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                                                <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Edit", "Job", new {id = job.JobId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                                <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Delete", "Job", new {idPerson = job.PersonId, idJob = job.JobId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -52,7 +53,7 @@
                         <p class="text-right">
                             <b>from @Model.Salary UAH/mon</b>
                         </p>
-                        <button class="btn btn-success btn-xs btn-block" onclick="location.href='@Url.Action("Create", "TypeJob", new {id = @Model.PersonId}, null)'">Add type job</button>
+                        <button class="btn btn-primary btn-raised btn-block btn-flat" onclick="location.href='@Url.Action("Create", "TypeJob", new {id = @Model.PersonId}, null)'">Add type job</button>
                         @if (@Model.PersonTypeJobs != null)
                         {
                             foreach (var job in @Model.PersonTypeJobs)
@@ -64,8 +65,8 @@
                                         </div>
                                         <div class="col-md-4" style="padding-left: 0px">
                                             <div class="btn-group btn-group-justified">
-                                                <a class="btn btn-warning  btn-xs" onclick="location.href='@Url.Action("Edit", "TypeJob", new {id = job.PersonTypeJobId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                                <a class="btn btn-danger btn-xs" onclick="location.href='@Url.Action("Delete", "TypeJob", new {idPerson = job.PersonId, idPersonTypeJob = job.PersonTypeJobId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                                                <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Edit", "TypeJob", new {id = job.PersonTypeJobId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                                <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Delete", "TypeJob", new {idPerson = job.PersonId, idPersonTypeJob = job.PersonTypeJobId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -74,13 +75,11 @@
                         }
                         <p>
 
-                            <div class="row">
-                                <div class="col-md-10" style="padding-right: 5px">
+                            <div >
                                     <b>Education</b>
-                                </div>
-                                <div class="col-md-2" style="padding-left: 0px">
-                                    <button class="btn btn-success btn-xs" onclick="location.href='@Url.Action("Create", "Education", new {id = @Model.PersonId}, null)'"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                </div>
+                                
+                                    
+                              
                             </div>
                         </p>
 
@@ -95,8 +94,8 @@
                                     </div>
                                     <div class="col-md-4" style="padding-left: 0px">
                                         <div class="btn-group btn-group-justified">
-                                            <a class="btn btn-warning  btn-xs" onclick="location.href='@Url.Action("Edit", "Education", new {id = education.EducationId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                            <a class="btn btn-danger btn-xs" onclick="location.href='@Url.Action("Delete", "Education", new {idPerson = education.PersonId, idEducation = education.EducationId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                                            <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Edit", "Education", new {id = education.EducationId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                            <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Delete", "Education", new {idPerson = education.PersonId, idEducation = education.EducationId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -114,24 +113,20 @@
                                 <hr />
                                             }
                                         }
+                        <button class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Create", "Education", new {id = @Model.PersonId}, null)'"><span>Add education</span></button>
                     </div>
+
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-6">
-                        <p>
-                            <div class="row">
-                                <div class="col-md-10" style="padding-right: 5px">
-                                    <b>Work experience (@Model.WorkExpireance years) </b>
-                                </div>
-                                <div class="col-md-2" style="padding-left: 0px">
-                                    <button class="btn btn-success btn-xs" onclick="location.href = '@Url.Action("Create", "WorkExpireance", new {id = @Model.PersonId}, null)'"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                </div>
-                            </div>
+                        <div>
+                            <b>Work experience </b>
+                            <p>@Model.WorkExpireance years</p>
 
-                        </p>
-                        <p></p>
+                        </div>
+
                         @if (@Model.WorkExperiences != null)
                         {
                             foreach (var experience in @Model.WorkExperiences)
@@ -143,8 +138,8 @@
                                     </div>
                                     <div class="col-md-4" style="padding-left: 0px">
                                         <div class="btn-group btn-group-justified">
-                                            <a class="btn btn-warning  btn-xs" onclick="location.href = '@Url.Action("Edit", "WorkExpireance", new {id = experience.WorkExperienceId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                            <a class="btn btn-danger btn-xs" onclick="location.href = '@Url.Action("Delete", "WorkExpireance", new {idPerson = experience.PersonId, idWorkExperience = experience.WorkExperienceId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                                            <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Edit", "WorkExpireance", new {id = experience.WorkExperienceId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                            <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Delete", "WorkExpireance", new {idPerson = experience.PersonId, idWorkExperience = experience.WorkExperienceId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -162,124 +157,116 @@
 
 
                                 <hr />
-                                            }
-                                        }
-                    </div>
+                               }
+                               <button class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Create", "WorkExpireance", new {id = @Model.PersonId}, null)'"><span>Add work experience</span></button>
+
+                            }
+                        </div>
 
                     <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-10" style="padding-right: 5px">
+                        <div>
+                            <div>
                                 <b>Knowlerge of language</b>
                             </div>
-                            <div class="col-md-2" style="padding-left: 0px">
-                                <button class="btn btn-success btn-xs" onclick="location.href='@Url.Action("Create", "Language", new {id = @Model.PersonId}, null)'"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                            </div>
-                        </div>
-                        @if (@Model.Languages != null)
-                        {
-                            <ul>
-                                @foreach (var language in @Model.Languages)
-                                {
-                                    <p>
-                                        <div class="row">
-                                            <div class="col-md-8" style="padding-right: 5px">
-                                    <li>@language.LanguageName - @language.LanguageLevelName</li>
-                            </div>
-                            <div class="col-md-4" style="padding-left: 0px">
-                                <div class="btn-group btn-group-justified">
-                                    <a class="btn btn-warning  btn-xs" onclick="location.href='@Url.Action("Edit", "Language", new {id = language.LanguageId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                    <a class="btn btn-danger btn-xs" onclick="location.href='@Url.Action("Delete", "Language", new {idPerson = language.PersonId, idLanguage = language.LanguageId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        </p>
-                                }
-                                </ul>
-                        }
-                        <p>
-                            <div class="row">
-                                <div class="col-md-10" style="padding-right: 5px">
-                                    <b>Professional skills</b>
-                                </div>
-                                <div class="col-md-2" style="padding-left: 0px">
-                                    <button class="btn btn-success btn-xs" onclick="location.href = '@Url.Action("Create", "ProfessionalSkill", new {id = @Model.PersonId}, null)'"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                </div>
-                            </div>
-                        </p>
-                        @if (@Model.ProfessionalSkills != null)
-                        {
-                            <ul>
-                                @foreach (var skill in @Model.ProfessionalSkills)
-                                {
-                                    <p>
-                                        <div class="row">
-                                            <div class="col-md-8" style="padding-right: 5px">
-                                    <li> @skill.SkillName</li>
-                            </div>
-                            <div class="col-md-4" style="padding-left: 0px">
-                                <div class="btn-group btn-group-justified">
-                                    <a class="btn btn-warning  btn-xs" onclick="location.href = '@Url.Action("Edit", "ProfessionalSkill", new {id = skill.ProfessionalSkillId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                    <a class="btn btn-danger btn-xs" onclick="location.href = '@Url.Action("Delete", "ProfessionalSkill", new {idPerson = skill.ProfessionalSkillId, idSkill = skill.ProfessionalSkillId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        </p>
-                                }
-                                </ul>
-                        }
-                    </div>
-                </div>
-                            </div>
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="row">
-                            <div class="col-md-10" style="padding-right: 5px">
-                                <b>Interviews</b>
-                            </div>
-                            <div class="col-md-2" style="padding-left: 0px">
-                                <button class="btn btn-success btn-xs" onclick="location.href='@Url.Action("Create", "Interview", new {id = @Model.PersonId}, null)'"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                            </div>
-                        </div>
-                        <br/>
-                        @if (@Model.Interviews != null)
-                        {
-                            foreach (var interview in @Model.Interviews)
+                            @if (@Model.Languages != null)
                             {
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <p>@interview.InterviewDate.ToString("dd.MM.yyyy")</p>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <p class="text-right"><b>Point:</b> @interview.Point</p>
-                                    </div>
-                                    <div class="col-md-3" style="padding-left: 0px">
-                                        <div class="btn-group btn-group-justified">
-                                            <a class="btn btn-warning  btn-xs" onclick="location.href = '@Url.Action("Edit", "Interview", new {id = interview.InterviewId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                            <a class="btn btn-danger btn-xs" onclick="location.href = '@Url.Action("Delete", "Interview", new {idPerson = interview.PersonId, idInterview = interview.InterviewId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                                foreach (var language in @Model.Languages)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-8" style="padding-right: 5px">
+                                            <li>@language.LanguageName - @language.LanguageLevelName</li>
+                                        </div>
+                                        <div class="col-md-4" style="padding-left: 0px">
+                                            <div class="btn-group btn-group-justified">
+                                                <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Edit", "Language", new {id = language.LanguageId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                                <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Delete", "Language", new {idPerson = language.PersonId, idLanguage = language.LanguageId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
                             }
-                        }
+                            <button class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Create", "Language", new {id = @Model.PersonId}, null)'"><span>add language</span></button>
+                        </div>
+                        <div>
+                            <div>
+                                <b>Professional skills</b>
+                            </div>
 
-                        <p>
-                            <b>Comments</b>
-                        </p>
-                        @if (@Model.Interviews != null)
-                        {
-                            foreach (var interview in @Model.Interviews)
+
+                            @if (@Model.ProfessionalSkills != null)
                             {
-                                <p>@interview.Comment</p>
+                                foreach (var skill in @Model.ProfessionalSkills)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-8" style="padding-right: 5px">
+                                            <li> @skill.SkillName</li>
+                                        </div>
+
+                                        <div class="col-md-4" style="padding-left: 0px">
+                                            <div class="btn-group btn-group-justified">
+                                                <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Edit", "ProfessionalSkill", new { id = skill.ProfessionalSkillId }, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                                <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Delete", "ProfessionalSkill", new { idPerson = skill.ProfessionalSkillId, idSkill = skill.ProfessionalSkillId }, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
                             }
-                        }
+                            <button class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Create", "ProfessionalSkill", new {id = @Model.PersonId}, null)'"><span>Add professional skills</span></button>
 
+                        </div>
                     </div>
-
-                    
                 </div>
+            </div>
+            
+
+        </div>
+        <hr style="border-color: lightgray"/>
+        <div class="row" style="padding: 5px; margin-top: 10px; margin-right: 10px; margin-left: 10px">
+                <div class="col-md-6">
+                    <div>
+                        <b>Interviews</b>
+                    </div>
+                    <br />
+                    @if (@Model.Interviews != null)
+                    {
+                        foreach (var interview in @Model.Interviews)
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p>@interview.InterviewDate.ToString("dd.MM.yyyy")</p>
+                                </div>
+                                <div class="col-md-5">
+                                    <p class="text-right"><b>Point:</b> @interview.Point</p>
+                                </div>
+                                <div class="col-md-3" style="padding-left: 0px">
+                                    <div class="btn-group btn-group-justified">
+                                        <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Edit", "Interview", new {id = interview.InterviewId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                        <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Delete", "Interview", new {idPerson = interview.PersonId, idInterview = interview.InterviewId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <button class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Create", "Interview", new {id = @Model.PersonId}, null)'"><span>Add interview</span></button>
+
+
+                </div>
+            <div class="col-md-6">
+                <p>
+                    <b>Comments</b>
+                </p>
+                @if (@Model.Interviews != null)
+                {
+                    foreach (var interview in @Model.Interviews)
+                    {
+                        <p>@interview.Comment</p>
+                    }
+                }
             </div>
 
         </div>
-</div>
+
+      </div>
+
+    </div>
 </div>
