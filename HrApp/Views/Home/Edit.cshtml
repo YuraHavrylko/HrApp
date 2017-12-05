@@ -17,50 +17,86 @@
             <div class="col-md-6 col-md-offset-3">
                 <div class="box">
                     <div class="box-body">
+                        <p class="text-center" style="font-size: 25px">
+                            Edit person
+                        </p>
                         @using (Html.BeginForm())
                         {
                             <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.FirstName, "has-error")">
-                                @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", @type = "text", @placeholder = @Html.DisplayNameFor(m => m.FirstName) })
-                                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.FirstName)</span>
+                                @Html.LabelFor(x => x.FirstName, new { @class = "col-sm-3 control-label" })
+
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", @type = "text" })
+                                    <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.FirstName)</span>
+                                </div>
                             </div>
 
                             <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.LastName, "has-error")">
-                                @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", @type = "text", @placeholder = @Html.DisplayNameFor(m => m.LastName) })
-                                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.LastName)</span>
+                                @Html.LabelFor(x => x.LastName, new { @class = "col-sm-3 control-label" })
+
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", @type = "text" })
+                                    <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.LastName)</span>
+                                </div>
                             </div>
 
                             <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.Birthday, "has-error")">
-                                @Html.TextBoxFor(model => model.Birthday, new { @class = "form-control", @type = "date", @placeholder = @Html.DisplayNameFor(m => m.Birthday) })
-                                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.Birthday)</span>
+                                @Html.LabelFor(x => x.Birthday, new { @class = "col-sm-3 control-label" })
+
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.Birthday, new { @class = "form-control", @type = "date" })
+                                    <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.Birthday)</span>
+                                </div>
                             </div>
 
                             <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.City, "has-error")">
-                                @Html.TextBoxFor(model => model.City, new { @class = "form-control", @type = "text", @placeholder = @Html.DisplayNameFor(m => m.City) })
-                                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.City)</span>
+                                @Html.LabelFor(x => x.City, new { @class = "col-sm-3 control-label" })
+
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.City, new { @class = "form-control", @type = "text" })
+                                    <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.City)</span>
+                                </div>
                             </div>
 
                             <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.Email, "has-error")">
-                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @type = "email", @placeholder = @Html.DisplayNameFor(m => m.Email) })
-                                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.Email)</span>
+                                @Html.LabelFor(x => x.Email, new { @class = "col-sm-3 control-label" })
+
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @type = "email" })
+                                    <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.Email)</span>
+                                </div>
                             </div>
 
+
                             <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.Phone, "has-error")">
-                                @Html.TextBoxFor(model => model.Phone, new { @class = "form-control", @pattern = "^[0-9]+$", @placeholder = @Html.DisplayNameFor(m => m.Phone) })
-                                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.Phone)</span>
+                                @Html.LabelFor(x => x.Phone, new { @class = "col-sm-3 control-label" })
+
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.Phone, new { @class = "form-control", @pattern = "^[0-9]+$" })
+                                    <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.Phone)</span>
+                                </div>
                             </div>
 
                             <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.Salary, "has-error")">
-                                @Html.TextBoxFor(model => model.Salary, new { @class = "form-control", @type = "number", @placeholder = @Html.DisplayNameFor(m => m.Salary) })
-                                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.Salary)</span>
+                                @Html.LabelFor(x => x.Salary, new { @class = "col-sm-3 control-label" })
+
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.Salary, new { @class = "form-control", @type = "number" })
+                                    <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.Salary)</span>
+                                </div>
                             </div>
 
                             <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.WorkExpireance, "has-error")">
-                                @Html.TextBoxFor(model => model.WorkExpireance, new { @class = "form-control", @type = "number", @placeholder = @Html.DisplayNameFor(m => m.WorkExpireance) })
-                                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.WorkExpireance)</span>
+                                @Html.LabelFor(x => x.WorkExpireance, new { @class = "col-sm-3 control-label" })
+
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.WorkExpireance, new { @class = "form-control", @type = "number" })
+                                    <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.WorkExpireance)</span>
+                                </div>
                             </div>
                             @Html.HiddenFor(model => model.PersonId)
-                            <div class="col-xs-5">
-                                <button type="submit" class="btn btn-primary btn-raised btn-block btn-flat">Edit</button>
+                            <div class="col-xs-4 col-xs-offset-4">
+                                <button type="submit" class="btn btn-sm btn-primary btn-raised btn-block btn-flat">Edit</button>
                             </div>
                         }
                     </div>

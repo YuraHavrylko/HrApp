@@ -28,20 +28,22 @@ namespace HrApp.Controllers
         public ActionResult Create()
         {
             var typeJobName = new TypeJobsName();
-            return View("Create", typeJobName);
+            return View(typeJobName);
         }
 
         // POST: TypeJobName/Create
         [HttpPost]
-        public ActionResult Create(TypeJobsName typeJobName)
+        public ActionResult Create(FormCollection typeJobName)
         {
+            var job = typeJobName["TypeJobName"];
+            var model = new TypeJobsName() { TypeJobName = job };
             if (ModelState.IsValid)
             {
-                _unitOfWork.TypeJobsNameRepository.Add(typeJobName);
+                _unitOfWork.TypeJobsNameRepository.Add(model);
                 return RedirectToAction("Index", "TypeJobName");
             }
 
-            return View(typeJobName);
+            return View(model);
         }
 
         // GET: TypeJobName/Edit/5

@@ -3,7 +3,7 @@
 @model HrApp.Models.TypeJobsName
 
 @{
-    ViewBag.Title = "Add type job";
+    ViewBag.Title = "Add language level";
 }
 
 <div class="content-wrapper">
@@ -11,7 +11,7 @@
         <ol class="breadcrumb">
             <li><a href="/Home"><i class="fa fa-dashboard"></i> Home</a></li>
             <li>Settings</li>
-            <li class="active">Create type job </li>
+            <li class="active">Create language level </li>
         </ol>
     </section>
 
@@ -32,10 +32,9 @@
                         }
 
                     </div>
-                    @Html.ActionLink("Back to manage type jobs", "Index", "TypeJobName", null, new { @class = "text-center" })
+                    @Html.ActionLink("Back to manage language levels", "Index", "LevelLanguage", null, new { @class = "text-center" })
                 </div>
             </div>
         </div>
     </section>
 </div>
-

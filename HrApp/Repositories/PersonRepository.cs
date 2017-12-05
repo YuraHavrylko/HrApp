@@ -247,9 +247,11 @@ namespace HrApp.Repositories
             return (int) CustomExecuteScalar("sp_GetCountPersonsWhere", parameters);
         }
 
-        public int GetCount()
+        public int GetCount(string userId)
         {
-            return (int)CustomExecuteScalar("sp_GetCountPersons");
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@ApplicationUserId", userId);
+            return (int)CustomExecuteScalar("sp_GetCountPersons", parameters);
         }
     }
 }

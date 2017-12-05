@@ -22,7 +22,7 @@ namespace HrApp.Controllers
         public ActionResult Create(int id)
         {
             var typejob = new TypeJob();
-            ViewBag.JobName = _unitOfWork.TypeJobRepository.GetAll();
+            ViewBag.JobName = _unitOfWork.TypeJobsNameRepository.GetAll();
             typejob.PersonId = id;
             return View(typejob);
         }

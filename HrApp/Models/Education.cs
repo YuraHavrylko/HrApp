@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HrApp.Models
 {
+    using System.ComponentModel;
+
     public class Education
     {
         [Key]
@@ -11,14 +13,18 @@ namespace HrApp.Models
 
         [Required]
         [MaxLength(100)]
+        [DisplayName("Specialty")]
         public string SpecialityName { get; set; }
 
         [Required]
         [MaxLength(200)]
+        [DisplayName("Institution name")]
         public string EducationalInstitutionName { get; set; }
 
+        [DisplayName("Start date")]
         public DateTime? StartDate { get; set; }
 
+        [DisplayName("Finish date")]
         public DateTime? FinishDate { get; set; }
 
         [Required]

@@ -18,31 +18,49 @@
             <div class="col-md-6 col-md-offset-3">
                 <div class="box">
                     <div class="box-body">
+                        <p class="text-center" style="font-size: 25px">
+                            Add education
+                        </p>
                         @using (Html.BeginForm())
                         {
                             <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.EducationalInstitutionName, "has-error")">
-                                @Html.TextBoxFor(model => model.EducationalInstitutionName, new { @class = "form-control", @type = "text", @placeholder = @Html.DisplayNameFor(m => m.EducationalInstitutionName) })
-                                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.EducationalInstitutionName)</span>
+                                @Html.LabelFor(x => x.EducationalInstitutionName, new { @class = "col-sm-3 control-label" })
+
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.EducationalInstitutionName, new { @class = "form-control", @type = "text" })
+                                    <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.EducationalInstitutionName)</span>
+                                </div>
                             </div>
 
                             <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.SpecialityName, "has-error")">
-                                @Html.TextBoxFor(model => model.SpecialityName, new { @class = "form-control", @type = "text", @placeholder = @Html.DisplayNameFor(m => m.SpecialityName) })
-                                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.SpecialityName)</span>
+                                @Html.LabelFor(x => x.SpecialityName, new { @class = "col-sm-3 control-label" })
+
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.SpecialityName, new { @class = "form-control", @type = "text" })
+                                    <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.SpecialityName)</span>
+                                </div>
                             </div>
 
                             <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.StartDate, "has-error")">
-                                @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control", @type = "date", @placeholder = @Html.DisplayNameFor(m => m.StartDate) })
-                                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.StartDate)</span>
+                                @Html.LabelFor(x => x.StartDate, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control", @type = "date" })
+                                    <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.StartDate)</span>
+
+                                </div>
                             </div>
 
                             <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.FinishDate, "has-error")">
-                                @Html.TextBoxFor(model => model.FinishDate, new { @class = "form-control", @type = "text", @placeholder = @Html.DisplayNameFor(m => m.FinishDate) })
-                                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.FinishDate)</span>
+                                @Html.LabelFor(x => x.FinishDate, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.FinishDate, new { @class = "form-control", @type = "date" })
+                                    <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.FinishDate)</span>
+                                </div>
                             </div>
-                            
+
                             @Html.HiddenFor(model => model.PersonId)
-                            <div class="col-xs-5">
-                                <button type="submit" class="btn btn-primary btn-raised btn-block btn-flat">Create</button>
+                            <div class="col-xs-4 col-xs-offset-4">
+                                <button type="submit" class="btn btn-sm btn-primary btn-raised btn-block btn-flat">Create</button>
                             </div>
                         }
                     </div>

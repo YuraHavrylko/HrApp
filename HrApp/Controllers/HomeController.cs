@@ -52,7 +52,7 @@ namespace HrApp.Controllers
                 person.TypeJobsNames = _unitOfWork.TypeJobsNameRepository.GetAll().ToList();
                 person.ApplicationUserId = this.User.Identity.GetUserId();
 
-                ViewBag.CountPerson = _unitOfWork.PersonRepository.GetCount();
+                ViewBag.CountPerson = _unitOfWork.PersonRepository.GetCount(User.Identity.GetUserId());
                 ViewBag.PersonFind = person;
                 var persons = _unitOfWork.PersonRepository.GetAllPersonsByHrId(person.ApplicationUserId, page, count);
                // var persons = _unitOfWork.PersonRepository.GetAll(page, count);

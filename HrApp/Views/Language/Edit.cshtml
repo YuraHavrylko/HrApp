@@ -20,21 +20,31 @@
             <div class="col-md-6 col-md-offset-3">
                 <div class="box">
                     <div class="box-body">
+                        <p class="text-center" style="font-size: 25px">
+                            Edit language
+                        </p>
                         @using (Html.BeginForm())
                         {
                             <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.LanguageName, "has-error")">
-                                @Html.TextBoxFor(model => model.LanguageName, new { @class = "form-control", @type = "text", @placeholder = @Html.DisplayNameFor(m => m.LanguageName) })
-                                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.LanguageName)</span>
+                                @Html.LabelFor(x => x.LanguageName, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-9">
+                                    @Html.DropDownListFor(model => model.LanguageName, new SelectList(list.Select(language => language.LanguageName)), "Select language", new { @class = "form-control", @type = "text", @placeholder = @Html.DisplayNameFor(m => m.LanguageName) })
+                                    <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.LanguageName)</span>
+                                </div>
                             </div>
 
                             <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.LanguageLevelName, "has-error")">
-                                @Html.TextBoxFor(model => model.LanguageLevelName, new { @class = "form-control", @type = "text", @placeholder = @Html.DisplayNameFor(m => m.LanguageLevelName) })
-                                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.LanguageLevelName)</span>
+                                @Html.LabelFor(x => x.LanguageLevelName, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-9">
+                                    @Html.DropDownListFor(model => model.LanguageLevelName, new SelectList(levels.Select(language => language.LanguageLevelName)), "Select level", new { @class = "form-control", @type = "text", @placeholder = @Html.DisplayNameFor(m => m.LanguageLevelName) })
+                                    <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.LanguageLevelName)</span>
+                                </div>
                             </div>
 
                             @Html.HiddenFor(model => model.PersonId)
-                            <div class="col-xs-5">
-                                <button type="submit" class="btn btn-primary btn-raised btn-block btn-flat">Create</button>
+                            @Html.HiddenFor(model => model.LanguageId)
+                            <div class="col-xs-4 col-xs-offset-4">
+                                <button type="submit" class="btn btn-sm btn-primary btn-raised btn-block btn-flat">Edit</button>
                             </div>
                         }
                     </div>
