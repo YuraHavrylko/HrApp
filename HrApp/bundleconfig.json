@@ -8,9 +8,10 @@
   {
     "outputFileName": "wwwroot/bundle/css/template.min.css",
     "inputFiles": [
+      "wwwroot/lib/admin-lte/dist/css/AdminLTE.min.css",
       "wwwroot/lib/ripples/dist/css/ripple.min.css",
-      "wwwroot/lib/bootstrap-material-design/dist/css/bootstrap-material-design.min.css",
-      "wwwroot/lib/admin-lte/dist/css/AdminLTE.min.css"
+      "wwwroot/lib/bootstrap-material-design/dist/css/bootstrap-material-design.min.css"
+
     ]
   },
   {
