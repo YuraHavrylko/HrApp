@@ -13,39 +13,30 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="~/wwwroot/bundle/css/base.min.css" />
-    <link rel="stylesheet" href="~/wwwroot/bundle/css/template.min.css" />
-    <link rel="stylesheet" href="~/wwwroot/lib/material-admin-lte/dist/css/MaterialAdminLTE.min.css" />
-    <link rel="stylesheet" href="~/wwwroot/lib/material-admin-lte/dist/css/skins/all-md-skins.min.css" />
+    <link rel="stylesheet" href="~/wwwroot/bundle/css/site.min.css" />
 </head>
 <body class="hold-transition @(Request.IsAuthenticated? "skin-blue sidebar-mini" : "login-page")">
 
-    <div id="wrapper" class="wrapper">
-        @if (Request.IsAuthenticated)
-        {
-            @Html.Partial("_TopNavbar")
+<div id="wrapper" class="wrapper">
+    @if (Request.IsAuthenticated)
+    {
+        @Html.Partial("_TopNavbar")
 
-            @Html.Partial("_Navigation")
-        }
+        @Html.Partial("_Navigation")
+    }
 
 
-        @RenderBody()
+    @RenderBody()
 
-        @if (Request.IsAuthenticated)
-        {
-            @Html.Partial("_Footer")
-        }
-    </div>
-    <script src="~/wwwroot/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/wwwroot/lib/bootstrap-material-design/dist/js/material.min.js"></script>
-    <script src="~/wwwroot/lib/ripples/dist/js/ripple.min.js"></script>
+    @if (Request.IsAuthenticated)
+    {
+        @Html.Partial("_Footer")
+    }
+</div>
+    <script src="~/wwwroot/bundle/js/site.min.js"></script>
     <script>
         $.material.init();
     </script>
-    <script src="~/wwwroot/lib/material-admin-lte/dist/js/app.min.js"></script>
-
-    <script src="~/wwwroot/lib/material-admin-lte/dist/js/demo.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
