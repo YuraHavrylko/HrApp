@@ -222,6 +222,7 @@
     <Compile Include="Contract\IConnectionFactory.cs" />
     <Compile Include="Contract\Repositories\IRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\EducationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InterviewController.cs" />
@@ -241,6 +242,8 @@
     <Compile Include="Helpers\Extensions\ExtensionsIDbCommand.cs" />
     <Compile Include="Helpers\Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\ApplicationContext.cs" />
+    <Compile Include="Infrastructure\ApplicationRoleManager.cs" />
+    <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\DbConnectionFactory.cs" />
     <Compile Include="Infrastructure\DbExecuteProvider.cs" />
@@ -274,6 +277,7 @@
     <Compile Include="Repositories\ProfessionalSkillRepository.cs" />
     <Compile Include="Repositories\TypeJobRepository.cs" />
     <Compile Include="Repositories\WorkExpireanceRepository.cs" />
+    <Compile Include="ViewModels\Admin\UserRoleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -331,7 +335,6 @@
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="wwwroot\image\image.jpg" />
-    
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Documents\Resumes\" />
@@ -355,8 +358,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
-   
     <None Include="Properties\PublishProfiles\PublishProfile.pubxml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
