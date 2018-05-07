@@ -45,7 +45,7 @@ namespace HrApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName};
+                ApplicationUser user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, RegistrationDate = DateTime.Now};
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -89,7 +89,8 @@ namespace HrApp.Controllers
                                                      {
                                                          IsPersistent = true
                                                      }, claim);
-
+                    user.LastLoginDate = DateTime.Now;
+                    await UserManager.UpdateAsync(user);
                     if (string.IsNullOrEmpty(returnUrl))
                     {
                         return RedirectToAction("Index", "Home");

@@ -56,9 +56,21 @@
       <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AutoMapper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.0-alpha-0001\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.EF6, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.EF6.1.1.1\lib\net45\AutoMapper.EF6.dll</HintPath>
+    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.5.1.2\lib\net45\CommonServiceLocator.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="DelegateDecompiler, Version=1.0.0.0, Culture=neutral, PublicKeyToken=93b26a10a04705bd, processorArchitecture=MSIL">
+      <HintPath>..\packages\DelegateDecompiler.0.23.0\lib\net40-client\DelegateDecompiler.dll</HintPath>
+    </Reference>
+    <Reference Include="DelegateDecompiler.EntityFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=93b26a10a04705bd, processorArchitecture=MSIL">
+      <HintPath>..\packages\DelegateDecompiler.EntityFramework.0.23.0\lib\net45\DelegateDecompiler.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -124,6 +136,9 @@
     </Reference>
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Reflection, Version=1.1.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Reflection.1.1.0.0\lib\Mono.Reflection.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -242,7 +257,13 @@
     <Compile Include="Helpers\Extensions\ExtensionsIDbCommand.cs" />
     <Compile Include="Helpers\Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\ApplicationContext.cs" />
+    <Compile Include="Infrastructure\ApplicationDbContext.cs" />
     <Compile Include="Infrastructure\ApplicationRoleManager.cs" />
+    <Compile Include="Infrastructure\ClaimsAccessAttribute.cs" />
+    <Compile Include="Models\AspNetRoles.cs" />
+    <Compile Include="Models\RoleClaim.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\DbConnectionFactory.cs" />
@@ -277,7 +298,9 @@
     <Compile Include="Repositories\ProfessionalSkillRepository.cs" />
     <Compile Include="Repositories\TypeJobRepository.cs" />
     <Compile Include="Repositories\WorkExpireanceRepository.cs" />
+    <Compile Include="ViewModels\Admin\RoleViewModel.cs" />
     <Compile Include="ViewModels\Admin\UserRoleViewModel.cs" />
+    <Compile Include="ViewModels\Admin\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -335,11 +358,11 @@
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="wwwroot\image\image.jpg" />
+    <Content Include="wwwroot\js\admin.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Documents\Resumes\" />
     <Folder Include="App_Data\Documents\Tests\" />
-    <Folder Include="wwwroot\js\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -360,6 +383,14 @@
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\PublishProfile.pubxml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Roles.cshtml" />
+    <Content Include="Views\Admin\EditRole.cshtml" />
+    <Content Include="Views\Admin\CreateRole.cshtml" />
+    <Content Include="Views\Admin\UserRoles.cshtml" />
+    <Content Include="Views\Admin\EditUserRole.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Admin\EditUser.cshtml" />
+    <Content Include="Views\Admin\EditClaim.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

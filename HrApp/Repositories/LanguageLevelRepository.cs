@@ -40,6 +40,11 @@ namespace HrApp.Repositories
             return CustomExecuteReader<LanguageLevel>("sp_GetLanguageLevelWhere", parameters).ToList();
         }
 
+        public IEnumerable<LanguageLevel> Get(Func<LanguageLevel, bool> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
         //stored procedure not realized 
         public void Add(LanguageLevel languageLevel)
         {

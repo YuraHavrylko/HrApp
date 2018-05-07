@@ -7,6 +7,8 @@ using HrApp.Models;
 
 namespace HrApp.Repositories
 {
+    using System;
+
     public class ProfessionalSkillRepository : DbExecuteProvider, IRepository<ProfessionalSkill>
     {
         public ProfessionalSkillRepository(IConnectionFactory connectionFactory) : base(connectionFactory)
@@ -34,6 +36,11 @@ namespace HrApp.Repositories
             };
 
             return CustomExecuteReader<ProfessionalSkill>("sp_GetProfessionalSkillsWhere", parameters).ToList();
+        }
+
+        public IEnumerable<ProfessionalSkill> Get(Func<ProfessionalSkill, bool> predicate)
+        {
+            throw new NotImplementedException();
         }
 
         public void Add(ProfessionalSkill professionalSkill)

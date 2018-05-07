@@ -7,6 +7,8 @@ using HrApp.Models;
 
 namespace HrApp.Repositories
 {
+    using System;
+
     public class EducationRepository : DbExecuteProvider, IRepository<Education>
     {
         public EducationRepository(IConnectionFactory connectionFactory) : base(connectionFactory)
@@ -35,6 +37,11 @@ namespace HrApp.Repositories
             };
 
             return CustomExecuteReader<Education>("sp_GetEducationsWhere", parameters).ToList();
+        }
+
+        public IEnumerable<Education> Get(Func<Education, bool> predicate)
+        {
+            throw new NotImplementedException();
         }
 
         public void Add(Education education)

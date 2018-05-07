@@ -7,6 +7,8 @@ using HrApp.Models;
 
 namespace HrApp.Repositories
 {
+    using System;
+
     public class WorkExpireanceRepository : DbExecuteProvider, IRepository<WorkExperience>
     {
         public WorkExpireanceRepository(IConnectionFactory connectionFactory) : base(connectionFactory)
@@ -35,6 +37,11 @@ namespace HrApp.Repositories
             };
 
             return CustomExecuteReader<WorkExperience>("sp_GetWorkExperiencesWhere", parameters).ToList();
+        }
+
+        public IEnumerable<WorkExperience> Get(Func<WorkExperience, bool> predicate)
+        {
+            throw new NotImplementedException();
         }
 
         public void Add(WorkExperience workExperience)

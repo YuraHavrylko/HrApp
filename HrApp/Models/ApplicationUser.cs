@@ -1,5 +1,6 @@
 ﻿namespace HrApp.Models
 {
+    using System;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -11,6 +12,10 @@
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+
+        public DateTime? RegistrationDate { get; set; }
+
+        public DateTime? LastLoginDate { get; set; }
 
         public ApplicationUser()
         {

@@ -11,9 +11,14 @@
         @RenderSection("Styles", required: false)
     }
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.0.0-19/collection/icon/icon.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.bootstrap.min.css">
     <link rel="stylesheet" href="~/wwwroot/bundle/css/site.min.css" />
+    
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition @(Request.IsAuthenticated? "skin-blue sidebar-mini" : "login-page")">
 
@@ -32,11 +37,24 @@
     {
         @Html.Partial("_Footer")
     }
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <div class="modal-content" id="modal-default-content">
+                
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 </div>
     <script src="~/wwwroot/bundle/js/site.min.js"></script>
-    <script>
-        $.material.init();
-    </script>
+<script>
+    $.material.init();
+</script>
+    
     @RenderSection("scripts", required: false)
+<script>
+</script>
 </body>
 </html>
