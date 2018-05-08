@@ -53,6 +53,9 @@ namespace HrApp.Models
         [DisplayName("Work expireance")]
         public int? WorkExpireance { get; set; }
 
+        [MaxLength(300)]
+        public string CVfile { get; set; }
+
         public ICollection<Education> Educations { get; set; }
 
         public ICollection<Interview> Interviews { get; set; }

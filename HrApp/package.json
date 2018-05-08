@@ -3,7 +3,7 @@
   "name": "hrapp",
   "private": true,
   "devDependencies": {
-    "admin-lte": "git+https://github.com/DucThanhNguyen/MaterialAdminLTE.git",
+    "admin-lte": "file:../../../AppData/Local/Temp/npm-git-118327-17516-1xnovht.f6tuj",
     "bower": "1.4.1",
     "clean-webpack-plugin": "^0.1.16",
     "del": "^3.0.0",
@@ -30,5 +30,9 @@
   },
   "gitDependencies": {
     "material-admin-lte": "https://github.com/DucThanhNguyen/MaterialAdminLTE.git#master"
-  }
+  },
+  "main": "gulpfile.js",
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

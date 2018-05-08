@@ -265,7 +265,13 @@
             </div>
 
         </div>
-
+        <hr style="border-color: lightgray" />
+        <div>
+            @using (Html.BeginForm("ShowCVInformation", "Home", new { personId = this.Model.PersonId }, FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                <button type="submit" class="btn btn-primary btnConfirm">Download</button>
+            }
+            </div>
       </div>
 
     </div>

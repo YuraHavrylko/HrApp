@@ -6,6 +6,8 @@ using HrApp.Contract.Repositories;
 using HrApp.Infrastructure;
 using HrApp.Models;
 using HrApp.Models.Search;
+using System.IO;
+using System;
 
 namespace HrApp.Repositories
 {
@@ -252,6 +254,53 @@ namespace HrApp.Repositories
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@ApplicationUserId", userId);
             return (int)CustomExecuteScalar("sp_GetCountPersons", parameters);
+        }
+
+        public string ConvertCVToPdf(int userId, byte[] applicationPDFData)
+        {
+            var basePath = AppDomain.CurrentDomain.BaseDirectory;
+            
+            var fileName = "test.pdf";
+            var fullPath = Path.Combine(basePath, Path.Combine("Content/CV", fileName));
+            try
+            {
+                if (File.Exists(fullPath))
+                {
+                    File.Delete(fullPath);
+                    System.Threading.Thread.Sleep(2000);
+
+                }
+                if (!File.Exists(fullPath))
+                {
+                    // save the new pdf
+                    using (var fileStream = new FileStream(fullPath, FileMode.CreateNew, FileAccess.Write))
+                    {
+                        fileStream.Write(applicationPDFData, 0, applicationPDFData.Length);
+                        fileStream.Flush(true);
+                    }
+                }
+                else
+                {
+                    using (var fileExist = new FileStream(fullPath, FileMode.Create, FileAccess.ReadWrite))
+                    {
+                        // If the pdf is too small, maybe got corrupted, rewrite the file
+                        if (fileExist.Length < 20)
+                        {
+                            fileExist.Write(applicationPDFData, 0, applicationPDFData.Length);
+                            fileExist.Flush(true);
+                        }
+                    }
+                }
+                
+                
+                // Save to database
+                //    ????
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return fullPath;
         }
     }
 }
