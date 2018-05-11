@@ -48,7 +48,7 @@
                                     <fieldset>
                                         <div class="">
                                             <div class="row rowWithFullWidth">
-                                                <div class="col-md-1">
+                                                <div class="col-md-2">
                                                     <h4>Salary:</h4>
                                                     <div class="form-group">
                                                         <div class="col-md-3">
@@ -68,12 +68,8 @@
 
                                                     </div>
 
-
-
                                                 </div>
-
-                                                <div class="col-md-1"></div>
-                                                <div class="col-md-1">
+                                                <div class="col-md-2">
                                                     <h4>Experience:</h4>
                                                     <div class="form-group">
                                                         <div class="col-md-3">
@@ -93,7 +89,6 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-1"></div>
                                                 <div class="col-md-2">
                                                     <h4>Language:</h4>
                                                     <div class="form-group">
@@ -113,7 +108,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-1"></div>
                                                 <div class="col-md-2">
                                                     <h4>Interview date:</h4>
                                                     <div class="form-group">
@@ -133,8 +127,26 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-2">
+                                                    <h4>Name:</h4>
+                                                    <div class="form-group">
+                                                        <div class="col-md-3">
+                                                            @Html.Label("first", new { @class = "control-label" })
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            @Html.TextBoxFor(model => model.PersonSearchModel.FirstName, new { @class = "form-control " })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-md-3">
+                                                            @Html.Label("last", new { @class = "control-label" })
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            @Html.TextBoxFor(model => model.PersonSearchModel.LastName, new { @class = "form-control" })
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                                <div class="col-md-1"></div>
                                                 <div class="col-md-2">
                                                     <h4>Type job:</h4>
                                                     <div class="form-group">
@@ -144,8 +156,8 @@
                                                         <div class="col-md-9">
                                                             @Html.DropDownListFor(model => model.PersonSearchModel.TypeJob.TypeJobName, new SelectList(Model.PersonSearchModel.TypeJobsNames.Select(x => x.TypeJobName)), "", new { @class = "form-control " })
                                                             <p>
-                                                                <br/>
-                                                                <input type="submit" value="Find" class="btn btn-sm btn-primary"/>
+                                                                <br />
+                                                                <input type="submit" value="Find" class="btn btn-sm btn-primary" />
                                                             </p>
                                                         </div>
                                                     </div>

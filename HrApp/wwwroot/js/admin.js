@@ -125,7 +125,7 @@ $(function () {
     table.buttons().container()
         .appendTo('#roles_wrapper .row:eq(0)');
 
-    var userTable = $('#user-roles').DataTable({
+    var userRolesTable = $('#user-roles').DataTable({
         lengthChange: true,
         buttons: [
             {
@@ -154,7 +154,7 @@ $(function () {
             }
         ]
     });
-    userTable.buttons().container()
+    userRolesTable.buttons().container()
         .appendTo('#user-roles_wrapper .row:eq(0)');
 
     var userTable = $('#users').DataTable({

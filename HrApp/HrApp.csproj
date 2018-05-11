@@ -232,6 +232,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AutofacConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Contract\IConnectionFactory.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\LanguageNameController.cs" />
     <Compile Include="Controllers\LevelLanguageController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfessionalSkillController.cs" />
     <Compile Include="Controllers\TypeJobController.cs" />
     <Compile Include="Controllers\TypeJobNameController.cs" />
@@ -265,7 +267,6 @@
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
-    <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\DbConnectionFactory.cs" />
     <Compile Include="Infrastructure\DbExecuteProvider.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
@@ -298,6 +299,8 @@
     <Compile Include="Repositories\ProfessionalSkillRepository.cs" />
     <Compile Include="Repositories\TypeJobRepository.cs" />
     <Compile Include="Repositories\WorkExpireanceRepository.cs" />
+    <Compile Include="ViewModels\Admin\AccountViewModels.cs" />
+    <Compile Include="ViewModels\Admin\ManageViewModels.cs" />
     <Compile Include="ViewModels\Admin\RoleViewModel.cs" />
     <Compile Include="ViewModels\Admin\UserRoleViewModel.cs" />
     <Compile Include="ViewModels\Admin\UserViewModel.cs" />
@@ -309,6 +312,11 @@
     </Content>
     <Content Include="gulpfile.js" />
     <Content Include="package.json" />
+    <None Include="Scripts\jquery-1.8.0.intellisense.js" />
+    <Content Include="Scripts\jquery-1.8.0.js" />
+    <Content Include="Scripts\jquery-1.8.0.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -358,11 +366,17 @@
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="wwwroot\image\image.jpg" />
+    <Content Include="wwwroot\js\account.js" />
     <Content Include="wwwroot\js\admin.js" />
+    <Content Include="Views\Manage\ChangePasswordComplete.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumberComplete.cshtml" />
+    <Content Include="Views\Manage\UploadImage.cshtml" />
+    <Content Include="Views\Manage\EditUserComplete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Documents\Resumes\" />
     <Folder Include="App_Data\Documents\Tests\" />
+    <Folder Include="App_Data\UserImage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -391,6 +405,21 @@
     <Content Include="Views\Admin\Users.cshtml" />
     <Content Include="Views\Admin\EditUser.cshtml" />
     <Content Include="Views\Admin\EditClaim.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\EditUser.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\Profile.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

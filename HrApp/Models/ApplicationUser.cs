@@ -17,6 +17,10 @@
 
         public DateTime? LastLoginDate { get; set; }
 
+        public int? PersonIdColumn { get; set; }
+
+        public Tuple<Person> PersonColumn { get; set; }
+
         public ApplicationUser()
         {
         }

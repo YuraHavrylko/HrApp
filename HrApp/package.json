@@ -23,7 +23,8 @@
     "jquery-validation-unobtrusive": "3.2.9",
     "modernizr": "3.4.0",
     "respond": "*",
-    "ripples": "*"
+    "ripples": "*",
+    "croppie": "2.6.2"
   },
   "scripts": {
     "install": "npm-git install"
