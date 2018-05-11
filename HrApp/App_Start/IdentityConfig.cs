@@ -1,6 +1,9 @@
 ﻿namespace HrApp
 {
     using System;
+    using System.Configuration;
+    using System.Net;
+    using System.Net.Mail;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -17,8 +20,15 @@
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            SmtpClient client = new SmtpClient();
+            client.Port = 587;
+            client.Host = "smtp.gmail.com";
+            client.EnableSsl = true;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["EmailAccount"], ConfigurationManager.AppSettings["EmailPassword"]);
+
+            return client.SendMailAsync(ConfigurationManager.AppSettings["EmailAccount"], message.Destination, message.Subject, message.Body);
         }
     }
 

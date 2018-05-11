@@ -240,6 +240,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\EducationController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InterviewController.cs" />
     <Compile Include="Controllers\JobController.cs" />
@@ -372,6 +373,10 @@
     <Content Include="Views\Manage\AddPhoneNumberComplete.cshtml" />
     <Content Include="Views\Manage\UploadImage.cshtml" />
     <Content Include="Views\Manage\EditUserComplete.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Error\BadRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Documents\Resumes\" />

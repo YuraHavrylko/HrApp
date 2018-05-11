@@ -2,9 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
     using System.Security.Claims;
     using System.Web;
     using System.Web.Mvc;
+    using System.Web.WebSockets;
+
     using Microsoft.AspNet.Identity.Owin;
     using HrApp.Contract.Repositories;
     using HrApp.Models;
@@ -29,6 +32,10 @@
 
         protected override bool AuthorizeCore(HttpContextBase context)
         {
+            if (!context.User.Identity.IsAuthenticated)
+            {
+                return false;
+            }
             var roles = repository.GetAll();
             var userRoles = new List<AspNetRoles>();
             foreach (var role in roles)
@@ -40,8 +47,11 @@
             }
 
             var claims = repositoryClaim.Get(claim => userRoles.Any(role => role.Id == claim.RoleId));
-
-            return context.User.Identity.IsAuthenticated && claims.Any(claim => claim.ClaimValue == Value && claim.ClaimType == ClaimType);
+            if (!claims.Any(claim => claim.ClaimValue == Value && claim.ClaimType == ClaimType))
+            {
+                throw new HttpException(403, "Forbidden");
+            }
+            return true;
         }
     }
 }

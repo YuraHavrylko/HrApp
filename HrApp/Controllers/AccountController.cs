@@ -60,7 +60,15 @@ namespace HrApp.Controllers
                 {
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    try
+                    {
+                        await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    }
+                    catch (Exception e)
+                    {
+                        
+                    }
+                    
 
                     return RedirectToAction("Login", "Account");
                 }
@@ -238,9 +246,15 @@ namespace HrApp.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        public async Task<ActionResult> ResetPassword(string userId, string code)
         {
-            return code == null ? View("Error") : View();
+            if (code == null)
+            {
+                throw new HttpException(400, "Bad request");
+            }
+            var user = await UserManager.FindByIdAsync(userId);
+            ViewData["User"] = user;
+            return View(new ResetPasswordViewModel(){Email = user.Email, Code = code, UserId = userId});
         }
 
         //
@@ -258,12 +272,12 @@ namespace HrApp.Controllers
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                return PartialView("ResetPasswordConfirmation", "Account");
             }
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                return PartialView("ResetPasswordConfirmation", "Account");
             }
             AddErrors(result);
             return View();
