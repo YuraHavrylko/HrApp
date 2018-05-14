@@ -170,26 +170,6 @@ namespace HrApp.Controllers
             }
         }
 
-        //public FileResult Photo()
-        //{
-        //    // get EF Database (maybe different way in your applicaiton)
-        //    var db = HttpContext.GetOwinContext().Get<ApplicationContext>();
-
-        //    // find the user. I am skipping validations and other checks.
-        //    var userId = User.Identity.GetUserId();
-        //    var user = db.Users.Where(x => x.Id == userId).FirstOrDefault();
-
-
-        //    if (user.ProfilePicture != null)
-        //    {
-        //        return new FileContentResult(user.ProfilePicture, "image/jpeg");
-        //    }
-        //    else
-        //    {
-        //        return new FilePathResult("/Content/blankprofile.png", "image/jpeg");
-        //    }
-        //}
-
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
@@ -266,7 +246,7 @@ namespace HrApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return PartialView("ResetPasswordError", model);
             }
             var user = await UserManager.FindByNameAsync(model.Email);
             if (user == null)
@@ -280,7 +260,7 @@ namespace HrApp.Controllers
                 return PartialView("ResetPasswordConfirmation", "Account");
             }
             AddErrors(result);
-            return View();
+            return PartialView("ResetPasswordError", model);
         }
 
         //
