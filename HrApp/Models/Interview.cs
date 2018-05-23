@@ -16,6 +16,10 @@ namespace HrApp.Models
 
         public string Comment { get; set; }
 
+        public string InterviewerRole { get; set; }
+        public string InterviewerName { get; set; }
+        public string InterviewerLastName { get; set; }
+
         public string FileResume { get; set; }
 
         public string FileTest { get; set; }

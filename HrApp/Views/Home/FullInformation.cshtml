@@ -1,245 +1,802 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model HrApp.Models.Person
+    <style>
+        .nav-tabs { border-bottom: 2px solid #DDD; }
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border-width: 0; }
+    .nav-tabs > li > a { border: none; color: #666; }
+        .nav-tabs > li.active > a, .nav-tabs > li > a:hover { border: none; color: #4285F4 !important; background-color: #fff !important; }
+        .nav-tabs > li > a::after { content: ""; background: #4285F4; height: 2px; position: absolute; width: 100%; left: 0px; bottom: -1px; transition: all 250ms ease 0s; transform: scale(0); }
+    .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after { transform: scale(1); }
+.tab-nav > li > a::after { background: #21527d none repeat scroll 0% 0%; color: #fff; }
+.tab-pane { padding: 15px 0; }
+.tab-content{padding:20px}
+
+
+
+*,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+body {
+	font-family: sans-serif;
+	background: #f6f9fa;
+}
+
+h1 {
+	color: #ccc;
+	text-align: center;
+}
+
+a {
+  color: #ccc;
+  text-decoration: none;
+  outline: none;
+}
+
+/*Fun begins*/
+.tab_container {
+	width: 90%;
+	margin: 0 auto;
+	padding-top: 35px;
+	position: relative;
+}
+
+input, section {
+  clear: both;
+  padding-top: 10px;
+  display: none;
+}
+
+label {
+  font-weight: 700;
+  font-size: 18px;
+  display: block;
+  float: left;
+  width: 20%;
+  padding: 1.5em;
+  color: #757575;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  background: #f0f0f0;
+}
+
+/*#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4,
+#tab5:checked ~ #content5 {
+  display: block;
+  padding: 20px;
+  background: #fff;
+  color: #999;
+  border-bottom: 2px solid #f0f0f0;
+}*/
+
+.tab_container .tab-content p,
+.tab_container .tab-content h3 {
+  -webkit-animation: fadeInScale 0.7s ease-in-out;
+  -moz-animation: fadeInScale 0.7s ease-in-out;
+  animation: fadeInScale 0.7s ease-in-out;
+}
+.tab_container .tab-content h3  {
+  text-align: center;
+}
+
+.tab_container [id^="tab"]:checked + label {
+  background: #fff;
+  box-shadow: inset 0 3px #0CE;
+}
+
+.tab_container [id^="tab"]:checked + label .fa {
+  color: #0CE;
+}
+
+label .fa {
+  font-size: 1.3em;
+  margin: 0 0.4em 0 0;
+}
+.btn{
+  position:relative;
+  height:45px;
+}
+
+.icon{
+  position:absolute;
+  left:18px;
+  top:9px;
+  font-size:30px;
+}
+    </style>
 <div class="content-wrapper">
-    <div class="panel-group">
+    <div class="panel-group" style="margin-right: 3px; margin-left: 3px">
         <div class="panel panel-default">
-        <div class="row" style="padding: 5px; margin-top: 10px; margin-right: 10px; margin-left: 10px">
-            <div class="col-md-6">
-                <div class="btn-group btn-group-justified">
-                    <a type="button" class="btn btn-primary btn-raised btn-block btn-flat" onclick="location.href='@Url.Action("Index", "Home", new {}, null)'">Back to list</a>
-                    <a type="button" class="btn btn-primary btn-raised btn-block btn-flat" onclick="location.href = '@Url.Action("Edit", "Home", new {id = @Model.PersonId}, null)'">Edit</a>
-                    <a type="button" class="btn btn-primary btn-raised btn-block btn-flat" onclick="location.href = '@Url.Action("Delete", "Home", new {id = @Model.PersonId}, null)'">Delete</a>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3>
-                            <b>@Model.FirstName @Model.LastName</b>
-                        </h3>
-                        <button class="btn btn-primary btn-raised btn-block btn-flat" onclick="location.href='@Url.Action("Create", "Job", new {id = @Model.PersonId}, null)'">Add job</button>
-                        @if (@Model.Jobs != null)
-                        {
-                            foreach (var job in @Model.Jobs)
-                            {
-                                <p>
-                                    <div class="row">
-                                        <div class="col-md-8" style="padding-right: 5px">
-                                            <b>@job.JobName</b>
-                                        </div>
-                                        <div class="col-md-4" style="padding-left: 0px">
-                                            <div class="btn-group btn-group-justified">
-                                                <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Edit", "Job", new {id = job.JobId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                                <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Delete", "Job", new {idPerson = job.PersonId, idJob = job.JobId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </p>
-                            }
-                        }
-                       @if (@Model.Birthday.HasValue)
-                       {
-                           <p>
-                               <b>
-                                   Date of birth
-                               </b><br />@Model.Birthday.Value.ToString("dd MMMM yyyy") (@{
-                                                                                       var age = 0;
-                                                                                       age = DateTime.Now.Year - @Model.Birthday.Value.Year;
-                                                                                   } @age years)
-                           </p>
-                       } 
-                        <p><b>City:</b> @Model.City</p>
-                        <p><b>Phone:</b> @Model.Phone</p>
-                        <p><b>Email:</b> @Model.Email</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p class="text-right">
-                            <b>from @Model.Salary UAH/mon</b>
-                        </p>
-                        <button class="btn btn-primary btn-raised btn-block btn-flat" onclick="location.href='@Url.Action("Create", "TypeJob", new {id = @Model.PersonId}, null)'">Add type job</button>
-                        @if (@Model.PersonTypeJobs != null)
-                        {
-                            foreach (var job in @Model.PersonTypeJobs)
-                            {
-                                <p>
-                                    <div class="row">
-                                        <div class="col-md-8" style="padding-right: 5px">
-                                            @job.TypeJobName
-                                        </div>
-                                        <div class="col-md-4" style="padding-left: 0px">
-                                            <div class="btn-group btn-group-justified">
-                                                <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Edit", "TypeJob", new {id = job.PersonTypeJobId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                                <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Delete", "TypeJob", new {idPerson = job.PersonId, idPersonTypeJob = job.PersonTypeJobId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </p>
-                            }
-                        }
-                        <p>
-
-                            <div >
-                                    <b>Education</b>
-                                
-                                    
-                              
-                            </div>
-                        </p>
-
-                        @if (@Model.Educations != null)
-                        {
-                            foreach (var education in @Model.Educations)
-                            {
-
-                                <div class="row">
-                                    <div class="col-md-8" style="padding-right: 5px">
-                                        <p>@education.SpecialityName</p>
-                                    </div>
-                                    <div class="col-md-4" style="padding-left: 0px">
-                                        <div class="btn-group btn-group-justified">
-                                            <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Edit", "Education", new {id = education.EducationId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                            <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Delete", "Education", new {idPerson = education.PersonId, idEducation = education.EducationId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p>
-                                    @{
-                                        var startDate = education.StartDate.Value.ToString("MM.yyyy");
-                                        var endDate = education.FinishDate.Value != null ? education.FinishDate.Value.ToString("MM.yyyy") : "today";
-                                        var totaldays = ((education.FinishDate.Value != null ? education.FinishDate.Value : DateTime.Now) - education.StartDate.Value).TotalDays;
-                                        int years = (int)Math.Truncate(totaldays / 365);
-                                        var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
-                                        var during = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
-                                    }from @startDate to @endDate (@during)
-                                </p>
-                                <p>@education.EducationalInstitutionName</p>
-                                <hr />
-                                            }
-                                        }
-                        <button class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Create", "Education", new {id = @Model.PersonId}, null)'"><span>Add education</span></button>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div>
-                            <b>Work experience </b>
-                            <p>@Model.WorkExpireance years</p>
-
-                        </div>
-
-                        @if (@Model.WorkExperiences != null)
-                        {
-                            foreach (var experience in @Model.WorkExperiences)
-                            {
-
-                                <div class="row">
-                                    <div class="col-md-8" style="padding-right: 5px">
-                                        <p>@experience.PositionName</p>
-                                    </div>
-                                    <div class="col-md-4" style="padding-left: 0px">
-                                        <div class="btn-group btn-group-justified">
-                                            <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Edit", "WorkExpireance", new {id = experience.WorkExperienceId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                            <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Delete", "WorkExpireance", new {idPerson = experience.PersonId, idWorkExperience = experience.WorkExperienceId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p>
-                                    @{
-                                        var startDate = experience.StartDate.Value.ToString("MM.yyyy");
-                                        var endDate = experience.FinishDate.Value != null ? experience.FinishDate.Value.ToString("MM.yyyy") : "Today";
-                                        var totaldays = ((experience.FinishDate.Value != null ? experience.FinishDate.Value : DateTime.Now) - experience.StartDate.Value).TotalDays;
-                                        int years = (int)Math.Truncate(totaldays / 365);
-                                        var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
-                                        var duringExp = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
-                                    }from @startDate to @endDate (@duringExp)
-                                </p>
-                                <p>@experience.CompanyName</p>
-
-
-                                <hr />
-                               }
-                               <button class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Create", "WorkExpireance", new {id = @Model.PersonId}, null)'"><span>Add work experience</span></button>
-
-                            }
-                        </div>
-
-                    <div class="col-md-6">
-                        <div>
-                            <div>
-                                <b>Knowlerge of language</b>
-                            </div>
-                            @if (@Model.Languages != null)
-                            {
-                                foreach (var language in @Model.Languages)
-                                {
-                                    <div class="row">
-                                        <div class="col-md-8" style="padding-right: 5px">
-                                            <li>@language.LanguageName - @language.LanguageLevelName</li>
-                                        </div>
-                                        <div class="col-md-4" style="padding-left: 0px">
-                                            <div class="btn-group btn-group-justified">
-                                                <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Edit", "Language", new {id = language.LanguageId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                                <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Delete", "Language", new {idPerson = language.PersonId, idLanguage = language.LanguageId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            <button class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Create", "Language", new {id = @Model.PersonId}, null)'"><span>add language</span></button>
-                        </div>
-                        <div>
-                            <div>
-                                <b>Professional skills</b>
-                            </div>
-
-
-                            @if (@Model.ProfessionalSkills != null)
-                            {
-                                foreach (var skill in @Model.ProfessionalSkills)
-                                {
-                                    <div class="row">
-                                        <div class="col-md-8" style="padding-right: 5px">
-                                            <li> @skill.SkillName</li>
-                                        </div>
-
-                                        <div class="col-md-4" style="padding-left: 0px">
-                                            <div class="btn-group btn-group-justified">
-                                                <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Edit", "ProfessionalSkill", new { id = skill.ProfessionalSkillId }, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                                <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Delete", "ProfessionalSkill", new { idPerson = skill.PersonId, idSkill = skill.ProfessionalSkillId }, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            <button class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Create", "ProfessionalSkill", new {id = @Model.PersonId}, null)'"><span>Add professional skills</span></button>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
             
+            <div class="tab_container">
+                <div class="box-title" style="display: flex; align-items: center; justify-content: center">
+                    <div style="display: inline-block; display: flex; align-items: center; justify-content: center">
+                        <h1 style="color: grey;">
+
+                            @this.Model.FirstName @this.Model.LastName  &nbsp;
+                        </h1>
+                    </div>
+                    @if (this.User.IsInRole("HR manager"))
+                    {
+                        <div style="display: inline-block;">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a onclick="location.href='@Url.Action("Edit", "Home", new { id = @Model.PersonId }, null)'"><i class="fa fa-edit"></i></a>
+                                </li>
+                                <li>
+                                    <a onclick="location.href = '@Url.Action("Delete", "Home", new { id = @Model.PersonId }, null)'"><i class="fa fa-trash"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                </div>
+                <br />
+                <ul class="nav nav-tabs nav-justified">
+                    <li class="active text-uppercase" name="tabs" checked><a data-toggle="tab" href="#home">Main information</a></li>
+                    <li class="text-uppercase" name="tabs" checked><a data-toggle="tab" href="#menu1">Work experience</a></li>
+                    <li class="text-uppercase" name="tabs" checked><a data-toggle="tab" href="#menu2">Interviews</a></li>
+                </ul>
+                <div id="nav-1-1-default-hor-left-underline" class="tab-content">
+                    <!-- Edit Profile -->
+                    <div class="tab-pane fade in active" id="home" role="tabpanel">
+                        <br />
+
+
+                        <div>
+                            <ul class="list-unstyled g-mb-30">
+                                <li>
+                                    <div style="display: inline-block;">
+                                        <h4><strong>Date of birth:</strong></h4>
+                                    </div>
+                                    <ul class="list-unstyled g-mb-30">
+                                        @if (@Model.Birthday != null)
+                                            {
+                                            <li>
+                                                <div style="display: inline-block;">
+                                                    @(Model.Birthday?.ToString("dd MMMM yyyy"))(@{
+                                                            var age = 0;
+                                                            age = DateTime.Now.Year - @Model.Birthday.Value.Year;
+                                                    } @age years)
+                                                </div>
+                                                <hr style="color: dimgray" />
+                                            </li>
+                                                            }
+                                    </ul>
+                                </li>
+                                <br />
+                                <li>
+                                    <div style="display: inline-block;">
+                                        <h4><strong>City:</strong></h4>
+                                    </div>
+                                    <ul class="list-unstyled g-mb-30">
+                                        @if (@Model.City != null)
+                                            {
+                                            <li>
+                                                <div style="display: inline-block;">
+                                                    @Model.City
+                                                </div>
+                                                <hr style="color: dimgray" />
+                                            </li>
+                                            }
+                                    </ul>
+                                </li>
+                                <br />
+                                <li>
+                                    <div style="display: inline-block;">
+                                        <h4><strong>Phone:</strong></h4>
+                                    </div>
+                                    <ul class="list-unstyled g-mb-30">
+                                        @if (@Model.Phone != null)
+                                            {
+                                            <li>
+                                                <div style="display: inline-block;">
+                                                    @Model.Phone
+                                                </div>
+                                                <hr style="color: dimgray" />
+                                            </li>
+                                            }
+                                    </ul>
+                                </li>
+                                <br />
+                                <li>
+                                    <div style="display: inline-block;">
+                                        <h4><strong>Email address:</strong></h4>
+                                    </div>
+                                    <ul class="list-unstyled g-mb-30">
+                                        @if (@Model.Email != null)
+                                            {
+                                            <li>
+                                                <div style="display: inline-block;">
+                                                    @Model.Email
+                                                </div>
+                                                <hr style="color: dimgray" />
+                                            </li>
+                                            }
+                                    </ul>
+                                </li>
+                                <br />
+                                <li>
+                                    <div style="display: inline-block;">
+                                        <h4><strong>Salary from:</strong></h4>
+                                    </div>
+                                    <ul class="list-unstyled g-mb-30">
+                                        @if (@Model.Salary != null)
+                                            {
+                                            <li>
+                                                <div style="display: inline-block;">
+                                                    @Model.Salary UAH/mon
+                                                </div>
+                                                <hr style="color: dimgray" />
+                                            </li>
+                                            }
+                                    </ul>
+                                </li>
+                                <br />
+                                <li>
+                                    <div style="display: inline-block;">
+                                        <h4>
+                                            <strong>Knowledge of languages:</strong>&nbsp; &nbsp;
+                                            @if (this.User.IsInRole("HR manager"))
+                                                {
+                                                <a onclick="location.href='location.href='@Url.Action("Create", "Language", new {id = @Model.PersonId}, null)'"><i class="fa fa-plus"></i></a>
+                                                }
+                                        </h4>
+                                    </div>
+                                    <ul class="list-unstyled g-mb-30">
+                                        @if (@Model.Languages != null)
+                                            {
+                                                foreach (var language in @Model.Languages)
+                                                {
+                                            <li>
+                                                <div style="display: inline-block;">
+                                                    @language.LanguageName - @language.LanguageLevelName
+                                                </div>
+                                                @if (this.User.IsInRole("HR manager"))
+                                                        {
+                                                        <div style="display: inline-block; float: right;" class="align-top">
+                                                            <a onclick="location.href='@Url.Action("Edit", "Language", new {id = language.LanguageId}, null)'"><i class="fa fa-edit"></i></a>
+                                                            &nbsp;
+                                                            <a onclick="location.href='@Url.Action("Delete", "Language", new {idPerson = language.PersonId, idLanguage = language.LanguageId}, null)'"><i class="fa fa-trash"></i></a>
+
+                                                        </div>
+                                                        }
+                                                <hr style="color: dimgray" />
+                                            </li>
+                                                }
+                                            }
+                                    </ul>
+                                </li>
+
+                                <br />
+                                <li>
+                                    <div style="display: inline-block;">
+                                        <h4>
+                                            <strong>JOBS:</strong>&nbsp; &nbsp;
+                                            @if (this.User.IsInRole("HR manager"))
+                                                {
+                                                <a onclick="location.href='@Url.Action("Create", "Job", new {id = @Model.PersonId}, null)'"><i class="fa fa-plus"></i></a>
+
+                                                }
+                                        </h4>
+                                    </div>
+                                    <ul class="list-unstyled g-mb-30">
+                                        @if (@Model.Jobs != null)
+                                            {
+                                                foreach (var job in @Model.Jobs)
+                                                {
+                                            <li>
+                                                <div style="display: inline-block;">
+                                                    @job.JobName
+                                                </div>
+                                                @if (this.User.IsInRole("HR manager"))
+                                                        {
+                                                        <div style="display: inline-block; float: right;" class="align-top">
+                                                            <a onclick="location.href='@Url.Action("Edit", "Job", new {id = job.JobId}, null)'"><i class="fa fa-edit"></i></a>
+                                                            &nbsp;
+                                                            <a onclick="location.href='@Url.Action("Delete", "Job", new {idPerson = job.PersonId, idJob = job.JobId}, null)'"><i class="fa fa-trash"></i></a>
+
+                                                        </div>
+                                                        }
+                                                <hr style="color: dimgray" />
+                                            </li>
+                                                }
+                                            }
+                                    </ul>
+                                </li>
+
+
+                                <br />
+                                <li>
+                                    <div style="display: inline-block;">
+                                        <h4>
+                                            <strong>JOB TYPE:</strong>&nbsp; &nbsp;
+                                            @if (this.User.IsInRole("HR manager"))
+                                                {
+                                                <a onclick="location.href='@Url.Action("Create", "TypeJob", new { id = @Model.PersonId }, null)'"><i class="fa fa-plus"></i></a>
+                                                }
+                                        </h4>
+                                    </div>
+                                    <ul class="list-unstyled g-mb-30">
+                                        @if (@Model.PersonTypeJobs != null)
+                                            {
+                                                foreach (var job in @Model.PersonTypeJobs)
+                                                {
+                                            <li>
+                                                <div style="display: inline-block;">
+                                                    @job.TypeJobName
+                                                </div>
+                                                @if (this.User.IsInRole("HR manager"))
+                                                        {
+                                                        <div style="display: inline-block; float: right;" class="align-top">
+                                                            <a onclick="location.href='@Url.Action("Edit", "TypeJob", new { id = job.PersonTypeJobId }, null)'"><i class="fa fa-edit"></i></a>
+                                                            &nbsp;
+                                                            <a onclick="location.href='@Url.Action("Delete", "TypeJob", new { idPerson = job.PersonId, idPersonTypeJob = job.PersonTypeJobId }, null)'"><i class="fa fa-trash"></i></a>
+
+                                                        </div>
+                                                        }
+                                                <hr style="color: dimgray" />
+                                            </li>
+                                                }
+                                            }
+                                    </ul>
+                                </li>
+                                <br />
+                                <li>
+                                    <div style="display: inline-block;">
+                                        <h4>
+                                            <strong>Education:</strong>&nbsp; &nbsp;
+                                            @if (this.User.IsInRole("HR manager"))
+                                                {
+                                                <a onclick="location.href='@Url.Action("Create", "Education", new {id = @Model.PersonId}, null)'"><i class="fa fa-plus"></i></a>
+                                                }
+                                        </h4>
+                                    </div>
+                                    <ul class="list-unstyled g-mb-30">
+                                        @if (@Model.Educations != null)
+                                            {
+                                                foreach (var education in @Model.Educations)
+                                                {
+                                            <li>
+                                                <div style="display: inline-block;">
+                                                    @education.EducationalInstitutionName &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp; @education.SpecialityName &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
+
+                                                    @{
+                                                                var startDate = education.StartDate.Value.ToString("MM.yyyy");
+                                                                var endDate = education.FinishDate.Value != null ? education.FinishDate.Value.ToString("MM.yyyy") : "today";
+                                                                var totaldays = ((education.FinishDate.Value != null ? education.FinishDate.Value : DateTime.Now) - education.StartDate.Value).TotalDays;
+                                                                int years = (int)Math.Truncate(totaldays / 365);
+                                                                var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
+                                                                var during = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
+                                                    }from @startDate to @endDate (@during)
+                                                </div>
+                                                @if (this.User.IsInRole("HR manager"))
+                                                        {
+                                                        <div style="display: inline-block; float: right;" class="align-top">
+                                                            <a onclick="location.href='@Url.Action("Edit", "Education", new {id = education.EducationId}, null)'"><i class="fa fa-edit"></i></a>
+                                                            &nbsp;
+                                                            <a onclick="location.href='@Url.Action("Delete", "Education", new {idPerson = education.PersonId, idEducation = education.EducationId}, null)'"><i class="fa fa-trash"></i></a>
+
+                                                        </div>
+                                                        }
+                                                <hr style="color: dimgray" />
+                                            </li>
+                                                                    }
+                                                                }
+                                    </ul>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        <div>
+                            <ul class="list-unstyled g-mb-30">
+                                <li>
+                                    <div style="display: inline-block;">
+                                        <h4>
+                                            <strong>Professional skills:</strong>&nbsp; &nbsp;
+                                            @if (this.User.IsInRole("HR manager"))
+                                                {
+                                                <a onclick="location.href='location.href='@Url.Action("Create", "ProfessionalSkill", new {id = @Model.PersonId}, null)'"><i class="fa fa-plus"></i></a>
+                                                }
+                                        </h4>
+                                    </div>
+                                    <ul class="list-unstyled g-mb-30">
+                                        @if (@Model.ProfessionalSkills != null)
+                                            {
+                                                foreach (var skill in @Model.ProfessionalSkills)
+                                                {
+                                            <li>
+                                                <div style="display: inline-block;">
+                                                    @skill.SkillName
+                                                </div>
+                                                @if (this.User.IsInRole("HR manager"))
+                                                        {
+                                                        <div style="display: inline-block; float: right;" class="align-top">
+                                                            <a onclick="location.href='@Url.Action("Edit", "ProfessionalSkill", new { id = skill.ProfessionalSkillId }, null)'"><i class="fa fa-edit"></i></a>
+                                                            &nbsp;
+                                                            <a onclick="location.href='@Url.Action("Delete", "ProfessionalSkill", new { idPerson = skill.PersonId, idSkill = skill.ProfessionalSkillId }, null)'"><i class="fa fa-trash"></i></a>
+
+                                                        </div>
+                                                        }
+                                                <hr style="color: dimgray" />
+                                            </li>
+                                                }
+                                            }
+                                    </ul>
+                                </li>
+                                <br />
+                                <li>
+                                    <div style="display: inline-block;">
+                                        <h4>
+                                            <strong>Work experience (@Model.WorkExpireance years) :</strong>&nbsp; &nbsp;
+                                            @if (this.User.IsInRole("HR manager"))
+                                                {
+                                                <a onclick="location.href='@Url.Action("Create", "WorkExpireance", new {id = @Model.PersonId}, null)'"><i class="fa fa-plus"></i></a>
+                                                }
+                                        </h4>
+                                    </div>
+                                    <ul class="list-unstyled g-mb-30">
+                                        @if (@Model.WorkExperiences != null)
+                                            {
+                                                foreach (var experience in @Model.WorkExperiences)
+                                                {
+                                            <li>
+                                                <div style="display: inline-block;">
+                                                    @experience.CompanyName &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp; @experience.PositionName &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
+
+                                                    @{
+                                                                var startDate = experience.StartDate.Value.ToString("MM.yyyy");
+                                                                var endDate = experience.FinishDate.Value != null ? experience.FinishDate.Value.ToString("MM.yyyy") : "Today";
+                                                                var totaldays = ((experience.FinishDate.Value != null ? experience.FinishDate.Value : DateTime.Now) - experience.StartDate.Value).TotalDays;
+                                                                int years = (int)Math.Truncate(totaldays / 365);
+                                                                var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
+                                                                var duringExp = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
+                                                    }from @startDate to @endDate (@duringExp)
+                                                </div>
+                                                @if (this.User.IsInRole("HR manager"))
+                                                        {
+                                                        <div style="display: inline-block; float: right;" class="align-top">
+                                                            <a onclick="location.href='@Url.Action("Edit", "WorkExpireance", new {id = experience.WorkExperienceId}, null)'"><i class="fa fa-edit"></i></a>
+                                                            &nbsp;
+                                                            <a onclick="location.href='@Url.Action("Delete", "WorkExpireance", new {idPerson = experience.PersonId, idWorkExperience = experience.WorkExperienceId}, null)'"><i class="fa fa-trash"></i></a>
+
+                                                        </div>
+                                                        }
+                                                <hr style="color: dimgray" />
+                                            </li>
+                                                                    }
+                                                                }
+                                    </ul>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
+                        <div>
+                            <ul class="list-unstyled g-mb-30">
+                            @if (@Model.Interviews != null)
+                            {
+                                foreach (var interview in @Model.Interviews)
+                                {
+                                <li>
+                                    <div style="display: inline-block;">
+                                        <h4>
+                                            <strong>Interview (@interview.InterviewDate.ToString("dd.MM.yyyy")) :</strong>&nbsp; &nbsp;
+                                            @if (this.User.IsInRole("HR manager"))
+                                            {
+                                                <a onclick="location.href='@Url.Action("Create", "Interview", new {id = @Model.PersonId}, null)'"><i class="fa fa-plus"></i></a>
+                                            }
+                                        </h4>
+                                    </div>
+                                    <ul class="list-unstyled g-mb-30">
+                                            <li>
+                                                <div style="display: inline-block;">
+                                                    <b>Point:</b> @interview.Point &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp; <b>Interviewer:</b> @this.User.Identity.Name
+
+                                                    
+                                                </div>
+
+                                                <br />
+                                                @interview.Comment
+
+                                                @if (this.User.IsInRole("Developer") || this.User.IsInRole("HR manager"))
+                                                {
+                                                    <div style="display: inline-block; float: right;" class="align-top">
+                                                        <a onclick="location.href='@Url.Action("Edit", "Interview", new {id = interview.InterviewId}, null)'"><i class="fa fa-edit"></i></a>
+                                                        &nbsp;
+                                                        <a onclick="location.href='@Url.Action("Delete", "Interview", new {idPerson = interview.PersonId, idInterview = interview.InterviewId}, null)'"><i class="fa fa-trash"></i></a>
+
+                                                    </div>
+                                                }
+                                                <hr style="color: dimgray" />
+                                            </li>
+                                    </ul>
+                                </li>
+
+                                                            }
+                                                        }
+                            </ul>
+                        </div>
+
+
+
+
+
+
+            </div>
+                </div>
+
+            </div>
 
         </div>
-        <hr style="border-color: lightgray"/>
-        <div class="row" style="padding: 5px; margin-top: 10px; margin-right: 10px; margin-left: 10px">
-                <div class="col-md-6">
-                    <div>
-                        <b>Interviews</b>
+    </div>
+    @*<div class="panel-group">
+        <div class="panel panel-default">
+            
+                <div class="row" style="padding: 5px; margin-top: 10px; margin-right: 10px; margin-left: 10px">
+                    <div class="col-md-6">
+                        <div class="btn-group btn-group-justified">
+                            <a type="button" class="btn btn-primary btn-raised btn-block btn-flat" onclick="location.href='@Url.Action("Index", "Home", new {}, null)'">Back to list</a>
+                            <a type="button" class="btn btn-primary btn-raised btn-block btn-flat" onclick="location.href = '@Url.Action("Edit", "Home", new {id = @Model.PersonId}, null)'">Edit</a>
+                            <a type="button" class="btn btn-primary btn-raised btn-block btn-flat" onclick="location.href = '@Url.Action("Delete", "Home", new {id = @Model.PersonId}, null)'">Delete</a>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3>
+                                    <b>@Model.FirstName @Model.LastName</b>
+                                </h3>
+                                <button class="btn btn-primary btn-raised btn-block btn-flat" onclick="location.href='@Url.Action("Create", "Job", new {id = @Model.PersonId}, null)'">Add job</button>
+                                @if (@Model.Jobs != null)
+                                {
+                                    foreach (var job in @Model.Jobs)
+                                    {
+                                        <p>
+                                            <div class="row">
+                                                <div class="col-md-8" style="padding-right: 5px">
+                                                    <b>@job.JobName</b>
+                                                </div>
+                                                <div class="col-md-4" style="padding-left: 0px">
+                                                    <div class="btn-group btn-group-justified">
+                                                        <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Edit", "Job", new {id = job.JobId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                                        <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Delete", "Job", new {idPerson = job.PersonId, idJob = job.JobId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </p>
+                                    }
+                                }
+                                <p>
+                                    <b>
+                                        Date of birth
+                                    </b><br />@Model.Birthday.ToString("dd MMMM yyyy") 
+                                </p>
+                                <p><b>City:</b> @Model.City</p>
+                                <p><b>Phone:</b> @Model.Phone</p>
+                                <p><b>Email:</b> @Model.Email</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-right">
+                                    <b>from @Model.Salary UAH/mon</b>
+                                </p>
+                                <button class="btn btn-primary btn-raised btn-block btn-flat" onclick="location.href='@Url.Action("Create", "TypeJob", new {id = @Model.PersonId}, null)'">Add type job</button>
+                                @if (@Model.PersonTypeJobs != null)
+                                {
+                                    foreach (var job in @Model.PersonTypeJobs)
+                                    {
+                                        <p>
+                                            <div class="row">
+                                                <div class="col-md-8" style="padding-right: 5px">
+                                                    @job.TypeJobName
+                                                </div>
+                                                <div class="col-md-4" style="padding-left: 0px">
+                                                    <div class="btn-group btn-group-justified">
+                                                        <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Edit", "TypeJob", new {id = job.PersonTypeJobId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                                        <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Delete", "TypeJob", new {idPerson = job.PersonId, idPersonTypeJob = job.PersonTypeJobId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </p>
+                                    }
+                                }
+                                <p>
+
+                                    <div>
+                                        <b>Education</b>
+
+
+
+                                    </div>
+                                </p>
+
+                                @if (@Model.Educations != null)
+                                {
+                                    foreach (var education in @Model.Educations)
+                                    {
+
+                                        <div class="row">
+                                            <div class="col-md-8" style="padding-right: 5px">
+                                                <p>@education.SpecialityName</p>
+                                            </div>
+                                            <div class="col-md-4" style="padding-left: 0px">
+                                                <div class="btn-group btn-group-justified">
+                                                    <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Edit", "Education", new {id = education.EducationId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                                    <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Delete", "Education", new {idPerson = education.PersonId, idEducation = education.EducationId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>
+                                            @{
+                                                var startDate = education.StartDate.Value.ToString("MM.yyyy");
+                                                var endDate = education.FinishDate.Value != null ? education.FinishDate.Value.ToString("MM.yyyy") : "today";
+                                                var totaldays = ((education.FinishDate.Value != null ? education.FinishDate.Value : DateTime.Now) - education.StartDate.Value).TotalDays;
+                                                int years = (int)Math.Truncate(totaldays / 365);
+                                                var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
+                                                var during = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
+                                            }from @startDate to @endDate (@during)
+                                        </p>
+                                        <p>@education.EducationalInstitutionName</p>
+                                        <hr />
+                                                    }
+                                                }
+                                <button class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Create", "Education", new {id = @Model.PersonId}, null)'"><span>Add education</span></button>
+                            </div>
+
+                        </div>
                     </div>
-                    <br />
-                    @if (@Model.Interviews != null)
-                    {
-                        foreach (var interview in @Model.Interviews)
-                        {
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <p>@interview.InterviewDate.ToString("dd.MM.yyyy")</p>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div>
+                                    <b>Work experience </b>
+                                    <p>@Model.WorkExpireance years</p>
+
                                 </div>
-                                <div class="col-md-5">
-                                    <p class="text-right"><b>Point:</b> @interview.Point</p>
+
+                                @if (@Model.WorkExperiences != null)
+                                {
+                                    foreach (var experience in @Model.WorkExperiences)
+                                    {
+
+                                        <div class="row">
+                                            <div class="col-md-8" style="padding-right: 5px">
+                                                <p>@experience.PositionName</p>
+                                            </div>
+                                            <div class="col-md-4" style="padding-left: 0px">
+                                                <div class="btn-group btn-group-justified">
+                                                    <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Edit", "WorkExpireance", new {id = experience.WorkExperienceId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                                    <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Delete", "WorkExpireance", new {idPerson = experience.PersonId, idWorkExperience = experience.WorkExperienceId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>
+                                            @{
+                                                var startDate = experience.StartDate.Value.ToString("MM.yyyy");
+                                                var endDate = experience.FinishDate.Value != null ? experience.FinishDate.Value.ToString("MM.yyyy") : "Today";
+                                                var totaldays = ((experience.FinishDate.Value != null ? experience.FinishDate.Value : DateTime.Now) - experience.StartDate.Value).TotalDays;
+                                                int years = (int)Math.Truncate(totaldays / 365);
+                                                var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
+                                                var duringExp = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
+                                            }from @startDate to @endDate (@duringExp)
+                                        </p>
+                                        <p>@experience.CompanyName</p>
+
+
+                                        <hr />
+                                                }
+                                                <button class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Create", "WorkExpireance", new {id = @Model.PersonId}, null)'"><span>Add work experience</span></button>
+
+                                                }
+                            </div>
+
+                            <div class="col-md-6">
+                                <div>
+                                    <div>
+                                        <b>Knowlerge of language</b>
+                                    </div>
+                                    @if (@Model.Languages != null)
+                                    {
+                                        foreach (var language in @Model.Languages)
+                                        {
+                                            <div class="row">
+                                                <div class="col-md-8" style="padding-right: 5px">
+                                                    <li>@language.LanguageName - @language.LanguageLevelName</li>
+                                                </div>
+                                                <div class="col-md-4" style="padding-left: 0px">
+                                                    <div class="btn-group btn-group-justified">
+                                                        <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Edit", "Language", new {id = language.LanguageId}, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                                        <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Delete", "Language", new {idPerson = language.PersonId, idLanguage = language.LanguageId}, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                    <button class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Create", "Language", new {id = @Model.PersonId}, null)'"><span>add language</span></button>
+                                </div>
+                                <div>
+                                    <div>
+                                        <b>Professional skills</b>
+                                    </div>
+
+
+                                    @if (@Model.ProfessionalSkills != null)
+                                    {
+                                        foreach (var skill in @Model.ProfessionalSkills)
+                                        {
+                                            <div class="row">
+                                                <div class="col-md-8" style="padding-right: 5px">
+                                                    <li> @skill.SkillName</li>
+                                                </div>
+                                                @if (this.User.IsInRole("HR manager"))
+                                                {
+                                                    <div class="col-md-4" style="padding-left: 0px">
+                                                        <div class="btn-group btn-group-justified">
+                                                            <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Edit", "ProfessionalSkill", new { id = skill.ProfessionalSkillId }, null)'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                                            <a class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Delete", "ProfessionalSkill", new { idPerson = skill.PersonId, idSkill = skill.ProfessionalSkillId }, null)'"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                                                        </div>
+                                                    </div>
+                                                }
+
+                                            </div>
+                                        }
+                                    }
+                                    @if (this.User.IsInRole("HR manager"))
+                                    {
+                                        <button class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href = '@Url.Action("Create", "ProfessionalSkill", new {id = @Model.PersonId}, null)'"><span>Add professional skills</span></button>
+
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <hr style="border-color: lightgray" />
+                <div class="row" style="padding: 5px; margin-top: 10px; margin-right: 10px; margin-left: 10px">
+                    <div class="col-md-6">
+                        <div>
+                            <b>Interviews</b>
+                        </div>
+                        <br />
+                        @if (@Model.Interviews != null)
+                        {
+                            foreach (var interview in @Model.Interviews)
+                            {
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <p>@interview.InterviewDate.ToString("dd.MM.yyyy")</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p class="text-right"><b>Point:</b> @interview.Point</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="text-right"><b>Interviewer:</b> @this.User.Identity.Name (@this.User.Identity.AuthenticationType)</p>
                                 </div>
                                 <div class="col-md-3" style="padding-left: 0px">
                                     <div class="btn-group btn-group-justified">
@@ -248,28 +805,35 @@
                                     </div>
                                 </div>
                             </div>
+                            }
                         }
-                    }
-                    <button class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Create", "Interview", new {id = @Model.PersonId}, null)'"><span>Add interview</span></button>
+                        @if (this.User.IsInRole("Developer") || this.User.IsInRole("HR manager"))
+                        {
+                            <button class="btn btn-primary btn-raised btn-block btn-flat btn-xs" onclick="location.href='@Url.Action("Create", "Interview", new {id = @Model.PersonId}, null)'"><span>Add interview</span></button>
 
+                        }
+
+
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            <b>Comments</b>
+                        </p>
+                        @if (@Model.Interviews != null)
+                        {
+                            foreach (var interview in @Model.Interviews)
+                            {
+                                <p>@interview.Comment</p>
+                            }
+                        }
+                    </div>
 
                 </div>
-            <div class="col-md-6">
-                <p>
-                    <b>Comments</b>
-                </p>
-                @if (@Model.Interviews != null)
-                {
-                    foreach (var interview in @Model.Interviews)
-                    {
-                        <p>@interview.Comment</p>
-                    }
-                }
+
             </div>
 
-        </div>
-
-      </div>
-
-    </div>
+    </div>*@
 </div>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
