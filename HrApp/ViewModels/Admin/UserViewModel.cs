@@ -1,6 +1,9 @@
 ﻿namespace HrApp.ViewModels.Admin
 {
     using System;
+    using System.Collections.Generic;
+
+    using HrApp.Models;
 
     public class UserViewModel
     {
@@ -25,5 +28,9 @@
         public bool LockoutEnabled { get; set; }
        
         public int AccessFailedCount { get; set; }
+
+        public int PersontId { get; set; }
+
+        public List<Person> PersonList { get; set; }
     }
 }

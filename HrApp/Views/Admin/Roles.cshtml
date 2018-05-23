@@ -24,45 +24,47 @@
                         </p>
                         <div class="box-body">
                             <button class="btn btn-sm btn-info btn-raised btn-flat" id="add-role">Create new role</button>
-                            <table id="roles" class="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Role name</th>
-                                    <th style="width: 50px"></th>
-                                    <th style="width: 50px"></th>
-                                    <th style="width: 50px"></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach (var role in Model)
-                                {
+                            <div class="table-responsive">
+                                <table id="roles" class="table table-bordered table-striped">
+                                    <thead>
                                     <tr>
-                                        <td style="vertical-align: middle;">@(++index)</td>
-                                        <td style="vertical-align: middle;">@role.Name</td>
-                                        <td><button class="btn btn-sm btn-success edit-claims" value="@role.Id">Edit claims</button></td>
-                                        <td><button class="btn btn-sm btn-warning edit-role" value="@role.Id">Edit</button></td>
-                                        <td><button class="btn btn-sm btn-danger delete-role" value="@role.Id">Delete</button></td>
-
+                                        <th>#</th>
+                                        <th>Role name</th>
+                                        <th style="width: 50px"></th>
+                                        <th style="width: 50px"></th>
+                                        <th style="width: 50px"></th>
                                     </tr>
-                                }
+                                    </thead>
+                                    <tbody>
+                                    @foreach (var role in Model)
+                                    {
+                                        <tr>
+                                            <td style="vertical-align: middle;">@(++index)</td>
+                                            <td style="vertical-align: middle;">@role.Name</td>
+                                            <td><button class="btn btn-sm btn-success edit-claims" value="@role.Id">Edit claims</button></td>
+                                            <td><button class="btn btn-sm btn-warning edit-role" value="@role.Id">Edit</button></td>
+                                            <td><button class="btn btn-sm btn-danger delete-role" value="@role.Id">Delete</button></td>
 
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Role name</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                </tfoot>
-                            </table>
+                                        </tr>
+                                    }
+
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Role name</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            </div>
+                            <div class="box-footer clearfix">
+
+                            </div>
                         </div>
-                        <div class="box-footer clearfix">
-                           
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

@@ -37,14 +37,17 @@
                                 </p>
                             }
                         }
-                        <p>
-                            <b>
-                                Date of birth
-                            </b><br />@Model.Birthday.ToString("dd MMMM yyyy") (@{
-                                var age = 0;
-                                age = DateTime.Now.Year - @Model.Birthday.Year;
-                            } @age years)
-                        </p>
+                       @if (@Model.Birthday.HasValue)
+                       {
+                           <p>
+                               <b>
+                                   Date of birth
+                               </b><br />@Model.Birthday.Value.ToString("dd MMMM yyyy") (@{
+                                                                                       var age = 0;
+                                                                                       age = DateTime.Now.Year - @Model.Birthday.Value.Year;
+                                                                                   } @age years)
+                           </p>
+                       } 
                         <p><b>City:</b> @Model.City</p>
                         <p><b>Phone:</b> @Model.Phone</p>
                         <p><b>Email:</b> @Model.Email</p>

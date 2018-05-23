@@ -92,6 +92,14 @@
                 </div>
             </div>
         </div>
+        <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.Email, "has-error")">
+            @Html.LabelFor(x => x.Email, new { @class = "col-sm-3 control-label" })
+
+            <div class="col-sm-9">
+                @Html.DropDownListFor(model => model.PersontId, new SelectList(Model.PersonList.Select(x => new SelectListItem { Value = x.PersonId.GetValueOrDefault().ToString(), Text = x.FirstName + " " + x.LastName }), "Value", "Text"), "", new { @class = "form-control " })
+                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.Email)</span>
+            </div>
+        </div>
         @Html.HiddenFor(model => model.Id)
 
     </div>

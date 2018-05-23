@@ -12,7 +12,7 @@
         <ol class="breadcrumb">
             <li><a href="/Home"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="/Admin"><i class="fa fa-dashboard"></i> Admin</a></li>
-            <li class="active">Roles</li>
+            <li class="active">UserRoles</li>
         </ol>
     </section>
     <section class="content">
@@ -24,41 +24,45 @@
                             User Roles
                         </p>
                         <div class="box-body">
-                            <table id="user-roles" class="table table-bordered table-striped">
-                                <thead>
+                            <div class="table-responsive">
+                                <table id="user-roles" class="table table-bordered table-striped">
+                                    <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>First name</th>
                                         <th>Last name</th>
-                                        <th>Email</th>
+                                        @*<th>Email</th>*@
                                         <th>Roles</th>
                                         <th style="width: 50px"></th>
                                     </tr>
-                                </thead>
-                                <tbody>
+                                    </thead>
+                                    <tbody>
                                     @foreach (var role in Model)
                                     {
                                         <tr>
                                             <td style="vertical-align: middle;">@(++index)</td>
                                             <td style="vertical-align: middle;">@role.FirstName</td>
                                             <td style="vertical-align: middle;">@role.LastName</td>
-                                            <td style="vertical-align: middle;">@role.Email</td>
+                                            @*<td style="vertical-align: middle;">@role.Email</td>*@
                                             <td style="vertical-align: middle; white-space: pre;">@string.Join(Environment.NewLine, role.AllRoles.Where(model => role.Roles.Any(viewModel => viewModel.Id == model.Id)).Select(model => model.Name))</td>
                                             <td><button class="btn btn-sm btn-warning edit-user-role" value="@role.Id">Edit</button></td>
                                         </tr>
                                     }
 
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Role name</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First name</th>
+                                            <th>Last name</th>
+                                            @*<th>Email</th>*@
+                                            <th>Roles</th>
+                                            <th style="width: 50px"></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            </div>
                     </div>
                 </div>
             </div>

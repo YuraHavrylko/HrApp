@@ -9,8 +9,10 @@ namespace HrApp.Controllers
     using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using HrApp.Contract.Repositories;
     using HrApp.Infrastructure;
     using HrApp.Models;
+    using HrApp.Repositories;
     using HrApp.ViewModels.Admin;
 
     using Microsoft.AspNet.Identity;
@@ -42,16 +44,30 @@ namespace HrApp.Controllers
                 return HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
         }
-
-        public ActionResult Register()
+        //private GenericRepository<Person> _repository;
+        private UnitOfWork _unitOfWork;
+        public AccountController(UnitOfWork unitOfWork)
         {
+            //this._repository = new GenericRepository<Person>(new ApplicationDbContext());
+            this._unitOfWork = unitOfWork;
+        }
+
+        public ActionResult Register(int? personId)
+        {
+            ViewBag.personId = personId;
+            if (personId.HasValue)
+            {
+                var person = this._unitOfWork.PersonRepository.Get(personId.Value);
+                return this.View(new RegisterModel(){LastName = person.LastName, FirstName = person.FirstName});
+            }
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterModel model)
+        public async Task<ActionResult> Register(RegisterModel model, int? personId)
         {
+            ViewBag.personId = personId;
             if (ModelState.IsValid)
             {
                 ApplicationUser user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, RegistrationDate = DateTime.Now};
@@ -68,7 +84,20 @@ namespace HrApp.Controllers
                     {
                         
                     }
+                    if (!personId.HasValue)
+                    {
+                        Person person = new Person(){FirstName = model.FirstName, Email = model.Email, LastName = model.LastName, City = "", Phone = "",Salary = 0, ApplicationUserId = "",WorkExpireance = 0};
+                        this._unitOfWork.PersonRepository.Add(person);
+                        var id = this._unitOfWork.PersonRepository.GetAll(1, Int32.MaxValue).Max(person1 => person1.PersonId);
+                       
+                        user.PersonIdColumn = id;
+                    }
+                    else
+                    {
+                        user.PersonIdColumn = personId;
+                    }
                     
+                    await UserManager.UpdateAsync(user);
 
                     return RedirectToAction("Login", "Account");
                 }
@@ -114,7 +143,7 @@ namespace HrApp.Controllers
                     await UserManager.UpdateAsync(user);
                     if (string.IsNullOrEmpty(returnUrl))
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Manage");
                     }
                         
                     return Redirect(returnUrl);
@@ -322,7 +351,7 @@ namespace HrApp.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Manage");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

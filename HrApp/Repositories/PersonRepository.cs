@@ -137,7 +137,7 @@ namespace HrApp.Repositories
             {
                 {"@FirstName", person.FirstName},
                 {"@LastName", person.LastName},
-                {"@Birthday", person.Birthday},
+                {"@Birthday", person.Birthday.HasValue? (object)person.Birthday.Value : System.DBNull.Value },
                 {"@City", person.City},
                 {"@Email", person.Email},
                 {"@Phone", person.Phone},
@@ -156,7 +156,7 @@ namespace HrApp.Repositories
                 {"@PersonId", person.PersonId},
                 {"@FirstName", person.FirstName},
                 {"@LastName", person.LastName},
-                {"@Birthday", person.Birthday},
+                {"@Birthday",person.Birthday.HasValue? (object)person.Birthday.Value : System.DBNull.Value},
                 {"@City", person.City},
                 {"@Email", person.Email},
                 {"@Phone", person.Phone},

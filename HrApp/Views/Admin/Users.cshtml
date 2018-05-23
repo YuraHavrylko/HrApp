@@ -23,8 +23,9 @@
                             Users
                         </p>
                         <div class="box-body">
-                            <table id="users" class="table table-bordered table-striped">
-                                <thead>
+                            <div class="table-responsive">
+                                <table id="users" class="table table-bordered table-striped">
+                                    <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>First name</th>
@@ -32,14 +33,12 @@
                                         <th>Email</th>
                                         <th>Email confirmed</th>
                                         <th>Phone number</th>
-                                        <th>Phone confirmed</th>
-                                        <th>Lockout enabled</th>
                                         <th>Lockout end date</th>
                                         <th style="width: 50px"></th>
                                         <th style="width: 50px"></th>
                                     </tr>
-                                </thead>
-                                <tbody>
+                                    </thead>
+                                    <tbody>
                                     @foreach (var role in Model)
                                     {
                                         <tr>
@@ -49,8 +48,6 @@
                                             <td style="vertical-align: middle;">@role.Email</td>
                                             <td style="vertical-align: middle;">@role.EmailConfirmed</td>
                                             <td style="vertical-align: middle;">@role.PhoneNumber</td>
-                                            <td style="vertical-align: middle;">@role.PhoneNumberConfirmed</td>
-                                            <td style="vertical-align: middle;">@role.LockoutEnabled</td>
                                             <td style="vertical-align: middle;">@role.LockoutEndDateUtc</td>
 
                                             <td><button class="btn btn-sm btn-warning edit-user" value="@role.Id">Edit</button></td>
@@ -59,24 +56,23 @@
                                         </tr>
                                     }
 
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th>#</th>
-                                    <th>First name</th>
-                                    <th>Last name</th>
-                                    <th>Email</th>
-                                    <th>Email confirmed</th>
-                                    <th>Phone number</th>
-                                    <th>Phone confirmed</th>
-                                    <th>Lockout enabled</th>
-                                    <th>Lockout end date</th>
-                                    <th style="width: 50px"></th>
-                                    <th style="width: 50px"></th>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>First name</th>
+                                        <th>Last name</th>
+                                        <th>Email</th>
+                                        <th>Email confirmed</th>
+                                        <th>Phone number</th>
+                                        <th>Lockout end date</th>
+                                        <th style="width: 50px"></th>
+                                        <th style="width: 50px"></th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            </div>
                         <div class="box-footer clearfix">
 
                         </div>

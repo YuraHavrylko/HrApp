@@ -45,7 +45,7 @@ namespace HrApp.Models
         public int? Salary { get; set; }
 
         [Required]
-        public DateTime Birthday { get; set; }
+        public DateTime? Birthday { get; set; }
 
         [MaxLength(50)]
         public string City { get; set; }

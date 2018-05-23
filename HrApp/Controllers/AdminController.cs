@@ -31,11 +31,13 @@ namespace HrApp.Controllers
         private UnitOfWork _unitOfWork;
 
         private GenericRepository<RoleClaim> _roleClaimRepository;
+        private GenericRepository<Person> _personRepository;
 
         public AdminController(UnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
             this._roleClaimRepository = new GenericRepository<RoleClaim>(new ApplicationDbContext());
+            this._personRepository = new GenericRepository<Person>(new ApplicationDbContext());
         }
 
         private ApplicationUserManager UserManager
@@ -72,7 +74,6 @@ namespace HrApp.Controllers
             ViewData["Skills"] = _unitOfWork.ProfessionalSkillRepository.GetAll().Count();
 
             ViewData["ConfirmedEmailCount"] = UserManager.Users.Count(user => user.EmailConfirmed);
-            ViewData["ConfirmedPhoneCount"] = UserManager.Users.Count(user => user.PhoneNumberConfirmed);
             ViewData["Locked"] = UserManager.Users.Count(user => user.LockoutEndDateUtc.HasValue);
 
             return View(usersWithRoles);
@@ -212,7 +213,9 @@ namespace HrApp.Controllers
                                              "admin:roles",
                                              "language:level",
                                              "language:name",
-                                             "typejob:name"
+                                             "typejob:name",
+                                             "hr:index",
+                                             "hr:dashboard",
                                          };
             return PartialView(new Tuple<IEnumerable<string>, IEnumerable<RoleClaim>, string>(allClaims, roleClaim, id));
         }
@@ -301,7 +304,7 @@ namespace HrApp.Controllers
         public async Task<PartialViewResult> EditUser(string id)
         {
             var user = Mapper.Map<UserViewModel>(await UserManager.FindByIdAsync(id));
-           
+            user.PersonList = this._unitOfWork.PersonRepository.GetAll(1, int.MaxValue).ToList();
             return PartialView(user);
         }
 

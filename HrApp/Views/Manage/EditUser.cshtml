@@ -36,7 +36,7 @@
 
             <div class="col-sm-9">
                @* @Html.TextBoxFor(model => model.Birthday, new { @class = "form-control", @id= "date" , type="text", placeholder= "__/__/____" })*@
-                <input type="text" name="Birthday" id= "date" class = "form-control" value="@Model.Birthday.ToString("dd/MM/yyyy")"/>
+                <input type="text" name="Birthday" id= "date" class = "form-control" value="@(Model.Birthday?.ToString("dd/MM/yyyy"))"/>
                 <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.Birthday)</span>
             </div>
         </div>

@@ -69,6 +69,27 @@
                     </ul>
                 </li>
             }
+            @if (claims.Any(claim => claim.ClaimValue.Contains("hr")))
+            {
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-pencil-square-o"></i> <span>HR Area</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        @if (claims.Any(claim => claim.ClaimValue == "hr:index"))
+                        {
+                            <li><a href="/Home/Dashboard"><i class="fa fa-circle-o"></i> Dashboard</a></li>
+                        }
+                        @if (claims.Any(claim => claim.ClaimValue == "admin:users"))
+                        {
+                            <li><a href="/"><i class="fa fa-circle-o"></i> Applications</a></li>
+                        }
+                    </ul>
+                </li>
+            }
             @if (claims.Any(claim => claim.ClaimValue.Contains("language")))
             {
                 <li class="treeview">
