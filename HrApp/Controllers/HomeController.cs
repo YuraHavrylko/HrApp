@@ -15,6 +15,7 @@ using Microsoft.AspNet.Identity;
 
 namespace HrApp.Controllers
 {
+    using Rotativa;
     using System.Globalization;
     using System.Threading.Tasks;
 
@@ -335,5 +336,32 @@ namespace HrApp.Controllers
 
             return Json(events);
         }
-    }
+
+        [HttpPost]
+        public ActionResult ShowCVInformation(int personId)
+        {
+            if (personId == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            var person = _unitOfWork.PersonRepository.Get(personId);
+            var report = new PartialViewAsPdf("_CVPartial", person);
+            byte[] applicationPDFData = report.BuildPdf(ControllerContext);
+
+            
+            var file  = this._unitOfWork.PersonRepository.ConvertCVToPdf(personId, applicationPDFData);
+
+            if (!System.IO.File.Exists(file))
+            {
+               return HttpNotFound();
+            }
+
+            var fileBytes = System.IO.File.ReadAllBytes(file);
+            var response = new FileContentResult(fileBytes, "application/octet-stream")
+            {
+                FileDownloadName = "CV.pdf"
+            };
+            return response;
+        }
+   }
 }

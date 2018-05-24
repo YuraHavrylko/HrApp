@@ -1,0 +1,367 @@
+﻿@model HrApp.Models.Person
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+    <TITLE>resume</TITLE>
+    <META NAME="GENERATOR" CONTENT="LibreOffice 4.1.6.2 (Linux)">
+    <META NAME="AUTHOR" CONTENT="..">
+    <META NAME="CREATED" CONTENT="20150721;153500000000000">
+    <META NAME="CHANGEDBY" CONTENT="Office Use">
+    <META NAME="CHANGED" CONTENT="20150721;153500000000000">
+    <STYLE TYPE="text/css">
+        <!--
+
+        P {
+            margin-bottom: 0in;
+            direction: ltr;
+            color: #000000;
+            widows: 2;
+            orphans: 2;
+        }
+
+            P.western {
+                font-family: "Times New Roman", serif;
+                font-size: 11pt;
+                so-language: en-GB;
+            }
+
+            P.cjk {
+                font-family: "Times New Roman", serif;
+                font-size: 11pt;
+            }
+
+            P.ctl {
+                font-family: "Times New Roman", serif;
+                font-size: 10pt;
+                so-language: ar-SA;
+            }
+
+        H1 {
+            margin-bottom: 0.04in;
+            direction: ltr;
+            color: #000000;
+            text-align: center;
+            widows: 2;
+            orphans: 2;
+        }
+
+            H1.western {
+                font-family: "Arial", sans-serif;
+                font-size: 16pt;
+                so-language: en-GB;
+            }
+
+            H1.cjk {
+                font-family: "Times New Roman", serif;
+                font-size: 16pt;
+            }
+
+            H1.ctl {
+                font-family: "Arial", sans-serif;
+                font-size: 16pt;
+                so-language: ar-SA;
+            }
+
+        H2 {
+            margin-bottom: 0.04in;
+            direction: ltr;
+            color: #000000;
+            text-align: center;
+            widows: 2;
+            orphans: 2;
+        }
+
+            H2.western {
+                font-family: "Arial", sans-serif;
+                font-size: 14pt;
+                so-language: en-GB;
+                font-style: italic;
+            }
+
+            H2.cjk {
+                font-family: "Times New Roman", serif;
+                font-size: 14pt;
+                font-style: italic;
+            }
+
+            H2.ctl {
+                font-family: "Arial", sans-serif;
+                font-size: 14pt;
+                so-language: ar-SA;
+                font-style: italic;
+            }
+
+        H3 {
+            margin-bottom: 0.04in;
+            direction: ltr;
+            color: #000000;
+            widows: 2;
+            orphans: 2;
+        }
+
+            H3.western {
+                font-family: "Arial", sans-serif;
+                font-size: 13pt;
+                so-language: en-GB;
+            }
+
+            H3.cjk {
+                font-family: "Times New Roman", serif;
+                font-size: 13pt;
+            }
+
+            H3.ctl {
+                font-family: "Arial", sans-serif;
+                font-size: 13pt;
+                so-language: ar-SA;
+            }
+
+        H4 {
+            margin-top: 0in;
+            margin-bottom: 0in;
+            direction: ltr;
+            color: #000000;
+            text-align: justify;
+            widows: 2;
+            orphans: 2;
+        }
+
+            H4.western {
+                font-family: "Times", serif;
+                font-size: 11pt;
+                so-language: en-GB;
+                font-style: italic;
+                font-weight: normal;
+            }
+
+            H4.cjk {
+                font-family: "Times New Roman", serif;
+                font-size: 11pt;
+                font-style: italic;
+                font-weight: normal;
+            }
+
+            H4.ctl {
+                font-family: "Times", serif;
+                font-size: 10pt;
+                so-language: ar-SA;
+                font-style: italic;
+                font-weight: normal;
+            }
+
+        H5 {
+            margin-bottom: 0.17in;
+            direction: ltr;
+            color: #000000;
+            widows: 2;
+            orphans: 2;
+        }
+
+            H5.western {
+                font-family: "Times", serif;
+                font-size: 11pt;
+                so-language: en-GB;
+            }
+
+            H5.cjk {
+                font-family: "Times New Roman", serif;
+                font-size: 11pt;
+            }
+
+            H5.ctl {
+                font-family: "Times", serif;
+                so-language: ar-SA;
+            }
+
+        A:link {
+            color: #0000ff;
+        }
+
+        A:visited {
+            color: #800080;
+        }
+
+        A.western:visited {
+            so-language: en-US;
+        }
+
+        A.cjk:visited {
+            so-language: zh-CN;
+        }
+
+        A.ctl:visited {
+            so-language: hi-IN;
+        }
+        -->
+    </STYLE>
+</HEAD>
+<BODY LANG="en-US" TEXT="#000000" LINK="#0000ff" VLINK="#800080" DIR="LTR">
+    <H1 LANG="en-GB" CLASS="western"><FONT SIZE=3>RESUME</FONT></H1>
+    <P LANG="en-GB" CLASS="western">
+        <BR>
+    </P>
+    <P LANG="en-GB" CLASS="western">
+        <FONT FACE="Arial, sans-serif">
+            <FONT SIZE=3>
+                <B>
+                    @Model.FirstName @Model.LastName
+                </B>
+                (
+                @if (@Model.Jobs != null)
+                {
+                    foreach (var job in @Model.Jobs)
+                    {
+                        @job.JobName
+                    }
+                }
+                )
+            </FONT>
+        </FONT>
+    </P>
+    <P LANG="en-GB" CLASS="western" ALIGN=CENTER>
+        <BR>
+    </P>
+    <P LANG="en-GB" STYLE="margin-left: 1in; text-indent: -1in">
+        <FONT FACE="Arial, sans-serif"><FONT SIZE=2><B>Address:</B></FONT></FONT><FONT FACE="Arial, sans-serif">
+            <FONT SIZE=2>
+                @Model.City
+            </FONT>
+        </FONT>
+    </P>
+    <P LANG="en-GB" STYLE="margin-left: 1in; text-indent: -1in">
+        <FONT FACE="Arial, sans-serif"><FONT SIZE=2><B>Phone:</B></FONT></FONT><FONT FACE="Arial, sans-serif">
+            <FONT SIZE=2>
+                @Model.Phone
+            </FONT>
+        </FONT>
+    </P>
+    <P LANG="en-GB" STYLE="margin-left: 1in; text-indent: -1in">
+        <FONT FACE="Arial, sans-serif"><FONT SIZE=2><B>Date of Birth:</B></FONT></FONT><FONT FACE="Arial, sans-serif">
+            <FONT SIZE=2>
+                @Model.Birthday
+            </FONT>
+        </FONT>
+    </P>
+    <P LANG="en-GB" STYLE="margin-left: 1in; text-indent: -1in"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><B>Email:</B></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2>		</FONT></FONT><FONT COLOR="#0000ff"><U><A CLASS="western" HREF="mailto:chrisw.baker@telstra.com"><FONT COLOR="#000000"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>@Model.Email</FONT></FONT></FONT></A></U></FONT></P>
+    <P LANG="en-GB" STYLE="margin-left: 1in; text-indent: -1in">
+        <BR>
+    </P>
+    <H2 LANG="en-GB" CLASS="western" ALIGN=LEFT STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.01in; padding-left: 0in; padding-right: 0in; font-style: normal">
+        <FONT SIZE=2>PROFESSIONAL SKILLS</FONT>
+    </H2>
+    <P LANG="en-GB" CLASS="western" ALIGN=CENTER>
+        <BR>
+    </P>
+    @if (@Model.ProfessionalSkills != null)
+    {
+        foreach (var experience in @Model.ProfessionalSkills)
+        {
+            <P LANG="en-GB" ALIGN=JUSTIFY STYLE="margin-left: 1in; text-indent: -1in; margin-top: 0.08in">
+                <FONT FACE="Arial, sans-serif">
+                    <FONT SIZE=2>
+                        @experience.SkillName
+                    </FONT>
+                </FONT>
+            </P>
+        }
+    }
+
+    <H2 LANG="en-GB" CLASS="western" ALIGN=LEFT STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.01in; padding-left: 0in; padding-right: 0in; font-style: normal">
+        <FONT SIZE=2>KNOWLEDGE OF LANGUAGE</FONT>
+    </H2>
+    <P LANG="en-GB" CLASS="western" ALIGN=CENTER>
+        <BR>
+    </P>
+    @if (@Model.Languages != null)
+    {
+        foreach (var language in @Model.Languages)
+        {
+            <P LANG="en-GB" ALIGN=JUSTIFY STYLE="margin-left: 1in; text-indent: -1in; margin-top: 0.08in">
+                <FONT FACE="Arial, sans-serif">
+                    <FONT SIZE=2>
+                        @language.LanguageName - @language.LanguageLevelName
+                    </FONT>
+                </FONT>
+            </P>
+        }
+    }
+
+
+    <H2 LANG="en-GB" CLASS="western" ALIGN=LEFT STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.01in; padding-left: 0in; padding-right: 0in; font-style: normal">
+        <FONT SIZE=2>EDUCATION</FONT>
+    </H2>
+    <P LANG="en-GB" CLASS="western" ALIGN=CENTER>
+        <BR>
+    </P>
+    @if (@Model.Educations != null)
+    {
+        foreach (var education in @Model.Educations)
+        {
+            <P LANG="en-GB" ALIGN=JUSTIFY STYLE="margin-left: 1in; text-indent: -1in; margin-top: 0.08in">
+                <FONT FACE="Arial, sans-serif">
+                    <FONT SIZE=2>
+                        @{
+                            var startDate = education.StartDate.Value.ToString("MM.yyyy");
+                            var endDate = education.FinishDate.Value != null ? education.FinishDate.Value.ToString("MM.yyyy") : "today";
+                            var totaldays = ((education.FinishDate.Value != null ? education.FinishDate.Value : DateTime.Now) - education.StartDate.Value).TotalDays;
+                            int years = (int)Math.Truncate(totaldays / 365);
+                            var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
+                            var during = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
+                        }from @startDate to @endDate (@during)	- @education.SpecialityName, @education.EducationalInstitutionName
+                    </FONT>
+                </FONT>
+            </P>
+                                }
+                            }
+
+    <H2 LANG="en-GB" CLASS="western" ALIGN=LEFT STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.01in; padding-left: 0in; padding-right: 0in; font-style: normal">
+        <FONT SIZE=2>WORK EXPERIENCE</FONT>
+    </H2>
+    <P LANG="en-GB" CLASS="western" ALIGN=CENTER>
+        <BR>
+    </P>
+    @if (@Model.WorkExperiences != null)
+    {
+        foreach (var experience in @Model.WorkExperiences)
+        {
+            <P LANG="en-GB" ALIGN=JUSTIFY STYLE="margin-left: 1in; text-indent: -1in; margin-top: 0.08in">
+                <FONT FACE="Arial, sans-serif">
+                    <FONT SIZE=2>
+                        @{
+                            var startDate = experience.StartDate.Value.ToString("MM.yyyy");
+                            var endDate = experience.FinishDate.Value != null ? experience.FinishDate.Value.ToString("MM.yyyy") : "Today";
+                            var totaldays = ((experience.FinishDate.Value != null ? experience.FinishDate.Value : DateTime.Now) - experience.StartDate.Value).TotalDays;
+                            int years = (int)Math.Truncate(totaldays / 365);
+                            var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
+                            var duringExp = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
+                        }from @startDate to @endDate (@duringExp)	- @experience.PositionName, @experience.CompanyName
+                    </FONT>
+                </FONT>
+            </P>
+                                }
+                            }
+
+
+    <H2 LANG="en-GB" CLASS="western" ALIGN=LEFT STYLE="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.01in; padding-left: 0in; padding-right: 0in; font-style: normal">
+        <FONT SIZE=2>INTERVIEWS</FONT>
+    </H2>
+    <P LANG="en-GB" CLASS="western" ALIGN=CENTER>
+        <BR>
+    </P>
+    @if (@Model.Interviews != null)
+    {
+        foreach (var interview in @Model.Interviews)
+        {
+            <P LANG="en-GB" ALIGN=JUSTIFY STYLE="margin-left: 1in; text-indent: -1in; margin-top: 0.08in">
+                <FONT FACE="Arial, sans-serif">
+                    <FONT SIZE=2>
+                        @interview.InterviewDate.ToString("dd.MM.yyyy")	- @interview.Point points  ( @interview.Comment)
+                    </FONT>
+                </FONT>
+            </P>
+        }
+    }
+
+</BODY>
+</HTML>

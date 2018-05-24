@@ -160,10 +160,14 @@ label .fa {
                 <div id="nav-1-1-default-hor-left-underline" class="tab-content">
                     <!-- Edit Profile -->
                     <div class="tab-pane fade in active" id="home" role="tabpanel">
-                        <br />
+                        @using (Html.BeginForm("ShowCVInformation", "Home", new { personId = this.Model.PersonId }, FormMethod.Post, new { @class = "form-horizontal" }))
+                        {
+                            <button type="submit" class="btn text-uppercase btn-default" style="width:100%">Download CV</button>
 
+                        }
 
                         <div>
+                            <br />
                             <ul class="list-unstyled g-mb-30">
                                 <li>
                                     <div style="display: inline-block;">
@@ -498,50 +502,55 @@ label .fa {
                     </div>
                     <div id="menu2" class="tab-pane fade">
                         <div>
+                            @using (Html.BeginForm("ShowCVInformation", "Home", new { personId = this.Model.PersonId }, FormMethod.Post, new { @class = "form-horizontal" }))
+                            {
+                                <button type="submit" class="btn btn-primary btnConfirm">Download CV</button>
+                            }
                             <ul class="list-unstyled g-mb-30">
-                            @if (@Model.Interviews != null)
+                                
+                        @if (@Model.Interviews != null)
                             {
                                 foreach (var interview in @Model.Interviews)
                                 {
-                                <li>
-                                    <div style="display: inline-block;">
-                                        <h4>
-                                            <strong>Interview (@interview.InterviewDate.ToString("dd.MM.yyyy")) :</strong>&nbsp; &nbsp;
-                                            @if (this.User.IsInRole("HR manager"))
+                                                            <li>
+                                                                <div style="display: inline-block;">
+                                                                    <h4>
+                                                                        <strong>Interview (@interview.InterviewDate.ToString("dd.MM.yyyy")) :</strong>&nbsp; &nbsp;
+                                                                        @if (this.User.IsInRole("HR manager"))
                                             {
-                                                <a onclick="location.href='@Url.Action("Create", "Interview", new {id = @Model.PersonId}, null)'"><i class="fa fa-plus"></i></a>
-                                            }
-                                        </h4>
-                                    </div>
-                                    <ul class="list-unstyled g-mb-30">
-                                            <li>
-                                                <div style="display: inline-block;">
-                                                    <b>Point:</b> @interview.Point &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp; <b>Interviewer:</b> @this.User.Identity.Name
+                                                                            <a onclick="location.href='@Url.Action("Create", "Interview", new {id = @Model.PersonId}, null)'"><i class="fa fa-plus"></i></a>
+                                                        }
+                                                                    </h4>
+                                                                </div>
+                                                                <ul class="list-unstyled g-mb-30">
+                                                                    <li>
+                                                                        <div style="display: inline-block;">
+                                                                            <b>Point:</b> @interview.Point &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp; <b>Interviewer:</b> @this.User.Identity.Name
 
-                                                    
-                                                </div>
 
-                                                <br />
-                                                @interview.Comment
+                                                                        </div>
 
-                                                @if (this.User.IsInRole("Developer") || this.User.IsInRole("HR manager"))
+                                                                        <br />
+                                                                        @interview.Comment
+
+                                                                        @if (this.User.IsInRole("Developer") || this.User.IsInRole("HR manager"))
                                                 {
-                                                    <div style="display: inline-block; float: right;" class="align-top">
-                                                        <a onclick="location.href='@Url.Action("Edit", "Interview", new {id = interview.InterviewId}, null)'"><i class="fa fa-edit"></i></a>
-                                                        &nbsp;
-                                                        <a onclick="location.href='@Url.Action("Delete", "Interview", new {idPerson = interview.PersonId, idInterview = interview.InterviewId}, null)'"><i class="fa fa-trash"></i></a>
+                                                            <div style="display: inline-block; float: right;" class="align-top">
+                                                                <a onclick="location.href='@Url.Action("Edit", "Interview", new {id = interview.InterviewId}, null)'"><i class="fa fa-edit"></i></a>
+                                                                &nbsp;
+                                                                <a onclick="location.href='@Url.Action("Delete", "Interview", new {idPerson = interview.PersonId, idInterview = interview.InterviewId}, null)'"><i class="fa fa-trash"></i></a>
 
-                                                    </div>
-                                                }
-                                                <hr style="color: dimgray" />
-                                            </li>
-                                    </ul>
-                                </li>
+                                                            </div>
+                                                        }
+                                                                        <hr style="color: dimgray" />
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
 
                                                             }
                                                         }
-                            </ul>
-                        </div>
+                        </ul>
+                    </div>
 
 
 
