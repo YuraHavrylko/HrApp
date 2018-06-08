@@ -1,7 +1,8 @@
 # HrApp
 
 HrApp is a web application for resource managers.
-http://sommeapp.somee.com
+http://hrapp.gearhostpreview.com/
+http://hrapp.somee.com/
 
 ## Getting Started
 
@@ -9,9 +10,9 @@ These instructions will get you a copy of the project up and be running on your 
 
 ### Prerequisites
 
-Visual Studio Community edition 2015 or later
-MS SQL Server 2014 or later
-npm
+1. Visual Studio Community edition 2015 or later
+2. MS SQL Server 2014 or later
+3. npm
 
 ### Installing
 
@@ -33,7 +34,7 @@ npm
 
 * [ASP.NET 4.6](https://www.asp.net/get-started) - The web framework used.
 * [MS SQL Server 2014](https://www.microsoft.com/ru-ru/download/details.aspx?id=42299) - The database used.
-* [Bower](https://bower.io/) - Frontend dependency Management.
+* [NPM](https://www.npmjs.com/) - Frontend dependency Management.
 * [Bootstrap](https://getbootstrap.com/) - The html framework used.
 
 ## Authors
@@ -45,4 +46,4 @@ See also the list of [contributors](https://github.com/YuraHavrylko/HrApp/contri
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details
