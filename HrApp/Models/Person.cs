@@ -45,14 +45,15 @@ namespace HrApp.Models
         public int? Salary { get; set; }
 
         [Required]
-        public DateTime Birthday { get; set; }
+        public DateTime? Birthday { get; set; }
 
         [MaxLength(50)]
         public string City { get; set; }
 
         [DisplayName("Work expireance")]
         public int? WorkExpireance { get; set; }
-
+        [MaxLength(300)]
+        public string CVfile { get; set; }
         public ICollection<Education> Educations { get; set; }
 
         public ICollection<Interview> Interviews { get; set; }

@@ -7,6 +7,8 @@ using HrApp.Models;
 
 namespace HrApp.Repositories
 {
+    using System;
+
     public class LanguageRepository : DbExecuteProvider, IRepository<Language>
     {
         public LanguageRepository(IConnectionFactory connectionFactory) : base(connectionFactory)
@@ -35,6 +37,11 @@ namespace HrApp.Repositories
             };
 
             return CustomExecuteReader<Language>("sp_GetLanguagesWhere", parameters).ToList();
+        }
+
+        public IEnumerable<Language> Get(Func<Language, bool> predicate)
+        {
+            throw new NotImplementedException();
         }
 
         public void Add(Language language)

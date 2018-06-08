@@ -1,0 +1,88 @@
+﻿@*@using (Ajax.BeginForm("UploadImage", "Manage", new AjaxOptions() { }, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>Photo</legend>
+        <div class="editor-label">
+            <label for="profile">FileName:</label>
+        </div>
+        <div class="editor-field">
+            <input name="Profile" id="profile" type="file" />
+        </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}*@
+<style>
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+
+</style>
+@using (Html.BeginForm("UploadImage", "Manage", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Upload image</h4>
+    </div>
+    <div class="modal-body">
+        <div class="input-group">
+            <span class="input-group-btn">
+                <button id="fake-file-button-browse" type="button" class="btn btn-info btn-raised">Browse
+                </button>
+            </span>
+            <input type="file" id="imgInp" name="userImage" style="display:none">
+            <input type="text" id="fake-file-input-name" disabled="disabled" placeholder="File not selected" class="form-control">
+            
+        </div>
+        <img id="blah" src="~/wwwroot/image/UserImage/default.png" class="center"/>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+
+
+}
+
+<script type="text/javascript">
+    // Fake file upload
+    document.getElementById('fake-file-button-browse').addEventListener('click', function() {
+        document.getElementById('imgInp').click();
+    });
+
+    document.getElementById('imgInp').addEventListener('change', function() {
+        document.getElementById('fake-file-input-name').value = this.value;
+        document.getElementById('fake-file-input-name').value.replace("C:\\fakepath\\", "");
+        $('#blah').attr('src', this.value);
+	
+        document.getElementById('fake-file-button-upload').removeAttribute('disabled');
+    });
+</script>
+<script>
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#imgInp").change(function() {
+        readURL(this);
+    });
+   
+</script>

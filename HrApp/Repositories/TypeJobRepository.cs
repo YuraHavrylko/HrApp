@@ -7,6 +7,8 @@ using HrApp.Models;
 
 namespace HrApp.Repositories
 {
+    using System;
+
     public class TypeJobRepository : DbExecuteProvider, IRepository<TypeJob>
     {
         public TypeJobRepository(IConnectionFactory connectionFactory) : base(connectionFactory)
@@ -34,6 +36,11 @@ namespace HrApp.Repositories
             };
 
             return CustomExecuteReader<TypeJob>("sp_GetTypeJobsWhere", parameters).ToList();
+        }
+
+        public IEnumerable<TypeJob> Get(Func<TypeJob, bool> predicate)
+        {
+            throw new NotImplementedException();
         }
 
         public void Add(TypeJob typeJob)

@@ -12,6 +12,8 @@ namespace HrApp.App_Start
 
     using HrApp.Contract.Repositories;
     using HrApp.Infrastructure;
+    using HrApp.Models;
+    using HrApp.Repositories;
 
     public class AutofacConfig
     {
@@ -21,6 +23,7 @@ namespace HrApp.App_Start
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
             builder.RegisterType<UnitOfWork>().WithParameter("connection", "HRDataBase");
+            builder.RegisterType<GenericRepository<RoleClaim>>().WithParameter("connection", "HRDataBase");
 
             var container = builder.Build();
 

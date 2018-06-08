@@ -7,6 +7,8 @@ using HrApp.Models;
 
 namespace HrApp.Repositories
 {
+    using System;
+
     public class InterviewRepository : DbExecuteProvider, IRepository<Interview>
     {
         public InterviewRepository(IConnectionFactory connectionFactory) : base(connectionFactory)
@@ -33,6 +35,11 @@ namespace HrApp.Repositories
             };
 
             return CustomExecuteReader<Interview>("sp_GetInterviewsWhere", parameters).ToList();
+        }
+
+        public IEnumerable<Interview> Get(Func<Interview, bool> predicate)
+        {
+            throw new NotImplementedException();
         }
 
         public void Add(Interview interview)

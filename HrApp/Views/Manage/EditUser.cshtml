@@ -1,0 +1,116 @@
+﻿@using System.Web.Mvc.Html
+@using HrApp.Helpers.Extensions
+@model HrApp.Models.Person
+@using (Ajax.BeginForm("EditUser", "Manage", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "modal-default-content", }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">User edit</h4>
+    </div>
+    <div class="modal-body">
+
+        <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.FirstName, "has-error")">
+            @Html.LabelFor(x => x.FirstName, new { @class = "col-sm-3 control-label" })
+
+            <div class="col-sm-9">
+                @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", @type = "text" })
+                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.FirstName)</span>
+            </div>
+        </div>
+
+        <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.LastName, "has-error")">
+            @Html.LabelFor(x => x.LastName, new { @class = "col-sm-3 control-label" })
+
+            <div class="col-sm-9">
+                @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", @type = "text" })
+                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.LastName)</span>
+            </div>
+        </div>
+
+        <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.Birthday, "has-error")">
+            @Html.LabelFor(x => x.Birthday, new { @class = "col-sm-3 control-label" })
+
+            <div class="col-sm-9">
+               @* @Html.TextBoxFor(model => model.Birthday, new { @class = "form-control", @id= "date" , type="text", placeholder= "__/__/____" })*@
+                <input type="text" name="Birthday" id= "date" class = "form-control" value="@(Model.Birthday?.ToString("dd/MM/yyyy"))"/>
+                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.Birthday)</span>
+            </div>
+        </div>
+
+        <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.City, "has-error")">
+            @Html.LabelFor(x => x.City, new { @class = "col-sm-3 control-label" })
+
+            <div class="col-sm-9">
+                @Html.TextBoxFor(model => model.City, new { @class = "form-control", @type = "text" })
+                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.City)</span>
+            </div>
+        </div>
+
+        @*<div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.Email, "has-error")">
+            @Html.LabelFor(x => x.Email, new { @class = "col-sm-3 control-label" })
+
+            <div class="col-sm-9">
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @type = "email" })
+                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.Email)</span>
+            </div>
+        </div>*@
+
+
+        <div class="form-group has-feedback  @Html.AddClassIfPropertyInError(x => x.Phone, "has-error")">
+            @Html.LabelFor(x => x.Phone, new { @class = "col-sm-3 control-label" })
+
+            <div class="col-sm-9">
+                @Html.TextBoxFor(model => model.Phone, new { @class = "form-control", @id="phone",@type="phone" , placeholder= "+(___) __ ____ ___" })
+                <span style="display: block" class="help-block">@Html.ValidationMessageFor(model => model.Phone)</span>
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.PersonId)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger error-block text-center", }, null)
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+
+
+}
+
+<script>
+    $(document).ready(function(){
+        $('#date').mask('00/00/0000', { placeholder: "__/__/____" });
+        $('#phone').mask('+(000) 00 0000 000', { placeholder: "+(___) __ ____ ___" });
+    });
+</script>
+
+
+
+
+
+
+@*<h2>@ViewBag.Title.</h2>
+
+    @using (Html.BeginForm("AddPhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Add a phone number</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Number, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Number, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Submit" />
+            </div>
+        </div>
+    }*@
+
+

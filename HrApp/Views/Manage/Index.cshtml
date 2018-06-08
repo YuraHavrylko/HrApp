@@ -1,0 +1,170 @@
+﻿@using HrApp.Infrastructure
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin
+@model HrApp.Models.ApplicationUser
+@{
+    ViewBag.Title = "Manage";
+    var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+    var roleManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationRoleManager>();
+    List<Tuple<DateTime?, string, string>> list = (List<Tuple<DateTime?, string, string>>)ViewData["Timeline"];
+
+    string[] colors = new[] { "bg-blue", "bg-aqua", "bg-navy", "bg-green", "bg-orange", "bg-red", "bg-maroon", "bg-purple", "bg-yellow" };
+    Random rnd = new Random();
+
+}
+
+<div class="content-wrapper" style="min-height: 1228px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            User Profile
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Manage</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-3">
+
+                <!-- Profile Image -->
+                <div class="box box-primary">
+                    <div class="box-body box-profile">
+                        <img class="profile-user-img img-responsive img-circle" src="@(File.Exists(Path.Combine(Server.MapPath("~/wwwroot/image/UserImage"),  Model.Id +".jpg"))? "/wwwroot/image/UserImage/"+ Model.Id +".jpg" : "/wwwroot/image/UserImage/default.png")" alt="User profile picture">
+
+                        <h3 class="profile-username text-center">@Model.FirstName @Model.LastName</h3>
+
+                        @foreach (var role in Model.Roles)
+                        {
+                            <p class="text-muted text-center">@roleManager.FindById(role.RoleId).Name</p>
+                        }
+
+                        @Ajax.ActionLink("Upload image", "UploadImage", null,
+                            new AjaxOptions { UpdateTargetId = "modal-default-content",  }, new { @class = "btn btn-primary btn-block show-modal" })
+                        @Ajax.ActionLink("Change password", "ChangePassword", null,
+                                 new AjaxOptions { UpdateTargetId = "modal-default-content",  }, new { @class = "btn btn-primary btn-block show-modal" })
+                        @Ajax.ActionLink("Edit user", "EditUser", null,
+                            new AjaxOptions { UpdateTargetId = "modal-default-content",  }, new { @class = "btn btn-primary btn-block show-modal"})
+                        
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+                <!-- About Me Box -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">About Me</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <strong><i class="fa fa-envelope margin-r-5"></i> Email</strong>
+
+                        <p class="text-muted">
+                            @Model.Email
+                        </p>
+
+                        <hr>
+                        
+                        @if (Model.PersonColumn.Item1.Phone != null)
+                        {
+                            <strong><i class="fa fa-phone margin-r-5"></i> Phone number</strong>
+
+                            <p class="text-muted">@Model.PersonColumn.Item1.Phone</p>
+
+                            <hr>
+                        }
+                        @if (Model.PersonColumn.Item1.City != null)
+                        {
+                            <strong><i class="fa fa-university margin-r-5"></i> City</strong>
+
+                            <p class="text-muted">@Model.PersonColumn.Item1.City</p>
+
+                            <hr>
+                        }
+                        @if (Model.PersonColumn.Item1?.Birthday != null)
+                        {
+                            <strong><i class="fa fa-birthday-cake margin-r-5"></i> Age</strong>
+
+                            <p class="text-muted">@(new DateTime((DateTime.Now - Model.PersonColumn.Item1.Birthday.Value).Ticks).Year) years (@Model.PersonColumn.Item1.Birthday.Value.ToString("d"))</p>
+
+                            <hr>
+                        }
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        @*<li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>*@
+                        <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
+                        @*<li><a href="#settings" data-toggle="tab">Settings</a></li>*@
+                    </ul>
+                    <div class="tab-content">
+                        @*<div class="active tab-pane" id="activity">
+                            
+                        </div>*@
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane active " id="timeline">
+                            <ul class="timeline">
+                                @foreach (var item in list)
+                                {
+                                    var index = rnd.Next(colors.Length);
+                                    <!-- timeline time label -->
+                                    <li class="time-label">
+                                        <span class="@(colors[index])">
+                                            @(item.Item1.Value.Year == DateTime.Now.Year? item.Item1.Value.ToString("dd MMMM") : item.Item1.Value.ToString("dd MMMM yyyy"))
+                                        </span>
+                                    </li>
+                                    <!-- /.timeline-label -->
+
+                                    <!-- timeline item -->
+                                    <li>
+                                        <!-- timeline icon -->
+                                        <i class="fa fa-map-marker @(colors[index])"></i>
+                                        <div class="timeline-item">
+                                            <span class="time"><i class="fa fa-clock-o"></i> @item.Item1.Value.ToString("t")</span>
+
+                                            <h3 class="timeline-header">@item.Item2</h3>
+
+                                            <div class="timeline-body">
+                                                @item.Item3
+                                            </div>
+
+                                       
+                                        </div>
+                                    </li>
+                                    <!-- END timeline item -->
+                                }
+                            
+
+                                
+
+                            </ul>
+                        <!-- /.tab-pane -->
+                    </div>
+                    </div>
+                    <!-- /.tab-content -->
+                </div>
+                <!-- /.nav-tabs-custom -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+</div>
+
+@section scripts {
+
+
+    <script src="/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/wwwroot/js/account.js"></script>
+}

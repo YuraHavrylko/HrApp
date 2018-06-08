@@ -15,6 +15,10 @@ using Microsoft.AspNet.Identity;
 
 namespace HrApp.Controllers
 {
+    using Rotativa;
+    using System.Globalization;
+    using System.Threading.Tasks;
+
     [Authorize]
     public class HomeController : Controller
     {
@@ -39,31 +43,28 @@ namespace HrApp.Controllers
                 return HttpContext.GetOwinContext().Authentication;
             }
         }
-        [Authorize]
+
+        [ClaimsAccess(ClaimType = "access", Value = "hr:index")]
         public ActionResult Index(int page = 1, int count = 10)
         {
-            if (this.User.Identity.IsAuthenticated)
-            {
-                var person = new PersonSearchModel();
-                ViewBag.Count = count;
-                ViewBag.Page = page;
-                person.TypeLanguages = _unitOfWork.LanguagesNameRepository.GetAll().ToList();
-                person.LanguageLevels = _unitOfWork.LanguageLevelRepository.GetAll().ToList();
-                person.TypeJobsNames = _unitOfWork.TypeJobsNameRepository.GetAll().ToList();
-                person.ApplicationUserId = this.User.Identity.GetUserId();
 
-                ViewBag.CountPerson = _unitOfWork.PersonRepository.GetCount(User.Identity.GetUserId());
-                ViewBag.PersonFind = person;
-                var persons = _unitOfWork.PersonRepository.GetAllPersonsByHrId(person.ApplicationUserId, page, count);
-               // var persons = _unitOfWork.PersonRepository.GetAll(page, count);
-                return View("Index", new BigPersonModel() { PersonSearchModel = person, Persons = persons });
-            }
-            else
-            {
-                return this.RedirectToAction("Login");
-            }
+            var person = new PersonSearchModel();
+            ViewBag.Count = count;
+            ViewBag.Page = page;
+            person.TypeLanguages = _unitOfWork.LanguagesNameRepository.GetAll().ToList();
+            person.LanguageLevels = _unitOfWork.LanguageLevelRepository.GetAll().ToList();
+            person.TypeJobsNames = _unitOfWork.TypeJobsNameRepository.GetAll().ToList();
+            person.ApplicationUserId = this.User.Identity.GetUserId();
+
+            ViewBag.CountPerson = _unitOfWork.PersonRepository.GetCount(User.Identity.GetUserId());
+            ViewBag.PersonFind = person;
+            var persons = _unitOfWork.PersonRepository.GetAllPersonsByHrId(person.ApplicationUserId, page, count);
+            // var persons = _unitOfWork.PersonRepository.GetAll(page, count);
+            return View("Index", new BigPersonModel() { PersonSearchModel = person, Persons = persons });
+
         }
-        
+
+        [ClaimsAccess(ClaimType = "access", Value = "hr:index")]
         public ActionResult FullInformation(int id)
         {
             var person = _unitOfWork.PersonRepository.Get(id);
@@ -73,6 +74,7 @@ namespace HrApp.Controllers
 
         //  
         // GET: /CRUD/Create  
+        [ClaimsAccess(ClaimType = "access", Value = "hr:index")]
         public ActionResult Create()
         {
             return View();
@@ -81,6 +83,7 @@ namespace HrApp.Controllers
         //  
         // POST: /CRUD/Create  
         [HttpPost]
+        [ClaimsAccess(ClaimType = "access", Value = "hr:index")]
         public ActionResult Create(Person person)
         {
             if (ModelState.IsValid)
@@ -94,6 +97,7 @@ namespace HrApp.Controllers
         }
 
         // GET: Education/Edit/5
+        [ClaimsAccess(ClaimType = "access", Value = "hr:index")]
         public ActionResult Edit(int id)
         {
             var education = _unitOfWork.PersonRepository.Get(id);
@@ -102,6 +106,7 @@ namespace HrApp.Controllers
 
         // POST: Education/Edit/5
         [HttpPost]
+        [ClaimsAccess(ClaimType = "access", Value = "hr:index")]
         public ActionResult Edit(Person person)
         {
             if (ModelState.IsValid)
@@ -114,12 +119,14 @@ namespace HrApp.Controllers
         }
 
         // GET: Education/Delete/5
+        [ClaimsAccess(ClaimType = "access", Value = "hr:index")]
         public ActionResult Delete(int id)
         {
             _unitOfWork.PersonRepository.Delete(id);
             return RedirectToAction("Index", "Home");
         }
 
+        [ClaimsAccess(ClaimType = "access", Value = "hr:index")]
         public ActionResult Filter(BigPersonModel person = null, int page = 1, int count = 10)
         {
 
@@ -143,6 +150,215 @@ namespace HrApp.Controllers
             person.Persons = persons;
             return View("Index", person);
         }
-        
-    }
+
+        [ClaimsAccess(ClaimType = "access", Value = "hr:dashboard")]
+        public ActionResult Dashboard()
+        {
+            ViewData["PersonCount"] = this._unitOfWork.PersonRepository.GetCountWhere(
+                new PersonSearchModel() { ApplicationUserId = User.Identity.GetUserId() });
+            var persons = this._unitOfWork.PersonRepository.GetAllPersonsByHrId(User.Identity.GetUserId(),1, Int32.MaxValue);
+            var interviewCount = 0;
+            var personEducCount = 0;
+            var personExpCount = 0;
+
+
+            foreach (var person in persons)
+            {
+                interviewCount += person.Interviews.Count();
+                if (person.Educations.Count > 0)
+                {
+                    personEducCount++;
+                }
+                if (person.WorkExperiences.Count > 0)
+                {
+                    personExpCount++;
+                }
+            }
+
+           
+            ViewData["InterviewCount"] = interviewCount;
+            ViewData["PersonEducCount"] = personEducCount;
+            ViewData["PersonExpCount"] = personExpCount;
+            return View(persons);
+        }
+
+        [HttpPost]
+        [ClaimsAccess(ClaimType = "access", Value = "hr:dashboard")]
+        public async Task<JsonResult> GroupPersonAge()
+        {
+            var persons = this._unitOfWork.PersonRepository.GetAllPersonsByHrId(
+                User.Identity.GetUserId(), 1, Int32.MaxValue);
+            var personAge = new Dictionary<string, int>();
+            foreach (var person in persons)
+            {
+                try
+                {
+                    if (person.Birthday.HasValue)
+                    {
+                        var age = new DateTime((DateTime.Now - person.Birthday.Value).Ticks).Year;
+                        if (personAge.ContainsKey(age.ToString()))
+                        {
+                            personAge[age.ToString()]++;
+                        }
+                        else
+                        {
+                            personAge.Add(age.ToString(), 1);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+
+            return Json(personAge);
+        }
+
+        [HttpPost]
+        [ClaimsAccess(ClaimType = "access", Value = "hr:dashboard")]
+        public async Task<JsonResult> GroupPersonExpireance()
+        {
+            var persons = this._unitOfWork.PersonRepository.GetAllPersonsByHrId(
+                User.Identity.GetUserId(), 1, Int32.MaxValue);
+            var personExp = new Dictionary<string, int>();
+            foreach (var person in persons)
+            {
+                var expCount = 0;
+                foreach (var experience in person.WorkExperiences)
+                {
+                    expCount =+ new DateTime((experience.FinishDate.Value - experience.StartDate.Value).Ticks).Month;
+                }
+                
+                if (personExp.ContainsKey(expCount.ToString()))
+                {
+                    personExp[expCount.ToString()]++;
+                }
+                else
+                {
+                    personExp.Add(expCount.ToString(), 1);
+                }
+            }
+
+            return Json(personExp);
+        }
+
+        [ClaimsAccess(ClaimType = "access", Value = "hr:dashboard")]
+        public async Task<JsonResult> GroupPersonJob()
+        {
+            var persons = this._unitOfWork.PersonRepository.GetAllPersonsByHrId(
+                User.Identity.GetUserId(), 1, Int32.MaxValue);
+            var personAge = new Dictionary<string, int>();
+            foreach (var person in persons)
+            {
+                try
+                {
+                    var jobTypesPerson = person.PersonTypeJobs;
+                    foreach (var  job in jobTypesPerson)
+                    {
+                        if (personAge.ContainsKey(job.TypeJobName))
+                        {
+                            personAge[job.TypeJobName]++;
+                        }
+                        else
+                        {
+                            personAge.Add(job.TypeJobName, 1);
+                        }
+                    }
+                    
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+
+            return Json(personAge);
+        }
+
+        [HttpPost]
+        [ClaimsAccess(ClaimType = "access", Value = "hr:dashboard")]
+        public async Task<JsonResult> GroupUser()
+        {
+            var users = new Dictionary<string, int>();
+            for (int i = 30; i > 0; i--)
+            {
+                users.Add(DateTime.Now.AddDays((double)-i).ToString("d"), 0);
+            }
+
+            var persons = this._unitOfWork.PersonRepository.GetAllPersonsByHrId(
+                User.Identity.GetUserId(), 1, Int32.MaxValue);
+            foreach (var person in persons)
+            {
+                try
+                {
+                    foreach (var job in person.Interviews)
+                    {
+                        users[job.InterviewDate.ToString("d")]++;
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+
+            return Json(users);
+        }
+
+        [HttpPost]
+        [ClaimsAccess(ClaimType = "access", Value = "hr:dashboard")]
+        public async Task<JsonResult> Calendar()
+        {
+            var events = new List<Tuple<string, DateTime>>();
+            var persons = this._unitOfWork.PersonRepository.GetAllPersonsByHrId(
+                User.Identity.GetUserId(), 1, Int32.MaxValue);
+            foreach (var person in persons)
+            {
+                try
+                {
+                    var interview = person.Interviews;
+                    foreach (var job in interview)
+                    {
+                        events.Add(new Tuple<string, DateTime>("Interview with " + person.FirstName + " " + person.LastName, job.InterviewDate.AddHours(3)));
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+
+            return Json(events);
+        }
+
+        [HttpPost]
+        public ActionResult ShowCVInformation(int personId)
+        {
+            if (personId == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            var person = _unitOfWork.PersonRepository.Get(personId);
+            var report = new PartialViewAsPdf("_CVPartial", person);
+            byte[] applicationPDFData = report.BuildPdf(ControllerContext);
+
+            
+            var file  = this._unitOfWork.PersonRepository.ConvertCVToPdf(personId, applicationPDFData);
+
+            if (!System.IO.File.Exists(file))
+            {
+               return HttpNotFound();
+            }
+
+            var fileBytes = System.IO.File.ReadAllBytes(file);
+            var response = new FileContentResult(fileBytes, "application/octet-stream")
+            {
+                FileDownloadName = "CV.pdf"
+            };
+            return response;
+        }
+   }
 }

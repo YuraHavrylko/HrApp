@@ -8,7 +8,7 @@ using HrApp.Models;
 
 namespace HrApp.Controllers
 {
-    [Authorize]
+    [ClaimsAccess(ClaimType = "access", Value = "typejob:name")]
     public class TypeJobNameController : Controller
     {
         private UnitOfWork _unitOfWork;

@@ -1,0 +1,100 @@
+﻿@model System.Collections.Generic.IEnumerable<HrApp.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var index = 0;
+}
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <ol class="breadcrumb">
+            <li><a href="/Home"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="/Admin"><i class="fa fa-dashboard"></i> Admin</a></li>
+            <li class="active">Users</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-body">
+                        <p class="text-center" style="font-size: 25px">
+                            Users
+                        </p>
+                        <div class="box-body">
+                            <div class="table-responsive">
+                                <table id="users" class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>First name</th>
+                                        <th>Last name</th>
+                                        <th>Email</th>
+                                        <th>Email confirmed</th>
+                                        <th>Phone number</th>
+                                        <th>Lockout end date</th>
+                                        <th style="width: 50px"></th>
+                                        <th style="width: 50px"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach (var role in Model)
+                                    {
+                                        <tr>
+                                            <td style="vertical-align: middle;">@(++index)</td>
+                                            <td style="vertical-align: middle;">@role.FirstName</td>
+                                            <td style="vertical-align: middle;">@role.LastName</td>
+                                            <td style="vertical-align: middle;">@role.Email</td>
+                                            <td style="vertical-align: middle;">@role.EmailConfirmed</td>
+                                            <td style="vertical-align: middle;">@role.PhoneNumber</td>
+                                            <td style="vertical-align: middle;">@role.LockoutEndDateUtc</td>
+
+                                            <td><button class="btn btn-sm btn-warning edit-user" value="@role.Id">Edit</button></td>
+                                            <td><button class="btn btn-sm btn-danger delete-user" value="@role.Id">Delete</button></td>
+
+                                        </tr>
+                                    }
+
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>First name</th>
+                                        <th>Last name</th>
+                                        <th>Email</th>
+                                        <th>Email confirmed</th>
+                                        <th>Phone number</th>
+                                        <th>Lockout end date</th>
+                                        <th style="width: 50px"></th>
+                                        <th style="width: 50px"></th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            </div>
+                        <div class="box-footer clearfix">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+@section scripts {
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
+
+    <script src="~/wwwroot/js/admin.js"></script>
+}

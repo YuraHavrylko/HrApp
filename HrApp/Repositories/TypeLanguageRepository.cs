@@ -40,6 +40,11 @@ namespace HrApp.Repositories
             return CustomExecuteReader<TypeLanguage>("sp_GetTypeLanguageWhere", parameters).ToList();
         }
 
+        public IEnumerable<TypeLanguage> Get(Func<TypeLanguage, bool> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
         //stored procedure not realized 
         public void Add(TypeLanguage languagesName)
         {

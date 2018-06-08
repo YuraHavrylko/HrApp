@@ -40,6 +40,11 @@ namespace HrApp.Repositories
             return CustomExecuteReader<TypeJobsName>("sp_GetTypeJobsNameWhere", parameters).ToList();
         }
 
+        public IEnumerable<TypeJobsName> Get(Func<TypeJobsName, bool> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
         //stored procedure not realized 
         public void Add(TypeJobsName typeJobsName)
         {

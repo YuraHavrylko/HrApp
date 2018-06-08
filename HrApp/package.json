@@ -13,7 +13,6 @@
     "gulp-htmlmin": "^3.0.0",
     "gulp-uglify": "^3.0.0",
     "merge-stream": "^1.0.1",
-    "npm-git-install": "^0.3.0",
     "webpack": "^2.5.1"
   },
   "dependencies": {
@@ -23,10 +22,8 @@
     "jquery-validation-unobtrusive": "3.2.9",
     "modernizr": "3.4.0",
     "respond": "*",
-    "ripples": "*"
-  },
-  "scripts": {
-    "install": "npm-git install"
+    "ripples": "*",
+    "croppie": "2.6.2"
   },
   "gitDependencies": {
     "material-admin-lte": "https://github.com/DucThanhNguyen/MaterialAdminLTE.git#master"

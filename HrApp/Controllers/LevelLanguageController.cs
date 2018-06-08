@@ -8,7 +8,7 @@ using HrApp.Models;
 
 namespace HrApp.Controllers
 {
-    [Authorize]
+    [ClaimsAccess(ClaimType = "access", Value = "language:level")]
     public class LevelLanguageController : Controller
     {
         private UnitOfWork _unitOfWork;

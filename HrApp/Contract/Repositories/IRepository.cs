@@ -3,6 +3,8 @@ using HrApp.Models;
 
 namespace HrApp.Contract.Repositories
 {
+    using System;
+
     public interface IRepository<T>
     {
         T Get(int id);
@@ -10,6 +12,8 @@ namespace HrApp.Contract.Repositories
         IEnumerable<T> GetAll();
 
         IEnumerable<T> GetAllWhere(T person, int page, int count);
+
+        IEnumerable<T> Get(Func<T, bool> predicate);
 
         void Add(T person);
 

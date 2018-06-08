@@ -1,4 +1,4 @@
-﻿/// <binding BeforeBuild='min' Clean='clean' />
+/// <binding Clean='clean, min' />
 "use strict";
 
 var gulp = require("gulp"),
@@ -12,14 +12,15 @@ var paths = {
 };
 
 paths.js = [
-    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css",
-    "https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css",
+
     "./node_modules/jquery/dist/jquery.js",
     "./node_modules/bootstrap/dist/js/bootstrap.js",
     "./node_modules/ripples/dist/js/ripple.js",
     "./node_modules/admin-lte/dist/js/material.js",
     "./node_modules/admin-lte/dist/js/adminlte.js",
-    "./node_modules/admin-lte/dist/js/demo.js"
+    "./node_modules/admin-lte/dist/js/demo.js",
+    //"./node_modules/datatables.net/js/jquery.dataTables.js",
+    //"./node_modules/datatables.net-bs/js/dataTables.bootstrap.js"
 ];
 paths.minJs = paths.webroot + "js/**/*.min.js";
 paths.css = [
@@ -28,7 +29,8 @@ paths.css = [
     "./node_modules/admin-lte/dist/css/bootstrap-material-design.min.css",
     "./node_modules/ripples/dist/css/ripple.min.css",
     "./node_modules/admin-lte/dist/css/MaterialAdminLTE.min.css",
-    "./node_modules/admin-lte/dist/css/skins/all-md-skins.min.css"
+    "./node_modules/admin-lte/dist/css/skins/all-md-skins.min.css",
+    "./node_modules/datatables.net-bs/css/dataTables.bootstrap.css"
 ];
 paths.minCss = paths.webroot + "css/**/*.min.css";
 paths.concatJsDest = paths.webroot + "js/site.min.js";
