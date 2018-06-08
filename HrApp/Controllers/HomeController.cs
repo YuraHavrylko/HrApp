@@ -156,29 +156,29 @@ namespace HrApp.Controllers
         {
             ViewData["PersonCount"] = this._unitOfWork.PersonRepository.GetCountWhere(
                 new PersonSearchModel() { ApplicationUserId = User.Identity.GetUserId() });
-            var persons = this._unitOfWork.PersonRepository.GetAllPersonsByHrId(
-                User.Identity.GetUserId());
+            var persons = this._unitOfWork.PersonRepository.GetAllPersonsByHrId(User.Identity.GetUserId(),1, Int32.MaxValue);
             var interviewCount = 0;
             var personEducCount = 0;
             var personExpCount = 0;
-            
+
+
             foreach (var person in persons)
             {
-                interviewCount += this._unitOfWork.InterviewRepository.GetAllWhere(new Interview() { PersonId = person.PersonId.GetValueOrDefault()}).Count();
-                if (this._unitOfWork.EducationRepository.GetAll().Count(education => education.PersonId == person.PersonId) > 0)
+                interviewCount += person.Interviews.Count();
+                if (person.Educations.Count > 0)
                 {
                     personEducCount++;
                 }
-                if (this._unitOfWork.WorkExpireanceRepository.GetAll().Count(education => education.PersonId == person.PersonId) > 0)
+                if (person.WorkExperiences.Count > 0)
                 {
                     personExpCount++;
                 }
-
             }
 
+           
             ViewData["InterviewCount"] = interviewCount;
-            ViewData["PersonEducCount"] = personEducCount; 
-            ViewData["PersonExpCount"] = personExpCount; 
+            ViewData["PersonEducCount"] = personEducCount;
+            ViewData["PersonExpCount"] = personExpCount;
             return View(persons);
         }
 
@@ -187,7 +187,7 @@ namespace HrApp.Controllers
         public async Task<JsonResult> GroupPersonAge()
         {
             var persons = this._unitOfWork.PersonRepository.GetAllPersonsByHrId(
-                User.Identity.GetUserId());
+                User.Identity.GetUserId(), 1, Int32.MaxValue);
             var personAge = new Dictionary<string, int>();
             foreach (var person in persons)
             {
@@ -220,14 +220,12 @@ namespace HrApp.Controllers
         public async Task<JsonResult> GroupPersonExpireance()
         {
             var persons = this._unitOfWork.PersonRepository.GetAllPersonsByHrId(
-                User.Identity.GetUserId());
+                User.Identity.GetUserId(), 1, Int32.MaxValue);
             var personExp = new Dictionary<string, int>();
             foreach (var person in persons)
             {
-                var exp = this._unitOfWork.WorkExpireanceRepository.GetAllWhere(
-                    new WorkExperience() { PersonId = person.PersonId.GetValueOrDefault() });
                 var expCount = 0;
-                foreach (var experience in exp)
+                foreach (var experience in person.WorkExperiences)
                 {
                     expCount =+ new DateTime((experience.FinishDate.Value - experience.StartDate.Value).Ticks).Month;
                 }
@@ -249,13 +247,13 @@ namespace HrApp.Controllers
         public async Task<JsonResult> GroupPersonJob()
         {
             var persons = this._unitOfWork.PersonRepository.GetAllPersonsByHrId(
-                User.Identity.GetUserId());
+                User.Identity.GetUserId(), 1, Int32.MaxValue);
             var personAge = new Dictionary<string, int>();
             foreach (var person in persons)
             {
                 try
                 {
-                    var jobTypesPerson = this._unitOfWork.TypeJobRepository.GetAll().Where(job => job.PersonId == person.PersonId);
+                    var jobTypesPerson = person.PersonTypeJobs;
                     foreach (var  job in jobTypesPerson)
                     {
                         if (personAge.ContainsKey(job.TypeJobName))
@@ -289,13 +287,12 @@ namespace HrApp.Controllers
             }
 
             var persons = this._unitOfWork.PersonRepository.GetAllPersonsByHrId(
-                User.Identity.GetUserId());
+                User.Identity.GetUserId(), 1, Int32.MaxValue);
             foreach (var person in persons)
             {
                 try
                 {
-                    var interview = this._unitOfWork.InterviewRepository.GetAll().Where(job => job.PersonId == person.PersonId);
-                    foreach (var job in interview)
+                    foreach (var job in person.Interviews)
                     {
                         users[job.InterviewDate.ToString("d")]++;
                     }
@@ -316,15 +313,15 @@ namespace HrApp.Controllers
         {
             var events = new List<Tuple<string, DateTime>>();
             var persons = this._unitOfWork.PersonRepository.GetAllPersonsByHrId(
-                User.Identity.GetUserId());
+                User.Identity.GetUserId(), 1, Int32.MaxValue);
             foreach (var person in persons)
             {
                 try
                 {
-                    var interview = this._unitOfWork.InterviewRepository.GetAll().Where(job => job.PersonId == person.PersonId);
+                    var interview = person.Interviews;
                     foreach (var job in interview)
                     {
-                        events.Add(new Tuple<string, DateTime>("Interview with " + person.FirstName + " " + person.LastName, job.InterviewDate));
+                        events.Add(new Tuple<string, DateTime>("Interview with " + person.FirstName + " " + person.LastName, job.InterviewDate.AddHours(3)));
                     }
 
                 }

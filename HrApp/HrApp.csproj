@@ -143,8 +143,8 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Rotativa">
-      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.4-rc\lib\net45\Rotativa.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -317,6 +317,9 @@
     <Content Include="gulpfile.js" />
     <Content Include="package.json" />
     <Content Include="App_Browsers\qt.browser" />
+    <Content Include="Content\CV\.gitkeep" />
+    <None Include="Properties\PublishProfiles\hrapp - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\hrapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.8.0.intellisense.js" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
@@ -331,9 +334,11 @@
     </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
@@ -377,6 +382,7 @@
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="wwwroot\image\image.jpg" />
+    <Content Include="wwwroot\image\UserImage\default.png" />
     <Content Include="wwwroot\js\account.js" />
     <Content Include="wwwroot\js\admin.js" />
     <Content Include="Views\Manage\ChangePasswordComplete.cshtml" />

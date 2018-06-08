@@ -221,29 +221,25 @@
                                     <td class="hidden-xs">
                                         @if (user.WorkExperiences != null)
                                         {
-                                            counter = 0;
+                                           
+                                            var duringExp = "";
+                                            var totaldays = 0.0;
                                             foreach (var experience in user.WorkExperiences)
                                             {
-                                                if (counter < 1)
-                                                {
+                                               
                                                     <p>
                                                         @{
-                                                            var startDate = experience.StartDate.Value.ToString("MM.yyyy");
-                                                            var endDate = experience.FinishDate.Value != null ? experience.FinishDate.Value.ToString("MM.yyyy") : "Today";
-                                                            var totaldays = ((experience.FinishDate.Value != null ? experience.FinishDate.Value : DateTime.Now) - experience.StartDate.Value).TotalDays;
-                                                            int years = (int)Math.Truncate(totaldays / 365);
-                                                            var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
-                                                            var duringExp = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
-                                                        } @duringExp
+                                                        var startDate = experience.StartDate.Value.ToString("MM.yyyy");
+                                                        var endDate = experience.FinishDate.Value != null ? experience.FinishDate.Value.ToString("MM.yyyy") : "Today";
+                                                        totaldays += ((experience.FinishDate.Value != null ? experience.FinishDate.Value : DateTime.Now) - experience.StartDate.Value).TotalDays;
+                                                        
+                                                    }
                                                     </p>
-                                                }
-                                                else
-                                                {
-                                                    break;
-                                                }
-                                                counter++;
-
                                             }
+                                            int years = (int)Math.Truncate(totaldays / 365);
+                                            var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
+                                            duringExp = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
+                                            @duringExp
                                         }
                                     </td>
                                     <td>@user.City</td>

@@ -1,6 +1,7 @@
 ﻿namespace HrApp.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Security.Policy;
@@ -52,6 +53,46 @@
         {
             var user = UserManager.FindByName(User.Identity.Name);
             user.PersonColumn = new Tuple<Person>(this._unitOfWork.PersonRepository.Get(user.PersonIdColumn.Value));
+
+            var currUser = UserManager.FindByName(User.Identity.Name);
+            var currPerson = _unitOfWork.PersonRepository.Get(currUser.PersonIdColumn ?? 0);
+            List<Tuple<DateTime?, string, string>> list = new List<Tuple<DateTime?, string, string>>();
+            list.Add(new Tuple<DateTime?, string, string>(currPerson.Birthday, "Your Birth Day", ""));
+            list.Add(new Tuple<DateTime?, string, string>(currUser.RegistrationDate, "Welcome", "You are join!"));
+            list.Add(new Tuple<DateTime?, string, string>(currUser.LastLoginDate, "Last login", ""));
+            list.Add(new Tuple<DateTime?, string, string>(DateTime.Now, "Now", ""));
+
+            var persons = this._unitOfWork.PersonRepository.GetAllPersonsByHrId(User.Identity.GetUserId());
+            foreach (var person in persons)
+            {
+                var birth = new DateTime(DateTime.Now.Year, person.Birthday.Value.Month, person.Birthday.Value.Day); 
+                
+                list.Add(
+                    new Tuple<DateTime?, string, string>(birth,
+                        "Birth Day",
+                        person.FirstName + " " + person.LastName + " celebrates his birthday"));
+                try
+                {
+                    var interview = this._unitOfWork.InterviewRepository.GetAll()
+                        .Where(job => job.PersonId == person.PersonId);
+                    foreach (var job in interview)
+                    {
+                        list.Add(
+                            new Tuple<DateTime?, string, string>(
+                                job.InterviewDate,
+                                "Interview",
+                                "Interview with " + person.FirstName + " " + person.LastName));
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+
+                }
+            }
+
+            ViewData["Timeline"] = list.Where(tuple => tuple.Item1.HasValue).OrderByDescending(tuple => tuple.Item1.Value).ToList();
 
             return View(user);
         }

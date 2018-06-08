@@ -5,6 +5,7 @@
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+    
 }
 
 @section Styles
@@ -186,6 +187,7 @@
                     <div class="box-body no-padding">
                         <!-- THE CALENDAR -->
                         <div id="calendar"></div>
+                        
                     </div>
                     <!-- /.box-body -->
                 </div>

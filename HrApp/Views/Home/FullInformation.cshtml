@@ -1,6 +1,8 @@
 ﻿@{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    double counter = 0;
+    string duringExp1 = "";
 }
 @model HrApp.Models.Person
     <style>
@@ -165,7 +167,8 @@ label .fa {
                             <button type="submit" class="btn text-uppercase btn-default" style="width:100%">Download CV</button>
 
                         }
-
+                    <p class="text-left">Send this link if you want add account in system to this person (user must register)</p>
+                    <a href="http://www.hrapp.somee.com/account/register?personId=@Model.PersonId">http://www.hrapp.somee.com/account/register?personId=@Model.PersonId</a>
                         <div>
                             <br />
                             <ul class="list-unstyled g-mb-30">
@@ -261,10 +264,10 @@ label .fa {
                                     <div style="display: inline-block;">
                                         <h4>
                                             <strong>Knowledge of languages:</strong>&nbsp; &nbsp;
-                                            @if (this.User.IsInRole("HR manager"))
-                                                {
-                                                <a onclick="location.href='location.href='@Url.Action("Create", "Language", new {id = @Model.PersonId}, null)'"><i class="fa fa-plus"></i></a>
-                                                }
+                                            @*@if (this.User.IsInRole("HR manager"))
+                                                {*@
+                                                <a onclick="location.href='@Url.Action("Create", "Language", new {id = @Model.PersonId}, null)'"><i class="fa fa-plus"></i></a>
+                                                @*}*@
                                         </h4>
                                     </div>
                                     <ul class="list-unstyled g-mb-30">
@@ -276,15 +279,15 @@ label .fa {
                                                 <div style="display: inline-block;">
                                                     @language.LanguageName - @language.LanguageLevelName
                                                 </div>
-                                                @if (this.User.IsInRole("HR manager"))
-                                                        {
+                                                @*@if (this.User.IsInRole("HR manager"))*@
+                                                        @*{*@
                                                         <div style="display: inline-block; float: right;" class="align-top">
                                                             <a onclick="location.href='@Url.Action("Edit", "Language", new {id = language.LanguageId}, null)'"><i class="fa fa-edit"></i></a>
                                                             &nbsp;
                                                             <a onclick="location.href='@Url.Action("Delete", "Language", new {idPerson = language.PersonId, idLanguage = language.LanguageId}, null)'"><i class="fa fa-trash"></i></a>
 
                                                         </div>
-                                                        }
+                                                        @*}*@
                                                 <hr style="color: dimgray" />
                                             </li>
                                                 }
@@ -297,11 +300,11 @@ label .fa {
                                     <div style="display: inline-block;">
                                         <h4>
                                             <strong>JOBS:</strong>&nbsp; &nbsp;
-                                            @if (this.User.IsInRole("HR manager"))
-                                                {
+                                            @*@if (this.User.IsInRole("HR manager"))
+                                                {*@
                                                 <a onclick="location.href='@Url.Action("Create", "Job", new {id = @Model.PersonId}, null)'"><i class="fa fa-plus"></i></a>
 
-                                                }
+                                                @*}*@
                                         </h4>
                                     </div>
                                     <ul class="list-unstyled g-mb-30">
@@ -313,15 +316,15 @@ label .fa {
                                                 <div style="display: inline-block;">
                                                     @job.JobName
                                                 </div>
-                                                @if (this.User.IsInRole("HR manager"))
-                                                        {
+                                                @*@if (this.User.IsInRole("HR manager"))
+                                                        {*@
                                                         <div style="display: inline-block; float: right;" class="align-top">
                                                             <a onclick="location.href='@Url.Action("Edit", "Job", new {id = job.JobId}, null)'"><i class="fa fa-edit"></i></a>
                                                             &nbsp;
                                                             <a onclick="location.href='@Url.Action("Delete", "Job", new {idPerson = job.PersonId, idJob = job.JobId}, null)'"><i class="fa fa-trash"></i></a>
 
                                                         </div>
-                                                        }
+                                                        @*}*@
                                                 <hr style="color: dimgray" />
                                             </li>
                                                 }
@@ -335,10 +338,10 @@ label .fa {
                                     <div style="display: inline-block;">
                                         <h4>
                                             <strong>JOB TYPE:</strong>&nbsp; &nbsp;
-                                            @if (this.User.IsInRole("HR manager"))
-                                                {
+                                            @*@if (this.User.IsInRole("HR manager"))
+                                                {*@
                                                 <a onclick="location.href='@Url.Action("Create", "TypeJob", new { id = @Model.PersonId }, null)'"><i class="fa fa-plus"></i></a>
-                                                }
+                                                @*}*@
                                         </h4>
                                     </div>
                                     <ul class="list-unstyled g-mb-30">
@@ -350,15 +353,15 @@ label .fa {
                                                 <div style="display: inline-block;">
                                                     @job.TypeJobName
                                                 </div>
-                                                @if (this.User.IsInRole("HR manager"))
-                                                        {
+                                                @*@if (this.User.IsInRole("HR manager"))
+                                                        {*@
                                                         <div style="display: inline-block; float: right;" class="align-top">
                                                             <a onclick="location.href='@Url.Action("Edit", "TypeJob", new { id = job.PersonTypeJobId }, null)'"><i class="fa fa-edit"></i></a>
                                                             &nbsp;
                                                             <a onclick="location.href='@Url.Action("Delete", "TypeJob", new { idPerson = job.PersonId, idPersonTypeJob = job.PersonTypeJobId }, null)'"><i class="fa fa-trash"></i></a>
 
                                                         </div>
-                                                        }
+                                                        @*}*@
                                                 <hr style="color: dimgray" />
                                             </li>
                                                 }
@@ -370,10 +373,10 @@ label .fa {
                                     <div style="display: inline-block;">
                                         <h4>
                                             <strong>Education:</strong>&nbsp; &nbsp;
-                                            @if (this.User.IsInRole("HR manager"))
-                                                {
+                                            @*@if (this.User.IsInRole("HR manager"))
+                                                {*@
                                                 <a onclick="location.href='@Url.Action("Create", "Education", new {id = @Model.PersonId}, null)'"><i class="fa fa-plus"></i></a>
-                                                }
+                                                @*}*@
                                         </h4>
                                     </div>
                                     <ul class="list-unstyled g-mb-30">
@@ -394,15 +397,15 @@ label .fa {
                                                                 var during = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
                                                     }from @startDate to @endDate (@during)
                                                 </div>
-                                                @if (this.User.IsInRole("HR manager"))
-                                                        {
+                                                @*@if (this.User.IsInRole("HR manager"))
+                                                        {*@
                                                         <div style="display: inline-block; float: right;" class="align-top">
                                                             <a onclick="location.href='@Url.Action("Edit", "Education", new {id = education.EducationId}, null)'"><i class="fa fa-edit"></i></a>
                                                             &nbsp;
                                                             <a onclick="location.href='@Url.Action("Delete", "Education", new {idPerson = education.PersonId, idEducation = education.EducationId}, null)'"><i class="fa fa-trash"></i></a>
 
                                                         </div>
-                                                        }
+                                                        @*}*@
                                                 <hr style="color: dimgray" />
                                             </li>
                                                                     }
@@ -421,10 +424,10 @@ label .fa {
                                     <div style="display: inline-block;">
                                         <h4>
                                             <strong>Professional skills:</strong>&nbsp; &nbsp;
-                                            @if (this.User.IsInRole("HR manager"))
-                                                {
-                                                <a onclick="location.href='location.href='@Url.Action("Create", "ProfessionalSkill", new {id = @Model.PersonId}, null)'"><i class="fa fa-plus"></i></a>
-                                                }
+                                            @*@if (this.User.IsInRole("HR manager"))
+                                                {*@
+                                                <a onclick="location.href='@Url.Action("Create", "ProfessionalSkill", new {id = @Model.PersonId}, null)'"><i class="fa fa-plus"></i></a>
+                                                @*}*@
                                         </h4>
                                     </div>
                                     <ul class="list-unstyled g-mb-30">
@@ -436,15 +439,15 @@ label .fa {
                                                 <div style="display: inline-block;">
                                                     @skill.SkillName
                                                 </div>
-                                                @if (this.User.IsInRole("HR manager"))
-                                                        {
+                                                @*@if (this.User.IsInRole("HR manager"))
+                                                        {*@
                                                         <div style="display: inline-block; float: right;" class="align-top">
                                                             <a onclick="location.href='@Url.Action("Edit", "ProfessionalSkill", new { id = skill.ProfessionalSkillId }, null)'"><i class="fa fa-edit"></i></a>
                                                             &nbsp;
                                                             <a onclick="location.href='@Url.Action("Delete", "ProfessionalSkill", new { idPerson = skill.PersonId, idSkill = skill.ProfessionalSkillId }, null)'"><i class="fa fa-trash"></i></a>
 
                                                         </div>
-                                                        }
+                                                        @*}*@
                                                 <hr style="color: dimgray" />
                                             </li>
                                                 }
@@ -453,46 +456,74 @@ label .fa {
                                 </li>
                                 <br />
                                 <li>
+                                    @if (Model.WorkExperiences != null)
+                                    {
+                                        // counter = 0;
+                                        foreach (var experience in Model.WorkExperiences)
+                                        {
+                                            //if (counter < 1)
+                                            //{
+
+
+                                            var startDate = experience.StartDate.Value.ToString("MM.yyyy");
+                                            var endDate = experience.FinishDate.Value != null ? experience.FinishDate.Value.ToString("MM.yyyy") : "Today";
+                                            counter += ((experience.FinishDate.Value != null ? experience.FinishDate.Value : DateTime.Now) - experience.StartDate.Value).TotalDays;
+
+
+
+
+                                            //}
+                                            //else
+                                            //{
+                                            //    break;
+                                            //}
+                                            //  counter++;
+
+                                        }
+                                        int years = (int)Math.Truncate(counter / 365);
+                                        var month  = (int)Math.Truncate((counter - (365 * years)) / 30);
+                                        duringExp1 = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
+                                    }
                                     <div style="display: inline-block;">
                                         <h4>
-                                            <strong>Work experience (@Model.WorkExpireance years) :</strong>&nbsp; &nbsp;
-                                            @if (this.User.IsInRole("HR manager"))
-                                                {
-                                                <a onclick="location.href='@Url.Action("Create", "WorkExpireance", new {id = @Model.PersonId}, null)'"><i class="fa fa-plus"></i></a>
-                                                }
+                                            <strong>Work experience (@duringExp1) :</strong>&nbsp; &nbsp;
+                                            @*@if (this.User.IsInRole("HR manager"))*@
+                                            @*{*@
+                                            <a onclick="location.href = '@Url.Action("Create", "WorkExpireance", new { id = @Model.PersonId }, null)'"><i class="fa fa-plus"></i></a>
+                                            @*}*@
                                         </h4>
                                     </div>
                                     <ul class="list-unstyled g-mb-30">
                                         @if (@Model.WorkExperiences != null)
+                                        {
+                                            foreach (var experience in @Model.WorkExperiences)
                                             {
-                                                foreach (var experience in @Model.WorkExperiences)
-                                                {
-                                            <li>
-                                                <div style="display: inline-block;">
-                                                    @experience.CompanyName &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp; @experience.PositionName &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
+                                                <li>
+                                                    <div style="display: inline-block;">
+                                                        @experience.CompanyName &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp; @experience.PositionName &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
 
-                                                    @{
-                                                                var startDate = experience.StartDate.Value.ToString("MM.yyyy");
-                                                                var endDate = experience.FinishDate.Value != null ? experience.FinishDate.Value.ToString("MM.yyyy") : "Today";
-                                                                var totaldays = ((experience.FinishDate.Value != null ? experience.FinishDate.Value : DateTime.Now) - experience.StartDate.Value).TotalDays;
-                                                                int years = (int)Math.Truncate(totaldays / 365);
-                                                                var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
-                                                                var duringExp = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
-                                                    }from @startDate to @endDate (@duringExp)
-                                                </div>
-                                                @if (this.User.IsInRole("HR manager"))
-                                                        {
-                                                        <div style="display: inline-block; float: right;" class="align-top">
-                                                            <a onclick="location.href='@Url.Action("Edit", "WorkExpireance", new {id = experience.WorkExperienceId}, null)'"><i class="fa fa-edit"></i></a>
-                                                            &nbsp;
-                                                            <a onclick="location.href='@Url.Action("Delete", "WorkExpireance", new {idPerson = experience.PersonId, idWorkExperience = experience.WorkExperienceId}, null)'"><i class="fa fa-trash"></i></a>
+                                                        @{
+                                                            var startDate = experience.StartDate.Value.ToString("MM.yyyy");
+                                                            var endDate = experience.FinishDate.Value != null ? experience.FinishDate.Value.ToString("MM.yyyy") : "Today";
+                                                            var totaldays = ((experience.FinishDate.Value != null ? experience.FinishDate.Value : DateTime.Now) - experience.StartDate.Value).TotalDays;
+                                                            int years = (int)Math.Truncate(totaldays / 365);
+                                                            var month = (int)Math.Truncate((totaldays - (365 * years)) / 30);
+                                                            var duringExp = (years > 0 ? years + " years" : "") + (month > 0 ? " " + month + " month" : "");
+                                                        }from @startDate to @endDate (@duringExp)
+                                                    </div>
+                                                    @*@if (this.User.IsInRole("HR manager"))
+                                                        {*@
+                                                    <div style="display: inline-block; float: right;" class="align-top">
+                                                        <a onclick="location.href = '@Url.Action("Edit", "WorkExpireance", new { id = experience.WorkExperienceId }, null)'"><i class="fa fa-edit"></i></a>
+                                                        &nbsp;
+                                                        <a onclick="location.href = '@Url.Action("Delete", "WorkExpireance", new { idPerson = experience.PersonId, idWorkExperience = experience.WorkExperienceId }, null)'"><i class="fa fa-trash"></i></a>
 
-                                                        </div>
-                                                        }
-                                                <hr style="color: dimgray" />
-                                            </li>
-                                                                    }
-                                                                }
+                                                    </div>
+                                                    @*}*@
+                                                    <hr style="color: dimgray"/>
+                                                </li>
+                                            }
+                                        }
                                     </ul>
                                 </li>
 
@@ -502,24 +533,25 @@ label .fa {
                     </div>
                     <div id="menu2" class="tab-pane fade">
                         <div>
-                            @using (Html.BeginForm("ShowCVInformation", "Home", new { personId = this.Model.PersonId }, FormMethod.Post, new { @class = "form-horizontal" }))
+                            @*@using (Html.BeginForm("ShowCVInformation", "Home", new { personId = this.Model.PersonId }, FormMethod.Post, new { @class = "form-horizontal" }))
                             {
                                 <button type="submit" class="btn btn-primary btnConfirm">Download CV</button>
-                            }
+                            }*@
                             <ul class="list-unstyled g-mb-30">
-                                
+                                <a onclick="location.href='@Url.Action("Create", "Interview", new {id = @Model.PersonId}, null)'"><i class="fa fa-plus"></i></a>
                         @if (@Model.Interviews != null)
                             {
+
                                 foreach (var interview in @Model.Interviews)
                                 {
                                                             <li>
                                                                 <div style="display: inline-block;">
                                                                     <h4>
                                                                         <strong>Interview (@interview.InterviewDate.ToString("dd.MM.yyyy")) :</strong>&nbsp; &nbsp;
-                                                                        @if (this.User.IsInRole("HR manager"))
-                                            {
-                                                                            <a onclick="location.href='@Url.Action("Create", "Interview", new {id = @Model.PersonId}, null)'"><i class="fa fa-plus"></i></a>
-                                                        }
+                                                                        @*@if (this.User.IsInRole("HR manager"))
+                                            {*@
+                                                                           
+                                                        @*}*@
                                                                     </h4>
                                                                 </div>
                                                                 <ul class="list-unstyled g-mb-30">
@@ -533,15 +565,15 @@ label .fa {
                                                                         <br />
                                                                         @interview.Comment
 
-                                                                        @if (this.User.IsInRole("Developer") || this.User.IsInRole("HR manager"))
-                                                {
+                                                                        @*@if (this.User.IsInRole("Developer") || this.User.IsInRole("HR manager"))
+                                                {*@
                                                             <div style="display: inline-block; float: right;" class="align-top">
                                                                 <a onclick="location.href='@Url.Action("Edit", "Interview", new {id = interview.InterviewId}, null)'"><i class="fa fa-edit"></i></a>
                                                                 &nbsp;
                                                                 <a onclick="location.href='@Url.Action("Delete", "Interview", new {idPerson = interview.PersonId, idInterview = interview.InterviewId}, null)'"><i class="fa fa-trash"></i></a>
 
                                                             </div>
-                                                        }
+                                                        @*}*@
                                                                         <hr style="color: dimgray" />
                                                                     </li>
                                                                 </ul>

@@ -144,7 +144,7 @@ namespace HrApp.Repositories
                 {"@Email", person.Email},
                 {"@Phone", person.Phone},
                 {"@Salary", person.Salary},
-                {"@WorkExpireance", person.WorkExpireance},
+                {"@WorkExpireance", 0},
                 {"@ApplicationUserId", person.ApplicationUserId},
             };
 
@@ -163,7 +163,7 @@ namespace HrApp.Repositories
                 {"@Email", person.Email},
                 {"@Phone", person.Phone},
                 {"@Salary", person.Salary},
-                {"@WorkExpireance", person.WorkExpireance},
+                {"@WorkExpireance", 0},
             };
 
             CustomExecuteNonQuery("sp_EditPerson", parameters);
